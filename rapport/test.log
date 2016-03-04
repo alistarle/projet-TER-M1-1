@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.20)  4 MAR 2016 17:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.20)  4 MAR 2016 17:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -171,57 +171,65 @@ Overfull \hbox (48.34654pt too wide) in paragraph at lines 14--14
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Chapitre 1.
 [1
 
-] [2
+] [2] [3
+
+]
+Chapitre 1.
+[4
 
 ]
 Chapitre 2.
-[3
+[5
+
+] [6
 
 ]
 Chapitre 3.
-[4
+[7
 
-] [5
+] [8
 
 ]
 Chapitre 4.
-[6
-
-]
-Chapitre 5.
-[7
-
-]
-Chapitre 6.
-[8
-
-]
-Chapitre 7.
 [9
 
 ]
-Annexe A.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 92.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmtt.fd
+Chapitre 5.
+[10
+
+] [11
+
+]
+Chapitre 6.
+[12
+
+]
+Chapitre 7.
+[13
+
+] [14
+
+] [15] [16
+
+]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 113.
+
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 92.
+(Font)              <10> on input line 113.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 92.
+(Font)              <7> on input line 113.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 92.
- [10
-
-] (./test.toc)
+(Font)              <5> on input line 113.
+[17] (./test.toc)
 \tf@toc=\write3
 \openout3 = `test.toc'.
 
-
-[11
+ [18
 
 ] (./test.aux) ) 
 Here is how much of TeX's memory you used:
@@ -240,10 +248,10 @@ xmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fo
 nts/type1/public/lm/lmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
 ublic/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lm
 tt10.pfb>
-Output written on test.pdf (12 pages, 182147 bytes).
+Output written on test.pdf (19 pages, 182881 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
