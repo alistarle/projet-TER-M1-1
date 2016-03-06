@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Donnez un nom a la variable : "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editTextVariableInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Donnez lui un type : "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeVariableView
+        android:layout_height="109dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/promptviewtypevariable"
+        android:minWidth="100dp"
+        android:fillViewport="false"
+        >
+
+    </com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeVariableView>
+
+</LinearLayout>
