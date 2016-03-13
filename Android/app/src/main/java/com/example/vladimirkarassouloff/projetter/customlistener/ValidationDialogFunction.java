@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.vladimirkarassouloff.projetter.R;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.fonction.ProductionFonction;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.fonction.ProductionFonctionInstanciation;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.variable.ProductionVariableInstanciation;
-import com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeVariableView;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonctionInstanciation;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 
 /**
  * Created by Vladimir on 17/02/2016.

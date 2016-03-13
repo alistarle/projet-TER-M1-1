@@ -30,7 +30,7 @@
         android:text="Que renvoie la fonction : "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeFunctionView
+    <com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeFunctionView
         android:layout_height="109dp"
         android:layout_width="wrap_content"
         android:id="@+id/promptviewtypefunction"
@@ -38,6 +38,6 @@
         android:fillViewport="false"
         >
 
-    </com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeFunctionView>
+    </com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeFunctionView>
 
 </LinearLayout>

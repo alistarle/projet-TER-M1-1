@@ -3,7 +3,7 @@ package com.example.vladimirkarassouloff.projetter.customlistener;
 import android.app.Dialog;
 import android.view.View;
 
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.Production;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 
 /**
  * Created by Vladimir on 24/02/2016.

@@ -5,8 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.vladimirkarassouloff.projetter.R;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 
 /**

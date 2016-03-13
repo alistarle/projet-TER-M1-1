@@ -30,7 +30,7 @@
         android:text="Donnez lui un type : "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeVariableView
+    <com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView
         android:layout_height="109dp"
         android:layout_width="wrap_content"
         android:id="@+id/promptviewtypevariable"
@@ -38,6 +38,6 @@
         android:fillViewport="false"
         >
 
-    </com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeVariableView>
+    </com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView>
 
 </LinearLayout>

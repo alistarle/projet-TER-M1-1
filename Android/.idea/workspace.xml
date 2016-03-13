@@ -1,10 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="" />
+        <option name="name" value="Unnamed-0" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="" />
+        <option name="name" value="Blabla" />
+        <option name="packageNamePattern" value="com.example.vladimirkarassouloff.projetter.*" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Blabla" />
+    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24ca833d-0e13-4ee2-a0e0-9adf3cecf4cd" name="Default" comment="" />
+    <list default="true" id="24ca833d-0e13-4ee2-a0e0-9adf3cecf4cd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/utils/Debug.java" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\.idea\libraries\appcompat_v7_23_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\.idea\libraries\support_annotations_23_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\.idea\libraries\support_v4_23_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\AlgoActivity.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\Debug.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\MyApp.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\DraggableElement.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\ElementNumber.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\condition\ElementElse.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\condition\ElementElseIf.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\condition\ElementIf.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\fonction\ElementFonction.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\fonction\ElementFonctionInstanciation.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogic.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicAnd.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicEq.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicInf.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicInfEq.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicNot.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicNotEq.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicOr.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicSup.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\logic\ElementLogicSupEq.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\operator\ElementDivideOperator.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\operator\ElementEqualOperator.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\operator\ElementMinusOperator.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\operator\ElementMultiplyOperator.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\operator\ElementOperator.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\operator\ElementPlusOperator.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\variable\ElementVariable.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelements\variable\ElementVariableInstanciation.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\Production.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\ProductionBraceCloser.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\condition\ProductionElse.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\condition\ProductionElseIf.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\condition\ProductionIf.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\fonction\ProductionFonction.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\fonction\ProductionFonctionInstanciation.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\variable\ProductionVariable.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myelementsproduction\variable\ProductionVariableInstanciation.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\AlgoView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\ControlView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\prompt\PromptTypeFunctionView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\prompt\PromptTypeVariableView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\scrolldraggable\ElementsView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\scrolldraggable\NameView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\scrolldraggable\OperationView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\ProgAndroid\ProjetTER\Android\app\src\main\java\com\example\vladimirkarassouloff\projetter\myviews\scrolldraggable\ScrollDraggableElementView.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogFunction.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogFunction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogNumber.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogNumber.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogProduction.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogProduction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogVariable.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogVariable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_algo.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_algo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_algo.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_algo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/promptfunction.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/promptfunction.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/promptvariable.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/promptvariable.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Android.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,6 +119,64 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Android" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="AlgoActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/AlgoActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="125" column="16" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3455#3606#0" expanded="true" />
+                <element signature="e#3605#3606#0" expanded="true" />
+                <element signature="e#4224#4645#0" expanded="true" />
+                <element signature="e#4644#4645#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkTask.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/NetworkTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.06187291">
+              <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1546#1742#0" expanded="true" />
+                <element signature="e#1741#1742#0" expanded="true" />
+                <element signature="e#3160#3380#0" expanded="true" />
+                <element signature="e#3379#3380#0" expanded="true" />
+                <element signature="e#3572#3764#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ValidationDialogVariable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogVariable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="90" selection-start-line="55" selection-start-column="8" selection-end-line="57" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -1357,6 +1506,38 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/AlgoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myprompt/promptip.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myprompt/PromptIp.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/promptip.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/promptconnection.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/BackgroundTask.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myelements/fonction/ElementFonctionInstanciation.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myelements/variable/ElementVariableInstanciation.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/AlgoView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/Debug.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/utils/Debug.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/NetworkInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/utils/DefaultValues.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/prompt/PromptConnectionView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogConnection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/MyApp.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_algo.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/AlgoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/NetworkTask.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="NamedScopeManager">
     <order />
   </component>
@@ -1366,14 +1547,14 @@
     <option name="width" value="1924" />
     <option name="height" value="1056" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -1389,8 +1570,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1407,6 +1588,46 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1441,18 +1662,162 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projetter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projetter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myviews" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projetter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myviews" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scrolldraggable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projetter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projetter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="customlistener" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Android Logcat" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="X9LDU14B24008441" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Aze" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="MemoryMonitor.paused" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.vladimirkarassouloff.projetter.utils" />
+      <recent name="com.example.vladimirkarassouloff.projetter.ui.myviews.prompt" />
+      <recent name="com.example.vladimirkarassouloff.projetter.ui" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1474,6 +1839,26 @@
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1514,6 +1899,11 @@
         <option name="Make" enabled="false" />
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -1559,13 +1949,13 @@
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="PREFERRED_AVD" value="Aze" />
+      <option name="CLEAR_LOGCAT" value="true" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="PREFERRED_AVD" value="Aze" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEEP_LINK" value="" />
@@ -1589,6 +1979,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="24ca833d-0e13-4ee2-a0e0-9adf3cecf4cd" name="Default" comment="" />
@@ -1598,46 +1991,558 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21245828" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299356" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.49785408" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.4914163" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22800429" sideWeight="0.5124378" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30367073" sideWeight="0.68991417" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30367073" sideWeight="0.68991417" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.49570817" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35150167" sideWeight="0.3143777" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.35354078" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299356" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22800429" sideWeight="0.48756218" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299356" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22800429" sideWeight="0.5131376" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30367073" sideWeight="0.31008583" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.49356222" order="8" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/AlgoActivity.java</url>
+          <line>184</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/prompt/PromptConnectionView.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/NetworkTask.java</url>
+          <line>125</line>
+          <properties />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="35" />
+    </breakpoint-manager>
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/AlgoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="140" column="29" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3455#3606#0" expanded="true" />
+            <element signature="e#3605#3606#0" expanded="true" />
+            <element signature="e#4224#4645#0" expanded="true" />
+            <element signature="e#4644#4645#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptfunction.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="88" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="88" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/prompt/PromptConnectionView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/LayoutInflater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="367" column="0" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#43858#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3313#3350#0" expanded="false" />
+            <element signature="e#7746#7747#0" expanded="false" />
+            <element signature="e#7780#7781#0" expanded="false" />
+            <element signature="e#9572#9573#0" expanded="false" />
+            <element signature="e#9603#9604#0" expanded="false" />
+            <element signature="e#9878#9879#0" expanded="false" />
+            <element signature="e#9909#9910#0" expanded="false" />
+            <element signature="e#10296#10297#0" expanded="false" />
+            <element signature="e#10328#10329#0" expanded="false" />
+            <element signature="e#12785#12786#0" expanded="false" />
+            <element signature="e#12815#12816#0" expanded="false" />
+            <element signature="e#42567#43054#0" expanded="false" />
+            <element signature="e#43053#43054#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptconnection.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptnumber.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptvariable.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_algo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="59" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="59" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/MyApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/widget/ViewAnimator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63235295">
+          <caret line="135" column="16" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="16" />
+          <folding>
+            <element signature="e#4361#4362#0" expanded="false" />
+            <element signature="e#4411#4412#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogProduction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogNumber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.1034484">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33235294">
+          <caret line="705" column="13" selection-start-line="705" selection-start-column="13" selection-end-line="705" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_algo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="59" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="59" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/LayoutInflater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="367" column="0" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#43858#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3313#3350#0" expanded="false" />
+            <element signature="e#7746#7747#0" expanded="false" />
+            <element signature="e#7780#7781#0" expanded="false" />
+            <element signature="e#9572#9573#0" expanded="false" />
+            <element signature="e#9603#9604#0" expanded="false" />
+            <element signature="e#9878#9879#0" expanded="false" />
+            <element signature="e#9909#9910#0" expanded="false" />
+            <element signature="e#10296#10297#0" expanded="false" />
+            <element signature="e#10328#10329#0" expanded="false" />
+            <element signature="e#12785#12786#0" expanded="false" />
+            <element signature="e#12815#12816#0" expanded="false" />
+            <element signature="e#42567#43054#0" expanded="false" />
+            <element signature="e#43053#43054#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptnumber.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40823328">
+          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptvariable.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptfunction.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="88" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="88" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/prompt/PromptTypeVariableView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25">
+          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/prompt/PromptTypeFunctionView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19444445">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/promptconnection.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1724138">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myelements/fonction/ElementFonctionInstanciation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="11" selection-start-line="72" selection-start-column="11" selection-end-line="72" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myelements/variable/ElementVariableInstanciation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/AlgoView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="26" selection-start-line="104" selection-start-column="26" selection-end-line="104" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/utils/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3979933">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/SharedPreferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277592">
+          <caret line="290" column="8" selection-start-line="290" selection-start-column="8" selection-end-line="290" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/utils/DefaultValues.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22742476">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277592">
+          <caret line="2445" column="0" selection-start-line="2445" selection-start-column="0" selection-end-line="2445" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/util/logging/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24749164">
+          <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277592">
+          <caret line="983" column="23" selection-start-line="983" selection-start-column="23" selection-end-line="983" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/os/AsyncTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277592">
+          <caret line="549" column="53" selection-start-line="549" selection-start-column="53" selection-end-line="549" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/NetworkInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/prompt/PromptConnectionView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277592">
+          <caret line="395" column="20" selection-start-line="395" selection-start-column="20" selection-end-line="395" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/MyApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_algo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="74" selection-start-line="7" selection-start-column="74" selection-end-line="7" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContextWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33277592">
+          <caret line="551" column="18" selection-start-line="551" selection-start-column="18" selection-end-line="551" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/myviews/scrolldraggable/NameView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65384614">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding>
+            <element signature="e#1402#1889#0" expanded="true" />
+            <element signature="e#1888#1889#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/ui/AlgoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="16" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3455#3606#0" expanded="true" />
+            <element signature="e#3605#3606#0" expanded="true" />
+            <element signature="e#4224#4645#0" expanded="true" />
+            <element signature="e#4644#4645#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/customlistener/ValidationDialogVariable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="90" selection-start-line="55" selection-start-column="8" selection-end-line="57" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/vladimirkarassouloff/projetter/network/NetworkTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06187291">
+          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1546#1742#0" expanded="true" />
+            <element signature="e#1741#1742#0" expanded="true" />
+            <element signature="e#3160#3380#0" expanded="true" />
+            <element signature="e#3379#3380#0" expanded="true" />
+            <element signature="e#3572#3764#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

@@ -1,13 +1,9 @@
 package com.example.vladimirkarassouloff.projetter.customlistener;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.Toast;
-
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.Production;
 
 /**
  * Created by Vladimir on 16/02/2016.

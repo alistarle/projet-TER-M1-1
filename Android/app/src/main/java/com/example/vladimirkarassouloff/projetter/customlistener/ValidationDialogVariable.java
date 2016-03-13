@@ -1,21 +1,15 @@
 package com.example.vladimirkarassouloff.projetter.customlistener;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 
 import com.example.vladimirkarassouloff.projetter.R;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.variable.ProductionVariable;
-import com.example.vladimirkarassouloff.projetter.myelementsproduction.variable.ProductionVariableInstanciation;
-import com.example.vladimirkarassouloff.projetter.myviews.prompt.PromptTypeVariableView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.variable.ProductionVariableInstanciation;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 
 /**
  * Created by Vladimir on 16/02/2016.

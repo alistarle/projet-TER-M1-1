@@ -5,10 +5,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/mainLayout"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".AlgoActivity"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ui.AlgoActivity"
     android:weightSum="1">
 
-    <com.example.vladimirkarassouloff.projetter.myviews.AlgoView
+    <com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView
         android:layout_width="169dp"
         android:layout_height="match_parent"
         android:id="@+id/algoScroll"
@@ -17,7 +17,7 @@
         android:fillViewport="false">
 
 
-    </com.example.vladimirkarassouloff.projetter.myviews.AlgoView>
+    </com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView>
 
     <LinearLayout
         android:orientation="vertical"
@@ -31,30 +31,30 @@
             android:id="@+id/viewanimator"
             android:layout_weight="1">
 
-            <com.example.vladimirkarassouloff.projetter.myviews.scrolldraggable.NameView
+            <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/namesScroll"
                 android:minWidth="100dp"
                 android:fillViewport="false">
-            </com.example.vladimirkarassouloff.projetter.myviews.scrolldraggable.NameView>
+            </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView>
 
-            <com.example.vladimirkarassouloff.projetter.myviews.scrolldraggable.ElementsView
+            <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/elementsScroll"
                 android:minWidth="100dp"
                 android:fillViewport="false">
-            </com.example.vladimirkarassouloff.projetter.myviews.scrolldraggable.ElementsView>
+            </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView>
 
 
-            <com.example.vladimirkarassouloff.projetter.myviews.scrolldraggable.OperationView
+            <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.OperationView
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/operationScroll"
                 android:minWidth="100dp"
                 android:fillViewport="false">
-            </com.example.vladimirkarassouloff.projetter.myviews.scrolldraggable.OperationView>
+            </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.OperationView>
         </ViewAnimator>
 
 

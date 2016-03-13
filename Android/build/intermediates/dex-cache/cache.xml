@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\pre-dexed\debug\classes-4fd560e83ccc88453c40a5279812808c982dd007.jar" />
+    </item>
+    <item
         jar="C:\Users\Vladimir\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -14,13 +21,6 @@
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
         <dex dex="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-3e66bbaace18c95ee502f5f7e316ff723163abcd.jar" />
-    </item>
-    <item
-        jar="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\pre-dexed\debug\classes-4fd560e83ccc88453c40a5279812808c982dd007.jar" />
     </item>
     <item
         jar="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
