@@ -182,9 +182,9 @@ public class AlgoView extends ScrollView {
                 }
             }
             else{
-                Log.i("ACTION NON GEREE\n","ACTION NON GEREE\n");
-                Log.i("ACTION NON GEREE\n","ACTION NON GEREE\n");
-                Log.i("ACTION NON GEREE\n","ACTION NON GEREE\n");
+                Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
+                Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
+                Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
             }
 
             /*if(testIfInsideBlock(event.getX(),event.getY())){
@@ -307,6 +307,16 @@ public class AlgoView extends ScrollView {
         }
     }
 
-
+    public String getAlgorithme(){
+        String algo = "";
+        for(int i = 0 ; i < ll.getChildCount() ; i++){
+            View v = ll.getChildAt(i);
+            if(v instanceof Production){
+                Production p = (Production) v;
+                algo+=p.getBasicText();
+            }
+        }
+        return algo;
+    }
 
 }

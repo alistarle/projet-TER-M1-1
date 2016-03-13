@@ -4,7 +4,18 @@
 public class CustomProtocol {
 
     public String processInput(String input){
-        return "mdr";
+        if(input == null)
+            return "";
+
+
+        if(input.equals("disconnect")) {
+            return "disconnect";
+        }
+
+        else{
+            return "execute_code";
+        }
+
     }
 
 }

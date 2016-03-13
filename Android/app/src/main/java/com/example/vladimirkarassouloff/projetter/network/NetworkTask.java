@@ -1,6 +1,9 @@
 package com.example.vladimirkarassouloff.projetter.network;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -12,29 +15,49 @@ import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Scanner;
+
 import android.os.Handler;
 /**
  * Created by Vladimir on 12/03/2016.
  */
 public class NetworkTask extends AsyncTask<Void,String,String> {
+
+    private NetworkProtocoleClient npc;
     private NetworkInfo ni;
 
-    public boolean connected;
 
+    public static boolean TASK_ALREADY_CONNECTED;
+    public static int TIMEOUT = 5000;
+    public static boolean connected;
 
-    private static int RETRY_CONNECT = 5;
+    private BroadcastReceiver onNotice;
+
+    private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
+
+    private static int RETRY_CONNECT = 3;
     private static long RETRY_SLEEP_TIME = 5000;
     private int currentTry;
 
-    public NetworkTask(NetworkInfo ni) {
-        this.ni = ni;
-        this.currentTry = 0;
-        this.connected = false;
-    }
+
     public NetworkTask(){
         this.currentTry = 0;
         this.connected = false;
+        this.npc = new NetworkProtocoleClient();
+        onNotice = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if(intent.getAction().equals("send")){
+                    out.println(intent.getStringExtra("message"));
+                }
+            }
+        };
+        LocalBroadcastManager.getInstance(MyApp.context).registerReceiver(onNotice, new IntentFilter("send"));
     }
 
 
@@ -42,9 +65,17 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
     @Override
     protected String doInBackground(Void... params) {
         Log.wtf("Task", "doInBackground");
+        if(TASK_ALREADY_CONNECTED){
+            Log.wtf("Network","Task already running !");
+            return "";
+        }
+        TASK_ALREADY_CONNECTED = true;
         this.connected = false;
         Handler handler=  new Handler(MyApp.context.getMainLooper());
 
+
+        InetSocketAddress address;
+        String fromServer, fromUser = "SALUT MDR";
 
         if(this.ni == null){
             Log.wtf("NETWORK","Ni null");
@@ -66,10 +97,42 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
 
         for (currentTry = 0; currentTry < RETRY_CONNECT; currentTry++) {
             try {
-                Socket socket = new Socket(this.ni.getIp(), this.ni.getPort());
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                address = new InetSocketAddress(this.ni.getIp(), this.ni.getPort());
+                socket = new Socket();
+
+                socket.connect(address, TIMEOUT);
+                out = new PrintWriter(socket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 connected = true;
+
+                /////connected
+                Intent intent = new Intent("connected");
+                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+                handler.post(new Runnable() {
+                    public void run() {
+                        Toast.makeText(MyApp.context, "Connexion réussie a " + ni.getIp() + ":" + ni.getPort(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                try {
+                    //Scanner stdIn = new Scanner(System.in);
+                    while ((fromServer = in.readLine()) != null) {
+                        Log.wtf("Network", "from Server: " + fromServer);
+                        if (fromServer.equals("disconnect")) {
+                            break;
+                        }
+
+                        //fromUser = stdIn.next();
+                        /*if (fromUser != null) {
+                            Log.wtf("Network", "sending: " + fromUser);
+                            out.println(fromUser);
+                        }*/
+                    }
+                }
+                catch (Exception e2){
+                    Log.wtf("Network","Exception 2 Network");
+                }
+
                 break;
             } catch (Exception e) {
                 if (currentTry < RETRY_CONNECT) {
@@ -94,16 +157,7 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
 
         }
 
-        if (connected) {
-            Intent intent = new Intent("connected");
-            LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
-            handler.post(new Runnable() {
-                public void run() {
-                    Toast.makeText(MyApp.context, "Connexion réussie a " + ni.getIp() + ":" + ni.getPort(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else{
+        if (! connected ) {
             Intent intent = new Intent("disconnected");
             LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
             handler.post(new Runnable() {
@@ -112,6 +166,7 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
                 }
             });
         }
+        TASK_ALREADY_CONNECTED = false;
         return null;
     }
 

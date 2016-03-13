@@ -1,12 +1,16 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Main {
 
-    public static void main(String[] args) {
+
+    public static boolean shouldContinue = true;
+
+    public static void main(String[] args) throws Exception{
 
 
         if (args.length != 1) {
@@ -16,30 +20,44 @@ public class Main {
 
 
         int portNumber = Integer.parseInt(args[0]);
-        try (
-                ServerSocket serverSocket = new ServerSocket(portNumber);
-                Socket clientSocket = serverSocket.accept();
-                PrintWriter out =
-                        new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(clientSocket.getInputStream()));
-        ) {
-            String envoie, reponse;
+        while(shouldContinue) {
+            System.out.println("On cherche un client");
+            try (
+                    ServerSocket serverSocket = new ServerSocket(portNumber);
+                    Socket clientSocket = serverSocket.accept();
+                    PrintWriter out =
+                            new PrintWriter(clientSocket.getOutputStream(), true);
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(clientSocket.getInputStream()));
+            ) {
+                System.out.println("On a trouve un client");
+                String envoie, reponse;
 
-            // Initiate conversation with client
-            CustomProtocol cp = new CustomProtocol();
-            reponse = cp.processInput(null);
-            out.println(reponse);
-
-            while ((envoie = in.readLine()) != null) {
-                reponse = cp.processInput(envoie);
+                // Initiate conversation with client
+                CustomProtocol cp = new CustomProtocol();
+                reponse = cp.processInput(null);
                 out.println(reponse);
-                if (reponse.equals("Bye."))
-                    break;
+
+                while ((envoie = in.readLine()) != null) {
+                    reponse = cp.processInput(envoie);
+
+                    if (reponse.equals("disconnect")) {
+                        out.println(reponse);
+                        break;
+                    }
+                    else if(reponse.equals("execute_code")){
+                        out.println(Compiler.compileCode(envoie));
+                    }
+
+                }
+            }
+            catch(BindException e2){
+                throw new Exception("Port deja utilise");
+            }
+            catch (Exception e) {
+                System.out.println("Exeception");
             }
         }
-        catch (Exception e){
-
-        }
+        System.out.println("Fin de l'execution");
     }
 }

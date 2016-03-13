@@ -162,6 +162,18 @@ public class AlgoActivity extends ActionBarActivity {
             showConnexionPrompt();
             return true;
         }
+        else if(id == R.id.action_disconnect){
+            Intent intent = new Intent("send");
+            intent.putExtra("message", "disconnect");
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+            return true;
+        }
+        else if(id == R.id.action_execute){
+            Intent intent = new Intent("send");
+            intent.putExtra("message", algoScroll.getAlgorithme());
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        }
         else if(id == R.id.action_show_name && viewAnimator.getDisplayedChild() != 0){
             viewAnimator.setDisplayedChild(0);
             return true;
@@ -209,7 +221,7 @@ public class AlgoActivity extends ActionBarActivity {
         alertDialog.show();
 
         Button theButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        theButton.setOnClickListener(new ValidationDialogConnection(alertDialog,promptsView,ip,port,this));
+        theButton.setOnClickListener(new ValidationDialogConnection(alertDialog, promptsView, ip, port, this));
     }
 
 
@@ -253,20 +265,30 @@ public class AlgoActivity extends ActionBarActivity {
         }
     }
     private void onConnected(){
-        menuConnect.setVisible(false);
-        menuExecuteCode.setVisible(true);
-        menuDisconnect.setVisible(true);
+        if(menuConnect != null)
+            menuConnect.setVisible(false);
+        if(menuExecuteCode != null)
+            menuExecuteCode.setVisible(true);
+        if(menuDisconnect != null)
+            menuDisconnect.setVisible(true);
     }
     private void onDisconnected(){
-        menuConnect.setVisible(true);
-        menuConnect.setEnabled(true);
-        menuExecuteCode.setVisible(false);
-        menuDisconnect.setVisible(false);
+        if(menuConnect != null) {
+            menuConnect.setVisible(true);
+            menuConnect.setEnabled(true);
+        }
+        if(menuExecuteCode != null)
+            menuExecuteCode.setVisible(false);
+        if(menuDisconnect != null)
+            menuDisconnect.setVisible(false);
     }
     private void onConnecting(){
-        menuConnect.setEnabled(false);
-        menuExecuteCode.setVisible(false);
-        menuDisconnect.setVisible(false);
+        if(menuConnect != null)
+            menuConnect.setEnabled(false);
+        if(menuExecuteCode != null)
+            menuExecuteCode.setVisible(false);
+        if(menuDisconnect != null)
+            menuDisconnect.setVisible(false);
     }
     //////////////////////////////////
 }
