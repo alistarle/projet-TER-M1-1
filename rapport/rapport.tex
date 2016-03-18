@@ -1,0 +1,81 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[frenchb]{babel}
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{chemfig}
+\usepackage{cancel}
+
+\usepackage{lettrine}
+\usepackage{oldgerm}
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\begin{document}
+\begin{center}
+{\Huge \textbf{Projet TER RobotTaf}}
+\\~
+\\~
+\\~
+\\~
+{\Large \textbf{Par:}}\\
+\large{\textbf{Victor Coutellier - Julien Gauttier - Vladimir Karassouloff}}
+\\~
+\\~
+\\~
+\large{\textbf{Faculté des sciences d’Orléans -  M1 informatique}}
+\\~
+\\~
+\\~
+\end{center}
+
+\tableofcontents
+\newpage
+
+\lettrine{L}{'objectif} de ce projet est de concevoir un mini langage servant à manipuler un robot afin d’enseigner les bases de la programmation aux jeunes enfants.
+\\
+Il s’agira de concevoir un langage de programmation contenant la plupart des notions de l’algorithmique et de le rendre accessible à des enfants. Une application Android devra être développer, les enfants devront alors créer un algorithme avec le langage préalablement conçu via cette application. Cette application servira d’interface entre l’enfant et le robot. Le programme produit par l’enfant devra ensuite être envoyé sur un robot qui lancera localement son exécution.
+
+\section{Une introduction au domaine}
+
+Dans un monde de plus en plus informatisé, la problématique de l’apprentissage de la programmation se pose de plus en plus. En effet, il est indispensable  pour les futurs générations de comprendre le monde qui les entoure, et cela passe par l’apprentissage des rudiment de la programmation. \\
+Malgré tout, la programmation semble assez difficile d’accès pour un enfant en bas âge, c’est pour cela qu’il est nécessaire de leur proposer des outils adéquat, tel que notre application associé au mini langage ainsi que le robot, dans le but d’avoir un feedback visuel pour l’enfant, ne comprenant pas forcement les résultats d’un programme informatique classique, couplé à un coté assez ludique.
+\section{Une analyse de l’existant}
+Il existe des interfaces intuitives pour ceux qui débutent dans la programmation comme dans https://studio.code.org/s/mc/stage/1/puzzle/1 ou comme Ardublock, où l’utilisateur doit créer des algorithmes à partir de bloc d’actions misent à sa disposition.\\
+\\ \\
+Ardublock est un projet se rapprochant beaucoup du notre, puisqu’il s’agit de concevoir des algorithmes spécifiquement pour l’arduino, et donc des robots tel que nous allons utiliser. \\
+On peut noter la présence de bloc permettant d’agir spécifiquement sur les éléments du robot tel que “faire clignoter la led” ou même de donner un temps d'exécution aux différentes actions du robot.\\
+
+https://www.aldebaran.com/fr/cool-robots/nao/en-savoir-plus-sur-nao : robots existants possèdant plusieurs capteurs afin d’interagir avec son utilisateur, on notera surtout la présence de capteurs pour se repérer, la possibilité de se mouvoir ainsi que la présence d’une carte wifi/ethernet
+\section{Une liste et analyse des besoins non-fonctionnels}
+Télécommande : sera utile aux tests. En effet, le simple fait de contrôler le robot via une télécommande permet de vérifier plusieurs points. D’une part, cela permet de tester le fonctionnement et les capteurs du robot, et d’autre part, cela permet de se familiariser avec la “chaine d’action” du projet. Enchaînant l’application android, la production du code en mini-language, la communication avec le robot, la compilation sur ce dernier et son exécution. Cela sera donc la première étape du projet.
+\section{Une liste et analyse des besoins fonctionnels}
+\textbf{Application} : servira à construire l’algorithme\\
+\textbf{Robot} : exécutera l’algorithme\\
+\textbf{Mini-langage }: Le développement d’un mini-langage est crucial dans ce projet, en effet, l’application ne sers que d’interface pour facilement écrire ce langage, qui sera traduit de manière formelle via l’application. Ce langage formel, défini via une grammaire, subira plusieurs phases d’analyse soit : lexicale, syntaxique et sémantique, afin de traduire ce mini-langage dans un langage machine exécutable sur le robot afin d’effectuer les requêtes de l’utilisateur.
+\section{Une description de prototypes et des résultats de tests préparatoires}
+\subsection{Prototype android}
+Une Viewanimator à droite, contenant liste de scrollview contenant différents élément de programmations tel que les structures (conditionnelles et boucles), les variables ou encore les opérateur de calculs et logique. Les différents éléments peuvent être drag and drop vers d’autres vues. \\
+\\
+Scrollview a gauche servant de réceptacle aux éléments de codes. Lors du drag and drop, soit les élément donnent lieu a une nouvelle ligne de code, soit les élément enrichissent les lignes deja présentes (exemple : drop d’une variable dans un if)
+\subsection{Prototype compilateur}
+Définition d’une grammaire via un outil d’analyse lexicale et sémantique, ATNLR4, qui permet via la description d’expressions régulières combinée de formuler un langage.\\
+\\
+Une fois cette grammaire définie, l’outil permet de créer un AST, qui permet ensuite d’effectuer l’analyse sémantique via une table des symboles, ce qui aboutira à la production du code machine exécutable sur le robot
+\section{Un planning, affectations des tâches}
+Victor : mini-langage et compilateur\\
+Julien et Vladimir: travail sur l’application\\
+Toute l’équipe : travail sur Erlang\\
+\section*{Bibliographie}
+https://studio.code.org/s/mc/stage/1/puzzle/1\\
+https://www.aldebaran.com/fr/cool-robots/nao/en-savoir-plus-sur-nao\\
+
+\end{document}
