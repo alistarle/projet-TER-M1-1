@@ -173,7 +173,6 @@ public class AlgoView extends ScrollView {
                 List<View> newViews = de.onDraggedOnLine(ll);
                 //Log.i("Drop ligne "+lineInsert,"Drop ligne "+lineInsert+"\n\n");
                 if(newViews != null){
-                    v.setBackgroundResource(android.R.color.black);
                     for (View vNew : newViews) {
                         vNew.setMinimumHeight(100);
                         //vNew.setPadding(5, 5, 5, 5);
