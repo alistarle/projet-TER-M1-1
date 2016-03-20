@@ -8,7 +8,7 @@ public class Debug {
     public static boolean DEBUG = true;
 
     public static boolean DEBUG_APP = DEBUG && false;
-    public static boolean DEBUG_NETWORK = DEBUG && true;
+    public static boolean DEBUG_NETWORK = DEBUG && false;
 
 
 }

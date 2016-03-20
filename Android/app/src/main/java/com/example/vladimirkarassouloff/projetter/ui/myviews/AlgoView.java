@@ -176,6 +176,7 @@ public class AlgoView extends ScrollView {
                     for (View vNew : newViews) {
                         vNew.setMinimumHeight(100);
                         //vNew.setPadding(5, 5, 5, 5);
+
                         ll.addView(vNew,lineInsert);
                         lineInsert++;
                     }
@@ -221,6 +222,7 @@ public class AlgoView extends ScrollView {
 
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
+
             View rootLayout = v.getRootView().findViewById(android.R.id.content);
             int[] viewLocation = new int[2];
             v.getLocationInWindow(viewLocation);
