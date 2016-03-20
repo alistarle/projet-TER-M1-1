@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.20)  21 MAR 2016 00:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.20)  21 MAR 2016 00:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1001,7 +1001,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 279--282
  []
 
 [13 <./img/create2.jpg> <./img/popup_nombre.jpg> <./img/create3.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 284--287
+Underfull \hbox (badness 10000) in paragraph at lines 284--286
 
  []
 
@@ -1033,7 +1033,7 @@ l/texlive/2015/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf
 -dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts
 /type1/public/lm/lmri10.pfb>
-Output written on rapport.pdf (15 pages, 964527 bytes).
+Output written on rapport.pdf (15 pages, 964494 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  57 compressed objects within 1 object stream
