@@ -159,7 +159,7 @@ Cette approche de la programmation par la robotique est des plus enrichissante, 
 \paragraph{}
 Le second facteur de l’adoption des robots dans l’apprentissage de la programmation est la chute du prix du matériel nécessaire sur la dernière décennie. Il est en effet très bon marché même pour les écoles les plus modestes d’accéder aux composant nécessaires. Car même si ces composant ne fournissent pas la précision nécessaire à un usage industriel, ils sont largement suffisant pour un usage éducatif.
 
-\subsection{Les systèmes basés sur Arduino}
+\subsection{Les systèmes annexes}
 
 \paragraph{}
 Ardublock est un programme de développement pour l'arduino a base de blocks. Cet outils à été testé sur des enfants et montre que l'apprentissage de la programmation en utilisant arduino est possible et qu'une évolutions dans certains domaines tel que la résolution de problèmes ont été observées chez les enfants.  \cite{sohn2014design}
@@ -174,22 +174,81 @@ Télécommande : sera utile aux tests. En effet, le simple fait de contrôler le
 \subsection{Architectures}
 Nous avons imaginé ici différentes architectures possibles, elles diffèrent de par leur facon de transcrire notre pseudo code en Arduino, l’acheminement de la sortie pseudo code de l’application Android jusqu'à son exécution sur le robot peut en effet se voir de différentes manières.
 \subsubsection{Erlang}
-Cette méthode profite de la facilité de communication entre plusieurs processus dont dispose Erlang, elle s’avère en premier lieu simple d’implémentations, on pourrait également se demander si une telle architecture ne serait pas simplifiable, et si nos commandes Arduino ne pourraient elles pas découler directement de la compilation.
 
+\begin{center}
+\includegraphics[scale=0.5]{img/archi-erlang.jpg}
+\end{center}
+
+Cette méthode profite de la facilité de communication entre plusieurs processus dont dispose Erlang, elle s’avère en premier lieu simple d’implémentations, on pourrait également se demander si une telle architecture ne serait pas simplifiable, et si nos commandes Arduino ne pourraient elles pas découler directement de la compilation.\\
+Le PCode nous sers de langage machine, en effet, ce langage proche de l'assembleur nous permettrait de l'interpreter en commande erlang directement éxécutable par le robot.
+
+\vfill\eject
 \subsubsection{Pcode}
-Avec cette méthode on allège le cheminement du code, mais on perd le coté pratique de Erlang, c’est une façon plus directe, on passe de notre pseudo code à des commandes Arduino avec plus de transparence.
 
+\begin{center}
+\includegraphics[scale=0.5]{img/archi-pcode.jpg}
+\end{center}
+
+Avec cette méthode on allège le cheminement du code, mais on perd le coté pratique de Erlang, c’est une façon plus directe, on passe de notre pseudo code à des commandes Arduino avec plus de transparence. On se sers la encore du PCode comme langage machine intermédiaire, c'est ce PCode qui est interpreté directement par l'Arduino.
+
+\vfill\eject
 \subsubsection{Lua}
 
+\begin{center}
+\includegraphics[scale=0.5]{img/archi-lua.jpg}
+\end{center}
+
+Cette architecture est basée uniquement sur la capacitée de la carte arduino à recevoir une implementation de LUA Script, si la carte controleur peut éxécuter une version basique de LUA, il est donc possible de directement envoyer un script LUA sur l'arduino, et ce dernier l'éxécutera sans problème sans autre forme de compilation.\\
+La seul tâche à effectuer sera de transformer le pseudo code issu de l'interface de l'application android en LUA Script.
 
 \section{Une liste et analyse des besoins fonctionnels}
-\textbf{Application} : L’application Android servira à construire un algorithme à travers une interface utilisateur imaginée pour les enfants.\\
-\textbf{Robot} : Il exécutera l’algorithme, le robot est muni de roues motorisées et de différents capteurs comme :
-Un capteur de distance utilisant les ultra-sons.
-Plusieurs capteurs de proximité pour détecter des collisions imminentes.
-Il dispose aussi d’un convertisseur usb que l’on relira à un raspberry disposant du wifi pour communiquer avec notre application Android.
-\\
-\textbf{Mini-langage }: Le développement d’un mini-langage est crucial dans ce projet, en effet, l’application ne sers que d’interface pour facilement écrire ce langage, qui sera traduit de manière formelle via l’application. Ce langage formel, défini via une grammaire, subira plusieurs phases d’analyse soit : lexicale, syntaxique et sémantique, afin de traduire ce mini-langage dans un langage machine exécutable sur le robot afin d’effectuer les requêtes de l’utilisateur.
+
+\subsection{Application}
+
+L’application Android servira à construire un algorithme à travers une interface utilisateur imaginée pour les enfants.
+
+\paragraph{}
+L'interface utilisateur de l'application est pensée pour les enfants, il necessite donc de ne pas afficher directement du code face à l'utilisateur, mais plutôt des blocs s'imbriquant les uns les autres pour former un programme. Il est également necessaire d'insister sur les formes et les couleurs afin de rendre l'application ludique pour l'utilisateur. En effet, toutes les combinaisons de blocs possibles qu'offre l'application doivent être éxécutables, afin que l'enfant puisse comprendre directement les conséquences de ses actions, et non se confronter à des erreurs.
+
+\paragraph{}
+Les principales inspirations pour l'application fûrent notamment l'application LEGO EV3 et Scratch JR pour tablette, ou les programmes sont composées de blocs tel des pieces d'un puzzle, ou chaque bloc est utilisable independamment et représente une action. Ces deux applications montrent une fenêtre principale dite de "bureau", c'est à dire la fenètre ou l'utilisateur peut faconner librement son programme, en imbriquant les briques les unes avec les autres pour former un algorithme complet.\\
+Sous cette fenètre de bureau se trouve un système d'onglet, et chaque onglet correspond à une catégorie de blocs representant une action. Par exemple l'onglet des capteurs proposera des blocs pour lire la valeur de tel ou tel capteurs, l'onglet des actuateurs contiendra des blocs pour actionner les moteurs, jouer un son ou emettre de la lumière.\\
+
+\paragraph{}
+Dans l'application LEGO EV3, un onglet flux permet de catégoriser les blocs controlant le déroulement de l'application, on y retrouve donc un bloc "debut" symbolisant le début du programme, ou un bloc "repeter", en forme de C afin de montrer que ce bloc n'est qu'un conteneur pour placer d'autres blocs d'action à l'interieur. Chaque bloc est ainsi personnalisable pour en limiter le nombre de base. Par exemple le bloc "jouer un son", une fois placé dans le programme, va permettre de choisir quel type de son jouer, et à quelle intensitée pendant combien de temps.
+
+\paragraph{}
+Dans l'application Scratch JR, étant plus adaptée aux enfants, on remarque la possibilitée d'importer et de modifier ses propres images et son depuis la tablette, afin d'offrir des capacités de personnalisation poussée du programme, pour que l'enfant s'identifie plus au projet. Il est également necessaire que l'espace de travail sois perçu comme un bureau physique, ou l'on peut laisser des blocs de côté, afin d'être réutilisé plus tard, ou seul les blocs colés après le bloc "debut" sont pris en compte dans l'éxécution finale
+
+\subsection{Robot}
+
+\begin{center}
+\includegraphics[scale=0.15]{img/robot.jpg}
+\end{center}
+
+\paragraph{}
+Le robot est, dans le cadre du projet, composé :
+\begin{itemize}
+\item D'un chassis à 4 roues motrices, sur lequel viens se fixer les differents capteurs, moteurs et carte élétroniques
+\item De 4 roues motrices actionnés par une batterie externe pour délivrer plus de puissance
+\item D'un capteur à ultrasons, posté sur un servo-moteur
+\item De 3 capteurs de proximités infrarouges
+\item D'une carte controleur de type Romeo, basée sur un Arduino Leonardo
+\item D'un mini pc tel un raspberry pi, avec wifi et bluetooth, fonctionnant sous ubuntu qui est relié en USB à la carte contrôleur
+\item De deux batterie, une pour la carte contrôleur et le mini pc, l'autre spécifique pour les moteurs
+\end{itemize}
+
+\paragraph{}
+Le but du robot est de communiquer en direct avec l'application Android via Wifi, afin de recevoir le code produit par l'utilisateur sur l'application, et selon l'architecture choisis de directement l'éxécuter sur l'arduino, ou de préalablement recompiler ce code pour l'éxécuter ensuite.\\
+Il sera par la suite possible d'améliorer ce robot afin d'ajout differents capteurs, ou même de se passer du mini pc si les instructions passée à l'arduino sont déjà pré-compilées par le téléphone afin de les envoyer directement à la carte contrôleur via un shield Arduino Wifi, cela baisserait drastiquement la taille et le coup de production du dit robot.
+
+\subsection{Mini-Langage} 
+
+Le développement d’un mini-langage est crucial dans ce projet, en effet, l’application ne sers que d’interface pour facilement écrire ce langage, qui sera traduit de manière formelle via l’application. Ce langage formel, défini via une grammaire, subira plusieurs phases d’analyse soit : lexicale, syntaxique et sémantique, afin de traduire ce mini-langage dans un langage machine exécutable sur le robot afin d’effectuer les requêtes de l’utilisateur.
+
+\paragraph{}
+Ce mini-langage sera une interpretation du "bureau" de l'application, c'est à dire de la suite de blocs prise en compte dans le programme final. Le langage cible sera donc une serie de commande très simple, envoyée sur le port serie de l'Arduino ou directement via wifi si une architecture sans mini pc est choisie, afin que ces commandes sois directement comprise et éxécutées via le code de la carte controlleur arduino. 
+
 \section{Une description de prototypes et des résultats de tests préparatoires}
 \subsection{Prototype android}
 \begin{center}
@@ -207,14 +266,26 @@ Une Viewanimator à droite, contenant liste de scrollview contenant différents 
 
 Scrollview a gauche servant de réceptacle aux éléments de codes. Lors du drag and drop, soit les élément donnent lieu a une nouvelle ligne de code, soit les élément enrichissent les lignes deja présentes (exemple : drop d’une variable dans un if)
 
+\subsection{Prototype robot}
+
+Un code arduino à été écris afin de comprendre des instructions basiques envoyées sur son port serie, et exécute des insctructions en fonctions de la commande reçue.\\
+Par exemple, on peut envoyer la suite de commande "w w w a s d" sur le port serie, qui aura pour effet de faire avancer 3 fois pendant 1 secondes le robot vers l'avant, puis de le faire tourner à gauche pendant une seconde, le faire reculer puis tourner à droite pendant une seconde.\\
+
+\paragraph{}
+Pour éviter tout dommage sur le robot, des routines dites "de sécurité" sont mises en place dans le code de l'arduino, ces routines permettent d'éviter au robot d'entrer en collision avec tout obstacle présent sur sa route. En effet, le robot verifie en permanence l'espace devant lui, et va chercher à tout prix à éviter la collision avec un obstacle, et cela même si l'instruction du programme qu'il est en train d'éxécuter lui indique d'aller vers cette collision.\\
+Cette vérification pourra être désactivée mais sera déconseillée, car un choc à pleine vitesse peut avoir de graves conséquences sur l'intégrité du robot.
+
 \subsection{Prototype compilateur}
 Définition d’une grammaire via un outil d’analyse lexicale et sémantique, ATNLR4, qui permet via la description d’expressions régulières combinée de formuler un langage.\\
 \\
 Une fois cette grammaire définie, l’outil permet de créer un AST, qui permet ensuite d’effectuer l’analyse sémantique via une table des symboles, ce qui aboutira à la production du code machine exécutable sur le robot
 \section{Un planning, affectations des tâches}
+
 Victor : mini-langage et compilateur\\
 Julien et Vladimir: travail sur l’application\\
 Toute l’équipe : travail sur Erlang\\
+
+\vfill\eject
 \bibliographystyle{plain}
 \bibliography{rapport}
 \end{document}

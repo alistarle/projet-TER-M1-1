@@ -30,17 +30,29 @@
 \contentsline {paragraph}{}{5}
 \contentsline {paragraph}{}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {subsection}{\numberline {2.5}Les syst\IeC {\`e}mes bas\IeC {\'e}s sur Arduino}{6}
+\contentsline {subsection}{\numberline {2.5}Les syst\IeC {\`e}mes annexes}{6}
 \contentsline {paragraph}{}{6}
 \contentsline {paragraph}{}{6}
 \contentsline {section}{\numberline {3}Une liste et analyse des besoins non-fonctionnels}{6}
 \contentsline {subsection}{\numberline {3.1}Prototype test}{6}
 \contentsline {subsection}{\numberline {3.2}Architectures}{6}
-\contentsline {subsubsection}{\numberline {3.2.1}Erlang}{6}
-\contentsline {subsubsection}{\numberline {3.2.2}Pcode}{6}
-\contentsline {subsubsection}{\numberline {3.2.3}Lua}{7}
-\contentsline {section}{\numberline {4}Une liste et analyse des besoins fonctionnels}{7}
-\contentsline {section}{\numberline {5}Une description de prototypes et des r\IeC {\'e}sultats de tests pr\IeC {\'e}paratoires}{7}
-\contentsline {subsection}{\numberline {5.1}Prototype android}{7}
-\contentsline {subsection}{\numberline {5.2}Prototype compilateur}{8}
-\contentsline {section}{\numberline {6}Un planning, affectations des t\IeC {\^a}ches}{8}
+\contentsline {subsubsection}{\numberline {3.2.1}Erlang}{7}
+\contentsline {subsubsection}{\numberline {3.2.2}Pcode}{8}
+\contentsline {subsubsection}{\numberline {3.2.3}Lua}{9}
+\contentsline {section}{\numberline {4}Une liste et analyse des besoins fonctionnels}{9}
+\contentsline {subsection}{\numberline {4.1}Application}{9}
+\contentsline {paragraph}{}{9}
+\contentsline {paragraph}{}{10}
+\contentsline {paragraph}{}{10}
+\contentsline {paragraph}{}{10}
+\contentsline {subsection}{\numberline {4.2}Robot}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {subsection}{\numberline {4.3}Mini-Langage}{12}
+\contentsline {paragraph}{}{12}
+\contentsline {section}{\numberline {5}Une description de prototypes et des r\IeC {\'e}sultats de tests pr\IeC {\'e}paratoires}{12}
+\contentsline {subsection}{\numberline {5.1}Prototype android}{12}
+\contentsline {subsection}{\numberline {5.2}Prototype robot}{13}
+\contentsline {paragraph}{}{13}
+\contentsline {subsection}{\numberline {5.3}Prototype compilateur}{13}
+\contentsline {section}{\numberline {6}Un planning, affectations des t\IeC {\^a}ches}{14}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.20)  20 MAR 2016 15:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.20)  21 MAR 2016 00:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -892,100 +892,151 @@ im-por-ter ses propres
  []
 
 [2] [3] [4] [5]
-Overfull \hbox (14.0334pt too wide) in paragraph at lines 172--172
+Overfull \hbox (14.0334pt too wide) in paragraph at lines 170--170
 []\T1/lmr/bx/n/14.4 Une liste et ana-lyse des be-soins non-fonctionnels 
  []
 
-[6] <img/menu_variableFonctions.jpg, id=29, 1084.05pt x 1927.2pt>
+<img/archi-erlang.jpg, id=26, 907.39pt x 612.2875pt>
+File: img/archi-erlang.jpg Graphic file (type jpg)
+
+<use img/archi-erlang.jpg>
+Package pdftex.def Info: img/archi-erlang.jpg used on input line 179.
+(pdftex.def)             Requested size: 453.6939pt x 306.143pt.
+
+Overfull \hbox (108.6939pt too wide) in paragraph at lines 179--180
+ [] 
+ []
+
+[6] [7 <./img/archi-erlang.jpg>]
+<img/archi-pcode.jpg, id=34, 732.7375pt x 555.07375pt>
+File: img/archi-pcode.jpg Graphic file (type jpg)
+
+<use img/archi-pcode.jpg>
+Package pdftex.def Info: img/archi-pcode.jpg used on input line 189.
+(pdftex.def)             Requested size: 366.36786pt x 277.53618pt.
+
+Overfull \hbox (21.36786pt too wide) in paragraph at lines 189--190
+ [] 
+ []
+
+[8 <./img/archi-pcode.jpg>]
+<img/archi-lua.jpg, id=38, 731.73375pt x 555.07375pt>
+File: img/archi-lua.jpg Graphic file (type jpg)
+ <use img/archi-lua.jpg>
+Package pdftex.def Info: img/archi-lua.jpg used on input line 198.
+(pdftex.def)             Requested size: 365.86598pt x 277.53618pt.
+
+Overfull \hbox (20.86598pt too wide) in paragraph at lines 198--199
+ [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--216
+
+ []
+
+[9 <./img/archi-lua.jpg>] <img/robot.jpg, id=42, 1445.4pt x 1927.2pt>
+File: img/robot.jpg Graphic file (type jpg)
+
+<use img/robot.jpg>
+Package pdftex.def Info: img/robot.jpg used on input line 226.
+(pdftex.def)             Requested size: 216.80064pt x 289.06754pt.
+ [10] [11 <./img/robot.jpg>]
+<img/menu_variableFonctions.jpg, id=49, 1084.05pt x 1927.2pt>
 File: img/menu_variableFonctions.jpg Graphic file (type jpg)
 
 <use img/menu_variableFonctions.jpg>
-Package pdftex.def Info: img/menu_variableFonctions.jpg used on input line 198.
+Package pdftex.def Info: img/menu_variableFonctions.jpg used on input line 255.
 
 (pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
 
-<img/popup_fonction.jpg, id=30, 1084.05pt x 1927.2pt>
+<img/popup_fonction.jpg, id=50, 1084.05pt x 1927.2pt>
 File: img/popup_fonction.jpg Graphic file (type jpg)
 
 <use img/popup_fonction.jpg>
-Package pdftex.def Info: img/popup_fonction.jpg used on input line 199.
+Package pdftex.def Info: img/popup_fonction.jpg used on input line 256.
 (pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
- <img/create1.jpg, id=31, 1084.05pt x 1927.2pt>
+ <img/create1.jpg, id=51, 1084.05pt x 1927.2pt>
 File: img/create1.jpg Graphic file (type jpg)
 
 <use img/create1.jpg>
-Package pdftex.def Info: img/create1.jpg used on input line 200.
+Package pdftex.def Info: img/create1.jpg used on input line 257.
 (pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--204
+Underfull \hbox (badness 10000) in paragraph at lines 259--261
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--204
+Underfull \hbox (badness 10000) in paragraph at lines 259--261
 
  []
 
-<img/create2.jpg, id=32, 1084.05pt x 1927.2pt>
+<img/create2.jpg, id=52, 1084.05pt x 1927.2pt>
 File: img/create2.jpg Graphic file (type jpg)
  <use img/create2.jpg>
-Package pdftex.def Info: img/create2.jpg used on input line 205.
+Package pdftex.def Info: img/create2.jpg used on input line 262.
 (pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
 
-<img/popup_nombre.jpg, id=33, 1084.05pt x 1927.2pt>
+<img/popup_nombre.jpg, id=53, 1084.05pt x 1927.2pt>
 File: img/popup_nombre.jpg Graphic file (type jpg)
  <use img/popup_nombre.jpg>
-Package pdftex.def Info: img/popup_nombre.jpg used on input line 206.
+Package pdftex.def Info: img/popup_nombre.jpg used on input line 263.
 (pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
 
-<img/create3.jpg, id=34, 1084.05pt x 1927.2pt>
+<img/create3.jpg, id=54, 1084.05pt x 1927.2pt>
 File: img/create3.jpg Graphic file (type jpg)
  <use img/create3.jpg>
-Package pdftex.def Info: img/create3.jpg used on input line 207.
+Package pdftex.def Info: img/create3.jpg used on input line 264.
 (pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
- [7 <./img/menu_variableFonctions.jpg> <./img/popup_fonction.jpg> <./img/create
-1.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 213--216
+ [12 <./img/menu_variableFonctions.jpg> <./img/popup_fonction.jpg> <./img/creat
+e1.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
 
  []
 
-(./rapport.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 217--1
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--282
 
  []
 
-[8 <./img/create2.jpg> <./img/popup_nombre.jpg> <./img/create3.jpg>]
-Underfull \hbox (badness 2042) in paragraph at lines 51--57
+[13 <./img/create2.jpg> <./img/popup_nombre.jpg> <./img/create3.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 284--287
+
+ []
+
+[14] (./rapport.bbl
+Underfull \hbox (badness 2042) in paragraph at lines 57--63
 \T1/lmr/m/n/10 chim De Stercke.  Pro-gram-ma-tion tasks with Scratch : Ob-ser-v
 a-
  []
 
 
-Underfull \hbox (badness 1067) in paragraph at lines 51--57
+Underfull \hbox (badness 1067) in paragraph at lines 57--63
 \T1/lmr/m/n/10 tion and ana-ly-sis of the pro-gres-sion in ma-the-ma-tics.  \T1
 /lmr/m/it/10 Fran-tice.net\T1/lmr/m/n/10 ,
  []
 
-) [9] (./rapport.aux) ) 
+) [15] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 14422 strings out of 493089
- 272788 string characters out of 6134842
- 322317 words of memory out of 5000000
- 17574 multiletter control sequences out of 15000+600000
+ 14443 strings out of 493089
+ 273209 string characters out of 6134842
+ 321320 words of memory out of 5000000
+ 17591 multiletter control sequences out of 15000+600000
  53738 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,5n,56p,768b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/l
-m-ec.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-
-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/
-type1/public/lm/lmri10.pfb>
-Output written on rapport.pdf (9 pages, 507177 bytes).
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/
+lm-ec.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf
+-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts
+/type1/public/lm/lmri10.pfb>
+Output written on rapport.pdf (15 pages, 964527 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 91 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 63 words of extra memory for PDF output out of 10000 (max. 10000000)
 
