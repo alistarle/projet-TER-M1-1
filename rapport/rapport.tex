@@ -168,16 +168,18 @@ Ardublock est un programme de développement pour l'arduino a base de blocks. Ce
 https://www.aldebaran.com/fr/cool-robots/nao/en-savoir-plus-sur-nao : robots existants possèdant plusieurs capteurs afin d’interagir avec son utilisateur, on notera surtout la présence de capteurs pour se repérer, la possibilité de se mouvoir ainsi que la présence d’une carte wifi/ethernet.
 
 \section{Une liste et analyse des besoins non-fonctionnels}
+\subsection{Prototype test}
 Télécommande : sera utile aux tests. En effet, le simple fait de contrôler le robot via une télécommande permet de vérifier plusieurs points. D’une part, cela permet de tester le fonctionnement et les capteurs du robot, et d’autre part, cela permet de se familiariser avec la “chaine d’action” du projet. Enchaînant l’application android, la production du code en mini-language, la communication avec le robot, la compilation sur ce dernier et son exécution. Cela sera donc la première étape du projet.
-Nous avons imaginé ici différentes architectures possibles, elles diffèrent de par leur facon de transcrire notre pseudo code en Arduino, l’acheminement de la sortie pseudo code de l’application Android jusqu'à son exécution sur le robot peut en effet se voir de différentes manières.
 
-\subsection{Erlang}
+\subsection{Architectures}
+Nous avons imaginé ici différentes architectures possibles, elles diffèrent de par leur facon de transcrire notre pseudo code en Arduino, l’acheminement de la sortie pseudo code de l’application Android jusqu'à son exécution sur le robot peut en effet se voir de différentes manières.
+\subsubsection{Erlang}
 Cette méthode profite de la facilité de communication entre plusieurs processus dont dispose Erlang, elle s’avère en premier lieu simple d’implémentations, on pourrait également se demander si une telle architecture ne serait pas simplifiable, et si nos commandes Arduino ne pourraient elles pas découler directement de la compilation.
 
-\subsection{Pcode}
+\subsubsection{Pcode}
 Avec cette méthode on allège le cheminement du code, mais on perd le coté pratique de Erlang, c’est une façon plus directe, on passe de notre pseudo code à des commandes Arduino avec plus de transparence.
 
-\subsection{Lua}
+\subsubsection{Lua}
 
 
 \section{Une liste et analyse des besoins fonctionnels}
