@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.20)  20 MAR 2016 01:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.20)  20 MAR 2016 14:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,22 +896,65 @@ Overfull \hbox (14.0334pt too wide) in paragraph at lines 172--172
 []\T1/lmr/bx/n/14.4 Une liste et ana-lyse des be-soins non-fonctionnels 
  []
 
+[6] <img/menu_variableFonctions.jpg, id=29, 1084.05pt x 1927.2pt>
+File: img/menu_variableFonctions.jpg Graphic file (type jpg)
 
-Underfull \hbox (badness 10000) in paragraph at lines 180--183
+<use img/menu_variableFonctions.jpg>
+Package pdftex.def Info: img/menu_variableFonctions.jpg used on input line 196.
+
+(pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
+
+<img/popup_fonction.jpg, id=30, 1084.05pt x 1927.2pt>
+File: img/popup_fonction.jpg Graphic file (type jpg)
+
+<use img/popup_fonction.jpg>
+Package pdftex.def Info: img/popup_fonction.jpg used on input line 197.
+(pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
+ <img/create1.jpg, id=31, 1084.05pt x 1927.2pt>
+File: img/create1.jpg Graphic file (type jpg)
+
+<use img/create1.jpg>
+Package pdftex.def Info: img/create1.jpg used on input line 198.
+(pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--202
 
  []
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 184--187
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--202
+
+ []
+
+<img/create2.jpg, id=32, 1084.05pt x 1927.2pt>
+File: img/create2.jpg Graphic file (type jpg)
+ <use img/create2.jpg>
+Package pdftex.def Info: img/create2.jpg used on input line 203.
+(pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
+
+<img/popup_nombre.jpg, id=33, 1084.05pt x 1927.2pt>
+File: img/popup_nombre.jpg Graphic file (type jpg)
+ <use img/popup_nombre.jpg>
+Package pdftex.def Info: img/popup_nombre.jpg used on input line 204.
+(pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
+
+<img/create3.jpg, id=34, 1084.05pt x 1927.2pt>
+File: img/create3.jpg Graphic file (type jpg)
+ <use img/create3.jpg>
+Package pdftex.def Info: img/create3.jpg used on input line 205.
+(pdftex.def)             Requested size: 108.41135pt x 192.7313pt.
+ [7 <./img/menu_variableFonctions.jpg> <./img/popup_fonction.jpg> <./img/create
+1.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 211--214
 
  []
 
 (./rapport.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 188--1
+Underfull \hbox (badness 10000) in paragraph at lines 215--1
 
  []
 
-
+[8 <./img/create2.jpg> <./img/popup_nombre.jpg> <./img/create3.jpg>]
 Underfull \hbox (badness 2042) in paragraph at lines 51--57
 \T1/lmr/m/n/10 chim De Stercke.  Pro-gram-ma-tion tasks with Scratch : Ob-ser-v
 a-
@@ -923,26 +966,26 @@ Underfull \hbox (badness 1067) in paragraph at lines 51--57
 /lmr/m/it/10 Fran-tice.net\T1/lmr/m/n/10 ,
  []
 
-[7]) [8] (./rapport.aux) ) 
+) [9] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 14390 strings out of 493089
- 272105 string characters out of 6134842
- 321316 words of memory out of 5000000
- 17550 multiletter control sequences out of 15000+600000
+ 14422 strings out of 493089
+ 272788 string characters out of 6134842
+ 322317 words of memory out of 5000000
+ 17574 multiletter control sequences out of 15000+600000
  53738 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,5n,56p,768b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/l
-m/lm-ec.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/tex
-mf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fon
-ts/type1/public/lm/lmri10.pfb>
-Output written on rapport.pdf (8 pages, 164325 bytes).
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/l
+m-ec.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/
+type1/public/lm/lmri10.pfb>
+Output written on rapport.pdf (9 pages, 506692 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 68 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

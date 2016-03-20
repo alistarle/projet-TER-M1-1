@@ -34,8 +34,11 @@
 \contentsline {paragraph}{}{6}
 \contentsline {paragraph}{}{6}
 \contentsline {section}{\numberline {3}Une liste et analyse des besoins non-fonctionnels}{6}
-\contentsline {section}{\numberline {4}Une liste et analyse des besoins fonctionnels}{6}
-\contentsline {section}{\numberline {5}Une description de prototypes et des r\IeC {\'e}sultats de tests pr\IeC {\'e}paratoires}{6}
-\contentsline {subsection}{\numberline {5.1}Prototype android}{6}
-\contentsline {subsection}{\numberline {5.2}Prototype compilateur}{7}
-\contentsline {section}{\numberline {6}Un planning, affectations des t\IeC {\^a}ches}{7}
+\contentsline {subsection}{\numberline {3.1}Erlang}{6}
+\contentsline {subsection}{\numberline {3.2}Pcode}{6}
+\contentsline {subsection}{\numberline {3.3}Lua}{7}
+\contentsline {section}{\numberline {4}Une liste et analyse des besoins fonctionnels}{7}
+\contentsline {section}{\numberline {5}Une description de prototypes et des r\IeC {\'e}sultats de tests pr\IeC {\'e}paratoires}{7}
+\contentsline {subsection}{\numberline {5.1}Prototype android}{7}
+\contentsline {subsection}{\numberline {5.2}Prototype compilateur}{8}
+\contentsline {section}{\numberline {6}Un planning, affectations des t\IeC {\^a}ches}{8}
