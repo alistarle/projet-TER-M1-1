@@ -9,21 +9,37 @@
     android:contextClickable="false">
 
 
-    <LinearLayout android:layout_weight="5" android:layout_height="fill_parent" android:layout_width="fill_parent">
+    <LinearLayout android:layout_weight="5" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/background_with_shadow">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <Button
             android:id="@+id/category1"
             android:text="Categorie 1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            style="@style/button_category"/>
 
         <Button
             android:id="@+id/category2"
             android:text="Categorie 2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            style="@style/button_category"/>
+
+        <Button
+            android:id="@+id/category3"
+            android:text="Categorie 3"
+            style="@style/button_category"/>
+
+            <Button
+                android:id="@+id/category4"
+                android:text="Categorie 4"
+                style="@style/button_category"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout android:layout_weight="3" android:layout_height="fill_parent" android:layout_width="fill_parent">
+    <LinearLayout android:layout_weight="3" android:layout_height="fill_parent" android:layout_width="fill_parent"
+        android:background="#FFFFFF">
         <GridLayout
             android:isScrollContainer="true"
             android:layout_width="match_parent"
@@ -57,61 +73,50 @@
         </GridLayout>
 
         </LinearLayout>
-    <LinearLayout android:layout_weight="4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/red"
-        >
-
-        <GridLayout
-            android:layout_gravity="center"
+    <LinearLayout android:layout_weight="4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/bottom_menu">
+        <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alignmentMode="alignBounds">
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                style="@style/button_algo"
                 android:id="@+id/action_turn_left"
-                android:background="@drawable/turn_left"
-                android:layout_margin="20dp"/>
+                android:background="@drawable/turn_left" />
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                style="@style/button_algo"
                 android:id="@+id/action_turn_right"
-                android:background="@drawable/turn_right"
-                android:layout_margin="20dp"/>
+                android:background="@drawable/turn_right" />
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/action1"
                 android:background="@drawable/loop_back"
-                android:layout_margin="20dp"/>
+                style="@style/button_algo" />
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/action2"
                 android:background="@drawable/loop_back"
-                android:layout_margin="20dp"/>
+                style="@style/button_algo"
+                />
 
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/action3"
                 android:background="@drawable/loop_back"
-                android:layout_margin="20dp"/>
+                style="@style/button_algo"
+                />
 
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/action_return"
                 android:background="@drawable/loop_back"
-                android:layout_margin="20dp"/>
+                style="@style/button_algo"
+                />
 
 
 
-        </GridLayout>
+        </LinearLayout>
 
 
     </LinearLayout>

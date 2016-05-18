@@ -1,5 +1,6 @@
 package com.example.vladimirkarassouloff.projetter.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,7 +35,7 @@ import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
 
 
-public class AlgoActivity extends ActionBarActivity {
+public class AlgoActivity extends Activity {
 
 
     //connecte a un robot
