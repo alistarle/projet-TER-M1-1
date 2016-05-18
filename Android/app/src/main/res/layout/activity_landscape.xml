@@ -9,7 +9,13 @@
     android:contextClickable="false">
 
 
-    <LinearLayout android:layout_weight="5" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/background_with_shadow">
+    <LinearLayout android:layout_weight="22" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/background_with_shadow">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MENU"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
         <LinearLayout
             android:gravity="center"
             android:layout_width="match_parent"
@@ -38,7 +44,7 @@
         </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout android:layout_weight="3" android:layout_height="fill_parent" android:layout_width="fill_parent"
+    <LinearLayout android:layout_weight="12" android:layout_height="fill_parent" android:layout_width="fill_parent"
         android:background="#FFFFFF">
         <GridLayout
             android:isScrollContainer="true"
@@ -73,7 +79,7 @@
         </GridLayout>
 
         </LinearLayout>
-    <LinearLayout android:layout_weight="4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/bottom_menu">
+    <LinearLayout android:layout_weight="19" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/bottom_menu">
         <LinearLayout
             android:gravity="center"
             android:layout_width="match_parent"
