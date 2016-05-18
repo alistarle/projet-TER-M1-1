@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.vladimirkarassouloff.projetter" >
+    package="com.example.vladimirkarassouloff.projetter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ui.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.AlgoActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="@string/app_name">
 
+
+        </activity>
+        <activity android:name=".ui.landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:label="@string/app_name" android:exported="true"
+            >
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>
