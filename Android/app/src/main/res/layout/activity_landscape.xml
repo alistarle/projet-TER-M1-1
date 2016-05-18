@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:contextClickable="false">
+
+
+    <LinearLayout android:layout_weight="5" android:layout_height="fill_parent" android:layout_width="fill_parent"
+        android:background="@color/ripple_material_dark">
+
+
+
+        <Button
+            android:id="@+id/category1"
+            android:text="Categorie 1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/category2"
+            android:text="Categorie 2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout android:layout_weight="3" android:layout_height="fill_parent" android:layout_width="fill_parent">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="12"
+            android:rowCount="12">
+
+
+            <Button
+                android:id="@+id/x"
+                android:layout_gravity="left|top"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/y"
+                android:layout_gravity="left|top"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/z"
+                android:layout_gravity="left|top"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/wwww"
+                android:layout_gravity="left|top"
+                android:text="Button" />
+
+
+        </GridLayout>
+        </LinearLayout>
+    <LinearLayout android:layout_weight="4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="?attr/colorPrimary"
+        >
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alignmentMode="alignMargins">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="AVANCER"
+                android:id="@+id/button"
+                android:background="@drawable/img_turn_left" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="RECULER"
+                android:id="@+id/button2" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="DROITE"
+                android:id="@+id/action0" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="GAUCHE"
+                android:id="@+id/action1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="DEMITOUR"
+                android:id="@+id/action2" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="AVANCER"
+                android:id="@+id/action3" />
+
+
+
+        </GridLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
