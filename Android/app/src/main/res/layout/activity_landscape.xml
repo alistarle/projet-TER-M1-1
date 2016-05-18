@@ -9,11 +9,7 @@
     android:contextClickable="false">
 
 
-    <LinearLayout android:layout_weight="5" android:layout_height="fill_parent" android:layout_width="fill_parent"
-        android:background="@color/ripple_material_dark">
-
-
-
+    <LinearLayout android:layout_weight="5" android:layout_height="fill_parent" android:layout_width="fill_parent">
         <Button
             android:id="@+id/category1"
             android:text="Categorie 1"
@@ -29,6 +25,7 @@
     </LinearLayout>
     <LinearLayout android:layout_weight="3" android:layout_height="fill_parent" android:layout_width="fill_parent">
         <GridLayout
+            android:isScrollContainer="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnCount="12"
@@ -38,7 +35,8 @@
             <Button
                 android:id="@+id/x"
                 android:layout_gravity="left|top"
-                android:text="Button" />
+                android:text="Button"
+                />
 
             <Button
                 android:id="@+id/y"
@@ -57,49 +55,59 @@
 
 
         </GridLayout>
+
         </LinearLayout>
     <LinearLayout android:layout_weight="4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/red"
         >
 
         <GridLayout
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alignmentMode="alignMargins">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="AVANCER"
-                android:id="@+id/button" />
+            android:alignmentMode="alignBounds">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="RECULER"
-                android:id="@+id/button2" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/action_turn_left"
+                android:background="@drawable/turn_left"
+                android:layout_margin="20dp"/>
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="DROITE"
-                android:id="@+id/action0" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/action_turn_right"
+                android:background="@drawable/turn_right"
+                android:layout_margin="20dp"/>
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/action1"
+                android:background="@drawable/loop_back"
+                android:layout_margin="20dp"/>
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="GAUCHE"
-                android:id="@+id/action1" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/action2"
+                android:background="@drawable/loop_back"
+                android:layout_margin="20dp"/>
+
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="DEMITOUR"
-                android:id="@+id/action2" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/action3"
+                android:background="@drawable/loop_back"
+                android:layout_margin="20dp"/>
+
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="AVANCER"
-                android:id="@+id/action3" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/action_return"
+                android:background="@drawable/loop_back"
+                android:layout_margin="20dp"/>
 
 
 
