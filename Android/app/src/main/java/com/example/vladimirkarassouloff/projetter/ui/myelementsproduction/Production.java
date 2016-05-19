@@ -1,11 +1,15 @@
 package com.example.vladimirkarassouloff.projetter.ui.myelementsproduction;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +25,7 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.operator.Oper
 import com.example.vladimirkarassouloff.projetter.myelementsstring.logic.LogicString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableString;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 
@@ -34,11 +39,24 @@ public abstract class Production extends TextView {
 
     protected ElementString basicElement;
 
+
+    //Modification
+    protected ViewGroup layoutParent;
+    protected Drawable separator;
+    private TextView myCustomSeparator;
+    protected LinearLayout llElem;
+    protected LinearLayout llSup;
+    protected int columnInsert = 0;
+
+
     public Production(Context context){
         super(context);
         this.basicElement = new ElementString();
         init();
     }
+
+
+
     public Production(Context context, AttributeSet attrs){
         super(context, attrs);
         this.basicElement = new ElementString();
@@ -56,9 +74,14 @@ public abstract class Production extends TextView {
     }
 
     protected void init(){
+        this.separator = getResources().getDrawable(R.drawable.test);
+        myCustomSeparator = new TextView(getContext());
+        myCustomSeparator.setText(" ");
+        myCustomSeparator.setBackground(separator);
+        myCustomSeparator.setHeight(20);
+
         this.setText("Default");
         this.setPadding(5, 10, 5, 10);
-        basicElement.components = new ArrayList<ElementString>();
         this.setOnLongClickListener(
                 new OnLongClickListener() {
                     public boolean onLongClick(View arg0) {
@@ -88,22 +111,153 @@ public abstract class Production extends TextView {
         ViewGroup parent = (ViewGroup)getParent();
         parent.removeView(this);
     }
+
+
     public void modifier(){
         LayoutInflater li = LayoutInflater.from(getContext());
         View promptsView = li.inflate(R.layout.modifyproduction, null);
 
-        LinearLayout componentLayout =(LinearLayout) promptsView.findViewById(R.id.elementsProduction);
+        //on bind les event du layout des elements
+        llElem =(LinearLayout) promptsView.findViewById(R.id.elementsProduction);
+        llElem.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                int action = event.getAction();
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        resetSeparator();
+                        break;
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        // v.setBackgroundDrawable(enterShape);
+                        //Log.i("ENTERED algo", "ENTERED algo");
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        // v.setBackgroundDrawable(normalShape);
+                        //Log.i("EXITED algo", "EXITED algo");
+                        break;
+                    case DragEvent.ACTION_DRAG_LOCATION:
+                        //Log.i("dragloc algo " + event.getX() + " " + event.getY(), "dragloc algo");
+                        resetSeparator();
+                        showInsertResultOnElement(event, v);
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        View vNew = (View) event.getLocalState();
+                        if(vNew.getParent() != null){
+                            ((ViewGroup)vNew.getParent()).removeView(vNew);
+                        }
+                        llElem.addView(vNew,columnInsert);
 
-        ArrayList<ElementString> arrayElements = new ArrayList<>();
-        getAllComponent(arrayElements,false);
+                        //refreshText();
+                        //autoIndent();
+                        break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        resetSeparator();
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+
+        //on bind les event du layout des elements a supprimer
+        llSup =(LinearLayout) promptsView.findViewById(R.id.elementsProductionSup);
+        llSup.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+
+                int action = event.getAction();
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        break;
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        Log.wtf("message","dragexit");
+                        break;
+                    case DragEvent.ACTION_DRAG_LOCATION:
+                        resetSeparator();
+                        showInsertResultOnElementToSup(v);
+                        Log.wtf("message","dragloc");
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        View vNew = (View) event.getLocalState();
+                        if(vNew.getParent() != null){
+                            ((ViewGroup)vNew.getParent()).removeView(vNew);
+                        }
+                        //Log.wtf("message","On insere a la column :"+columnInsert+" et le viewcount a "+llSup.getChildCount());
+                        llSup.addView(vNew);
+                        Log.wtf("message","dragdrop");
+                        break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+
+                        Log.wtf("message","dragend");
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+
+        //on place les elements et on bind l'event
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(30, 0, 30, 0);
+
+        List<ElementString> arrayElements = new ArrayList<>();
+        for(ElementString es : basicElement.components) {
+            arrayElements.add(es);
+            Production prod = new Production(llElem.getContext(),es) {
+                @Override
+                public String getBasicText() {
+                    return basicElement.toString();
+                }
+            };
+            prod.setOnTouchListener(
+                    new View.OnTouchListener() {
+                        public boolean onTouch(View v, MotionEvent event) {
+                            float x = event.getX();
+                            float y = event.getY();
+                            int action = event.getAction();
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    break;
+                                case MotionEvent.ACTION_UP:
+                                    break;
+                                case MotionEvent.ACTION_CANCEL:
+                                    break;
+                                case MotionEvent.ACTION_MOVE:
+                                    ClipData data2 = ClipData.newPlainText("", "");
+                                    View.DragShadowBuilder shadowBuilder2 = new View.DragShadowBuilder(v);
+                                    v.startDrag(data2, shadowBuilder2, v, 0);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return true;
+                        }
+                    }
+            );
+            prod.setOnLongClickListener(new OnLongClickListener(){public boolean onLongClick(View arg0) {return false;}});
+            prod.refreshText();
+            llElem.addView(prod,layoutParams);
+        }
+
+
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder.setView(promptsView);
         alertDialogBuilder.setCancelable(true).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
-
+                        List<ElementString> newArray = new ArrayList<ElementString>();
+                        for(int i = 0 ; i < llElem.getChildCount() ; i++){
+                            if(llElem.getChildAt(i) instanceof Production){
+                                Production pr = (Production) llElem.getChildAt(i);
+                                newArray.add(pr.basicElement);
+                            }
+                        }
+                        basicElement.components = newArray;
+                        refreshText();
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -116,6 +270,31 @@ public abstract class Production extends TextView {
         alertDialog.show();
     }
 
+    private void resetSeparator() {
+        if (myCustomSeparator.getParent() != null) {
+            ((ViewGroup) myCustomSeparator.getParent()).removeView(myCustomSeparator);
+        }
+    }
+
+    private void showInsertResultOnElement(DragEvent event, View v){
+        View view = (View) event.getLocalState();
+        //if sur le layout des elem
+        int i = getBlockProche(view,event.getX(), event.getY());
+        if(i != -2) {
+            /*if(i == -1){
+
+            }*/
+            columnInsert = i;
+            if(columnInsert > llElem.getChildCount()){
+                columnInsert--;
+            }
+            llElem.addView(myCustomSeparator, columnInsert);
+        }
+    }
+    private void showInsertResultOnElementToSup(View v){
+        llSup.addView(myCustomSeparator);
+    }
+
     public void getAllComponent(ArrayList<ElementString> array,boolean includeSelf){
         if(includeSelf && basicElement != null){
             array.add(basicElement);
@@ -125,6 +304,41 @@ public abstract class Production extends TextView {
         }
     }
 
+
+    private int getBlockProche(View dragged,float x,float y){
+        int nearestColumn = 0;
+        float distanceMin = Float.MAX_VALUE;
+        View nearestView = null;
+        for(int i = 0 ; i < llElem.getChildCount() ; i++){
+            View v = llElem.getChildAt(i);
+
+            View rootLayout = v.getRootView().findViewById(android.R.id.content);
+            int[] viewLocation = new int[2];
+            v.getLocationInWindow(viewLocation);
+
+            int[] rootLocation = new int[2];
+            rootLayout.getLocationInWindow(rootLocation);
+
+            int relativeLeft = viewLocation[0] - rootLocation[0];
+            int relativeTop  = viewLocation[1] - rootLocation[1];
+
+            Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
+            Log.wtf("message",String.valueOf(Math.abs( x-(relativeLeft+v.getWidth()/2)))+" est la distance entre les block");
+            if(Math.abs( x-(relativeLeft+v.getWidth()/2)) < Math.abs(distanceMin)){
+                distanceMin = x-(relativeLeft+v.getWidth()/2);
+                nearestColumn = i;
+                nearestView = v;
+            }
+
+        }
+        if(nearestView == dragged) {
+            return -2;
+        }
+        else if(distanceMin < 0){
+            return nearestColumn;
+        }
+        return nearestColumn+1;
+    }
 
     public abstract String getBasicText();
 
@@ -237,4 +451,7 @@ public abstract class Production extends TextView {
         this.basicElement.components.add(es);
     }
 
+    public ElementString getBasicElement() {
+        return basicElement;
+    }
 }

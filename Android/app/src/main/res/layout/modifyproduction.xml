@@ -5,10 +5,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Redisposez les élément"/>
+        android:text="Redisposez les éléments"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:id="@+id/elementsProduction">
+        android:layout_height="match_parent" android:id="@+id/elementsProduction" android:minHeight="30dp">
 
     </LinearLayout>
     <TextView
@@ -18,5 +18,20 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:minHeight="30dp"
-        android:background="@color/red" ></ScrollView>
+         >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="30dp"
+            android:orientation="horizontal" android:layout_width="fill_parent" android:background="@color/red"
+            android:layout_height="fill_parent" android:id="@+id/elementsProductionSup">
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter des parentheses"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:id="@+id/elementsProductionParenthese" android:minHeight="30dp">
+
+    </LinearLayout>
 </LinearLayout>

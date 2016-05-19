@@ -20,7 +20,7 @@ public class ElementString {
         components.add(es);
     }
 
-    public void getAllComponent(ArrayList<ElementString> array,boolean includeSelf){
+    public void getAllComponent(List<ElementString> array,boolean includeSelf){
         if(includeSelf){
             array.add(this);
         }

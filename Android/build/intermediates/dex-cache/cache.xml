@@ -1,27 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.1"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_d5db2c45816ca1c24b563af3cdd7dd48b44b4ef3.jar" />
-    </item>
-    <item
-        jar="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.1"
-        sha1="a66fb0433973b83935e094990119f8c1c6e9daa6">
-        <dex dex="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_403656bd2cefba68844c87de98461426dc802d7e.jar" />
-    </item>
-    <item
-        jar="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.1"
-        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
-        <dex dex="D:\ProgAndroid\ProjetTER\Android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_f3f2a17548b43e42b14818d308e310e29617be8a.jar" />
-
-    </item>
-
-</items>

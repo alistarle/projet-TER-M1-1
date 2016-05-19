@@ -51,10 +51,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.Vector;
 
 
 public class AlgoActivity extends AppCompatActivity {
+
+
+    private Button redoActionButton;
+    private Button undoActionButton;
+    private Stack<com.example.vladimirkarassouloff.projetter.action.Action> redoStack;
+    private Stack<com.example.vladimirkarassouloff.projetter.action.Action> undoStack;
+
 
 
     //connecte a un robot
@@ -96,6 +104,11 @@ public class AlgoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algo);
+
+
+        redoActionButton = (Button) findViewById(R.id.redo);
+        undoActionButton = (Button) findViewById(R.id.undo);
+
 
 
         //Gestion des main scoll
@@ -154,10 +167,18 @@ public class AlgoActivity extends AppCompatActivity {
                 } else if (intent.getAction().equals("disconnected")) {
                     setState(ConnectionState.disconnected);
                 }
+                else if(intent.getAction().equals("doAction")){
+                    //intent.getBundleExtra("action");
+                    //Action action = (Action)intent.getExtras("action");
+                    com.example.vladimirkarassouloff.projetter.action.Action action = (com.example.vladimirkarassouloff.projetter.action.Action)intent.getSerializableExtra("action");
+
+                }
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("action"));
+
     }
 
     @Override
@@ -168,6 +189,28 @@ public class AlgoActivity extends AppCompatActivity {
         this.menuDisconnect = (MenuItem) menu.findItem(R.id.action_disconnect);
         this.menuExecuteCode = (MenuItem) menu.findItem(R.id.action_execute);
         return true;
+    }
+
+
+    private void doAction(com.example.vladimirkarassouloff.projetter.action.Action a){
+        a.doAction();
+        undoStack.push(a);
+    }
+
+    private void redoAction(){
+        com.example.vladimirkarassouloff.projetter.action.Action a = redoStack.pop();
+        if(a != null){
+            a.doAction();
+            undoStack.push(a);
+        }
+    }
+
+    private void undoAction(){
+        com.example.vladimirkarassouloff.projetter.action.Action a = undoStack.pop();
+        if(a != null){
+            a.undoAction();
+            redoStack.push(a);
+        }
     }
 
 

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,7 +46,7 @@ public class ElementNumber extends TextView implements DraggableElement {
     }
 
     @Override
-    public ElementString onDraggedOnBlock(Production block) {
+    public ElementString onDraggedOnBlock(final Production block) {
         tv = new NumberString();
 
 
@@ -66,7 +67,8 @@ public class ElementNumber extends TextView implements DraggableElement {
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-
+                                block.getBasicElement().components.remove(tv);
+                                block.refreshText();
                                 dialog.cancel();
                             }
                         });
