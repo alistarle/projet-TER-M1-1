@@ -1,2 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-8.1.0_fa433bae561b786eae4e7147092a88feb80b43e4/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="11c61b302d716d842766ffa35ab8347ecd189a4d">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_d780167e8cf38bc528a090efb38289f1615ce58e/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.0.1_22d9d4b296715bba7ab16866261cefab6a489964/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.0.1_d2c247eb498d01d0fd323f6e238eef3ace000c9e/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="546f86957680e32af7ab64adf959c235c4871f58">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_cddf1b0d92d130c0f916b63fdcb072008b3d4c37/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.0.1_58c6f52807fde1cf219e6c6824729f1052b829b1/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.0.1_547441c897e5e1c20825fcfd1d047e02f496c5d3/classes.dex" />
+    </item>
+    <item
+        jar="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/Users/juliengauttier/Documents/M1/Projets/ter/Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-8.1.0_5390ba97ad831711cd25c11ede3e29091e53cfee/classes.dex" />
+    </item>
+
+</items>
