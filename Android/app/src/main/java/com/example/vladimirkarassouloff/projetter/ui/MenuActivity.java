@@ -19,13 +19,13 @@ public class MenuActivity extends AppCompatActivity {
 
     public void newAlgo(View view) {
         Intent myIntent = new Intent(MenuActivity.this, AlgoActivity.class);
-        //myIntent.putExtra("key", value); //Optional parameters
         MenuActivity.this.startActivity(myIntent);
 
     }
 
 
     public void loadAlgo(View view) {
-        //Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent myIntent = new Intent(MenuActivity.this, LoadActivity.class);
+        MenuActivity.this.startActivity(myIntent);
     }
 }

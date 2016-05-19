@@ -1,3 +1,4 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -7,7 +8,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ui.AlgoActivity"
     android:weightSum="1"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -113,16 +113,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.5"
-                android:text="annuler"
-                android:textSize="20px" />
+                android:text="load"
+                android:textSize="20px"
+                android:onClick="actionLoad"/>
 
             <Button
                 android:id="@+id/redo"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.5"
-                android:text="refaire"
-                android:textSize="20px" />
+                android:text="save"
+                android:textSize="20px"
+                android:onClick="actionSave"/>
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>

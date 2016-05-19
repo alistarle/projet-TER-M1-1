@@ -321,4 +321,8 @@ public class AlgoView extends ScrollView {
         return algo;
     }
 
+    public LinearLayout getLl() {
+        return ll;
+    }
+
 }
