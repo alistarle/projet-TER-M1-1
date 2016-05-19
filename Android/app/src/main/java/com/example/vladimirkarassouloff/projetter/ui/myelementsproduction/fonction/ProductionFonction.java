@@ -17,6 +17,7 @@ public class ProductionFonction extends Production {
     public ProductionFonction(Context context,String name) {
         super(context);
         this.element = new FonctionString(name);
+        this.basicElement = this.element;
     }
 
     public ProductionFonction(Context context, AttributeSet attrs,String name) {

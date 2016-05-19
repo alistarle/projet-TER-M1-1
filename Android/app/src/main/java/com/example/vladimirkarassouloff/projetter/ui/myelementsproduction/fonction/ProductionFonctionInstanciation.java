@@ -3,6 +3,10 @@ package com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonct
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.logic.LogicString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableString;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 
@@ -17,16 +21,19 @@ public class ProductionFonctionInstanciation extends Production {
         super(context);
         this.setText("Nouvelle fonction");
         element = new FonctionInstanciationString("Nouvelle","Fonction");
+        this.basicElement = element;
     }
 
     public ProductionFonctionInstanciation(Context context,String type,String name) {
         super(context);
         element = new FonctionInstanciationString(name,type);
+        this.basicElement = element;
     }
 
     public ProductionFonctionInstanciation(Context context, AttributeSet attrs,String type,String name) {
         super(context, attrs);
         element = new FonctionInstanciationString(name,type);
+        this.basicElement = element;
 
     }
 
@@ -47,6 +54,17 @@ public class ProductionFonctionInstanciation extends Production {
         element.setName(name);
     }
 
+    public String getArgumentsToString(){
+        String s = "";
+        for(int i = 0 ; i < basicElement.components.size() ; i++){
+            s+=basicElement.components.get(i).toString();
+            if(i != basicElement.components.size()-1){
+                s+=",";
+            }
+        }
+        return s;
+    }
+
     @Override
     public int tabChanger() {
         return 1;
@@ -54,11 +72,36 @@ public class ProductionFonctionInstanciation extends Production {
 
     @Override
     public String getBasicText() {
-        return  this.getType()+" "+this.getName()+" () {";
+        return  this.getType()+" "+this.getName()+" ("+this.getArgumentsToString()+") {";
     }
 
     @Override
-    public boolean supportDropVariableInstanciation() {
-        return super.supportDropVariableInstanciation();
+    public boolean supportDropVariable() {
+        return true;
+    }
+
+    @Override
+    public void onDrop(VariableString ev) {
+        basicElement.components.add(ev);
+    }
+
+    @Override
+    public boolean supportDropNumber() {
+        return true;
+    }
+
+    @Override
+    public void onDrop(NumberString ns) {
+        basicElement.components.add(ns);
+    }
+
+    @Override
+    public boolean supportDropLogic(LogicString op) {
+        return true;
+    }
+
+    @Override
+    public void onDrop(LogicString os) {
+        basicElement.components.add(os);
     }
 }

@@ -40,7 +40,7 @@ public class ValidationDialogVariable extends ValidationDialogProduction{
 
     protected boolean isNameCorrect(String s){
         for(int i = 0 ; i < s.length() ; i++){
-            if(!Character.isDigit(s.charAt(i)) && !Character.isAlphabetic(s.charAt(i))){
+            if(!Character.isDigit(s.charAt(i)) && !Character.isLetter(s.charAt(i))){
                 return false;
             }
         }

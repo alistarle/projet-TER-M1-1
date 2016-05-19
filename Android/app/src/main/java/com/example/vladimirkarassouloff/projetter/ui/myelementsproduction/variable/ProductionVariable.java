@@ -17,11 +17,13 @@ public class ProductionVariable extends Production {
     public ProductionVariable(Context context,String name) {
         super(context);
         this.element = new VariableString(name);
+        this.basicElement = element;
     }
 
     public ProductionVariable(Context context, AttributeSet attrs,String name) {
         super(context, attrs);
         this.element = new VariableString(name);
+        this.basicElement = element;
     }
 
     @Override

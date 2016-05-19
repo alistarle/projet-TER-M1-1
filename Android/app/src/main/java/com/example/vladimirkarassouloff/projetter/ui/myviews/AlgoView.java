@@ -10,6 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.ProductionBraceCloser;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.*;
@@ -100,19 +105,32 @@ public class AlgoView extends ScrollView {
         });
 
 
-
+        //main.refreshTextView();
 
         if(Debug.DEBUG_APP){
             ll.addView((new ElementVariableInstanciation(getContext())).onDraggedOnLine(ll).get(0),lineInsert);
             ll.addView((new ElementIf(getContext())).onDraggedOnLine(ll).get(0),2);
             ll.addView((new ElementIf(getContext())).onDraggedOnLine(ll).get(1),3);
-            refreshText();
+
         }
 
 
     }
 
-    private void showInsertResult(DragEvent event,View v){
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        ProductionFonctionInstanciation main = new ProductionFonctionInstanciation(getContext(),"main","void");
+        main.addComponent(new NumberString("43"));
+        main.addComponent(new NumberString("12"));
+        ll.addView(main,0);
+        ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
+        ll.addView(pbc,1);
+        refreshText();
+    }
+
+    private void showInsertResult(DragEvent event, View v){
         //on regarde si on dragg sur un block
         View view = (View) event.getLocalState();
         if (testIfInsideBlock(event.getX(), event.getY())) {

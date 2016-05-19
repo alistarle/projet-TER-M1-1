@@ -3,4 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <array name="contextMenuProduction">
+       <item>Supprimer</item>
+       <item>Modifier</item>
+    </array>
 </resources>
+

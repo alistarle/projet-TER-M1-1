@@ -43,6 +43,14 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
     public ElementFonctionInstanciation(Context context, AttributeSet attrs){
         super(context, attrs);
     }
+    public ElementFonctionInstanciation(Context context, FonctionInstanciationString element){
+        super(context);
+        //refreshTextView();
+    }
+    public ElementFonctionInstanciation(Context context, AttributeSet attrs, FonctionInstanciationString element){
+        super(context, attrs);
+        //refreshTextView();
+    }
 
     public String getType(){
         return element.getType();

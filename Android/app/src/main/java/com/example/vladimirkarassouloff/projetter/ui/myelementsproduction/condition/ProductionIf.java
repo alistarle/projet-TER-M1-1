@@ -29,7 +29,7 @@ public class ProductionIf extends Production {
 
     protected String getIfContent(){
         String s = "";
-        for(ElementString e : this.components){
+        for(ElementString e : basicElement.components){
             s+=e.toString()+" ";
         }
         if(s.length() != 0)
@@ -62,14 +62,14 @@ public class ProductionIf extends Production {
 
     @Override
     public void onDrop(OperatorString el){
-        this.components.add(el);
+        this.basicElement.add(el);
         /*if(lastIsVariable()){
             this.components.add(el);
         }*/
     }
     @Override
     public void onDrop(VariableString ev){
-        this.components.add(ev);
+        this.basicElement.add(ev);
         /*if(isComponentEmpty()){
             this.components.add(ev);
         }
@@ -84,7 +84,7 @@ public class ProductionIf extends Production {
 
     @Override
     public void onDrop(LogicString os) {
-        this.components.add(os);
+        this.basicElement.add(os);
         /*if(lastIsVariable()){
             this.components.add(os);
         }*/
@@ -92,6 +92,6 @@ public class ProductionIf extends Production {
 
     @Override
     public void onDrop(NumberString ns) {
-        this.components.add(ns);
+        this.basicElement.add(ns);
     }
 }

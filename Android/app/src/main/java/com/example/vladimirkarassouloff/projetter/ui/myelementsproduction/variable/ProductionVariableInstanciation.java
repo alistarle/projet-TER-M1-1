@@ -18,18 +18,20 @@ public class ProductionVariableInstanciation extends Production {
     public ProductionVariableInstanciation(Context context,String type,String name) {
         super(context);
         this.element = new VariableInstanciationString(type,name);
-
+        this.basicElement = element;
     }
 
     public ProductionVariableInstanciation(Context context) {
         super(context);
         this.setText("Nouvelle Variable");
         this.element = new VariableInstanciationString("Nouvelle","Variable");
+        this.basicElement = element;
     }
 
     public ProductionVariableInstanciation(Context context, AttributeSet attrs,String type,String name) {
         super(context, attrs);
         this.element = new VariableInstanciationString(type,name);
+        this.basicElement = element;
 
     }
 
