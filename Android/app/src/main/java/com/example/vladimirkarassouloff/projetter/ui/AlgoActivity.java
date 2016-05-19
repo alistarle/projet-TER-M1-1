@@ -262,6 +262,30 @@ public class AlgoActivity extends AppCompatActivity {
 
     }
 
+
+    ////////////////////Save/Export/Load STUFF
+    private void exportAlgo(String name) throws IOException {
+        // Write to disk with FileOutputStream
+        FileOutputStream f_out = new FileOutputStream("/sdcard/" + name + ".robotaf");
+        // Write object with ObjectOutputStream
+        ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
+        // Write object out to disk
+        System.out.println(algoScroll.getAlgorithme());
+        obj_out.writeObject(algoScroll.getAlgorithme());
+    }
+
+
+    public void actionExport(View view) {
+        int slot = 1;
+        try {
+            exportAlgo("test");
+        } catch (IOException e) {
+            System.out.println("failed to export in file "+ slot);
+            e.printStackTrace();
+        }
+    }
+
+
     private void saveAlgo(int slot) throws IOException {
         // Write to disk with FileOutputStream
         FileOutputStream f_out = new FileOutputStream("slot" + slot + ".data");
@@ -289,13 +313,13 @@ public class AlgoActivity extends AppCompatActivity {
         Object obj = obj_in.readObject();
 
         //if (obj instanceof ArrayList<View>) {
-            // Cast object to a Vector
-            obj = (ArrayList<View>) obj;
-            algoScroll.getLl().removeAllViews();
-            for(int i = 0 ; i<((ArrayList<View>) obj).size() ; i++ ){
-                algoScroll.getLl().addView(((ArrayList<View>) obj).get(i));
-            }
-            // Do something with vector....
+        // Cast object to a Vector
+        obj = (ArrayList<View>) obj;
+        algoScroll.getLl().removeAllViews();
+        for(int i = 0 ; i<((ArrayList<View>) obj).size() ; i++ ){
+            algoScroll.getLl().addView(((ArrayList<View>) obj).get(i));
+        }
+        // Do something with vector....
         //}
     }
 
@@ -319,7 +343,10 @@ public class AlgoActivity extends AppCompatActivity {
             System.out.println("failed to load file from slot " + slot);
         }
     }
-        ///////////////////Connexion stuff
+
+    ////////////////////////////////
+
+    ///////////////////Connexion stuff
 
     public void setState(ConnectionState state) {
         this.state = state;

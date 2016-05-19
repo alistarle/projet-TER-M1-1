@@ -113,18 +113,26 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.5"
-                android:text="load"
-                android:textSize="20px"
-                android:onClick="actionLoad"/>
+                android:text="annuler"
+                android:textSize="20px" />
 
             <Button
                 android:id="@+id/redo"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.5"
-                android:text="save"
+                android:text="refaire"
                 android:textSize="20px"
-                android:onClick="actionSave"/>
+                />
+
+            <Button
+                android:id="@+id/export"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:text="export"
+                android:textSize="20px"
+                android:onClick="actionExport"/>
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>

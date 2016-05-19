@@ -17,6 +17,7 @@ import com.example.vladimirkarassouloff.projetter.ui.myelements.condition.Elemen
 import com.example.vladimirkarassouloff.projetter.ui.myelements.variable.ElementVariableInstanciation;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
