@@ -1,9 +1,12 @@
+./Android/.gradle
 /Android/.gradle
 Android/.gradle
 
+./local.properties
 /local.properties
 local.properties
 
+./Android/.idea/*
 /Android/.idea/*
 Android/.idea/*
 /Android/.idea/
@@ -15,15 +18,25 @@ Android/local.properties
 
 Android/.gradle
 /Android/.idea/*
+./Android/.idea/*
+
 Android/build
 Android/captures
-Android/local.properties
 local.properties
-/Android/loacl.properties
+
+./Android/local.properties
+/Android/local.properties
+Android/local.properties
+
 /Android/build
 /Android/captures
 /Android/.idea/workspace.xml
 /local.properties
+
+./Android/build
+./Android/captures
+./Android/.idea/workspace.xml
+./local.properties
 
 .DS_Store
 
