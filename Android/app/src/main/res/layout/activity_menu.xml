@@ -15,7 +15,8 @@
         android:text="New"
         android:id="@+id/newButton"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="newAlgo"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -23,7 +24,8 @@
         android:text="Load"
         android:id="@+id/loadButton"
         android:layout_below="@+id/newButton"
-        android:layout_alignStart="@+id/newButton" />
+        android:layout_alignStart="@+id/newButton"
+        android:onClick="loadAlgo"/>
 
 
 </RelativeLayout>

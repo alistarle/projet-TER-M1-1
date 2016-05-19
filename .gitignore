@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 /Android/.gradle
 /local.properties
 /Android/.idea/workspace.xml
+=======
+Android/.gradle
+local.properties
+Android/.idea/workspace.xml
+Android/.idea/libraries
+Android/.idea/*
+>>>>>>> 1c4078ba58967d49e46e09e3583f217a7dd5ae0d
 .DS_Store
-/Android/build
-/Android/captures
-/Android/local.properties
+Android/build
+Android/captures
+Android/local.properties

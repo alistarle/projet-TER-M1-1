@@ -4,29 +4,32 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/mainLayout"
-    android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ui.AlgoActivity"
-    android:weightSum="1">
-
-    <com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView
-        android:layout_width="169dp"
-        android:layout_height="match_parent"
-        android:id="@+id/algoScroll"
-        android:minWidth="100dp"
-        android:layout_marginRight="25px"
-        android:fillViewport="false">
-
-
-    </com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView>
+    android:weightSum="1"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:weightSum="1">
-
-        <ViewAnimator
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/algoScroll"
+            android:minWidth="100dp"
+            android:fillViewport="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <ViewAnimator
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewanimator"
             android:layout_weight="1">
@@ -35,8 +38,8 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/namesScroll"
-                android:minWidth="100dp"
-                android:fillViewport="false">
+                android:fillViewport="false"
+                android:nestedScrollingEnabled="false">
             </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView>
 
             <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView
@@ -56,7 +59,19 @@
                 android:fillViewport="false">
             </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.OperationView>
         </ViewAnimator>
+    </LinearLayout>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -110,6 +125,8 @@
                 android:textSize="20px" />
         </LinearLayout>
     </LinearLayout>
+    </LinearLayout>
+
 
 
 </LinearLayout>

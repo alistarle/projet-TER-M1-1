@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,7 +36,7 @@ import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
 
 
-public class AlgoActivity extends Activity {
+public class AlgoActivity extends AppCompatActivity {
 
 
     //connecte a un robot
@@ -47,8 +48,6 @@ public class AlgoActivity extends Activity {
     private ConnectionState state = ConnectionState.disconnected;
 
     private BroadcastReceiver onNotice;
-
-
 
     ////////////////UI
     private MenuItem menuConnect;
@@ -80,8 +79,6 @@ public class AlgoActivity extends Activity {
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         elementsScroll = (ElementsView) findViewById(R.id.elementsScroll);
         algoScroll = (AlgoView) findViewById(R.id.algoScroll);
-
-
 
 
         ///////////Gestion viewanimator/////////////
