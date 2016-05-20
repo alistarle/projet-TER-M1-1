@@ -3,6 +3,8 @@ package com.example.vladimirkarassouloff.projetter.ui.myelements.fonction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogFunction;
@@ -104,9 +107,11 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                ViewGroup owner = (ViewGroup) tv.getParent();
+                                /*ViewGroup owner = (ViewGroup) tv.getParent();
                                 owner.removeView(tv);
-                                owner.removeView(bc);
+                                owner.removeView(bc);*/
+                                Intent intent = new Intent("removeLastAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });

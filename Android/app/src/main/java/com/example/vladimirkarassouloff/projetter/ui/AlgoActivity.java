@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.ViewAnimator;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogConnection;
 import com.example.vladimirkarassouloff.projetter.network.NetworkInfo;
 import com.example.vladimirkarassouloff.projetter.network.NetworkTask;
@@ -39,7 +40,6 @@ import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptConnec
 import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -50,6 +50,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import java.util.Vector;
@@ -62,7 +63,7 @@ public class AlgoActivity extends AppCompatActivity {
     private Button undoActionButton;
     private Stack<com.example.vladimirkarassouloff.projetter.action.Action> redoStack;
     private Stack<com.example.vladimirkarassouloff.projetter.action.Action> undoStack;
-
+    public static List<Action> ACTION_TO_CONSUME = new ArrayList<>();
 
 
     //connecte a un robot
@@ -105,11 +106,21 @@ public class AlgoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algo);
 
-
+        //DO UNDO REDO
+        redoStack = new Stack<Action>();
+        undoStack = new Stack<Action>();
         redoActionButton = (Button) findViewById(R.id.redo);
         undoActionButton = (Button) findViewById(R.id.undo);
-
-
+        redoActionButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                redoAction();
+            }
+        });
+        undoActionButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                undoAction();
+            }
+        });
 
         //Gestion des main scoll
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
@@ -168,18 +179,42 @@ public class AlgoActivity extends AppCompatActivity {
                     setState(ConnectionState.disconnected);
                 }
                 else if(intent.getAction().equals("doAction")){
+                    consumeActions();
                     //intent.getBundleExtra("action");
                     //Action action = (Action)intent.getExtras("action");
-                    com.example.vladimirkarassouloff.projetter.action.Action action = (com.example.vladimirkarassouloff.projetter.action.Action)intent.getSerializableExtra("action");
+                    //com.example.vladimirkarassouloff.projetter.action.Action action = (com.example.vladimirkarassouloff.projetter.action.Action)intent.getSerializableExtra("action");
 
+                }
+                else if(intent.getAction().equals("removeLastAction")){
+                    removeLastAction();
                 }
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("action"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
 
     }
+
+
+    public void removeLastAction(){
+        undoAction();
+        if(redoStack.size()>0){
+            redoStack.pop();
+        }
+    }
+
+    public void consumeActions(){
+        Iterator<Action> it = ACTION_TO_CONSUME.iterator();
+        while(it.hasNext()){
+            Action a = it.next();
+            doAction(a);
+            it.remove();
+        }
+        Log.wtf("message","on a consumme les actions");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -192,25 +227,33 @@ public class AlgoActivity extends AppCompatActivity {
     }
 
 
-    private void doAction(com.example.vladimirkarassouloff.projetter.action.Action a){
+    private void doAction(Action a){
         a.doAction();
         undoStack.push(a);
+        redoStack.clear();
+        Log.wtf("message","Action !");
     }
 
     private void redoAction(){
-        com.example.vladimirkarassouloff.projetter.action.Action a = redoStack.pop();
-        if(a != null){
-            a.doAction();
-            undoStack.push(a);
+        if(redoStack.size() > 0) {
+            Action a = redoStack.pop();
+            if (a != null) {
+                a.doAction();
+                undoStack.push(a);
+            }
         }
+        Log.wtf("message","redo! !");
     }
 
     private void undoAction(){
-        com.example.vladimirkarassouloff.projetter.action.Action a = undoStack.pop();
-        if(a != null){
-            a.undoAction();
-            redoStack.push(a);
+        if(undoStack.size() > 0) {
+            Action a = undoStack.pop();
+            if (a != null) {
+                a.undoAction();
+                redoStack.push(a);
+            }
         }
+        Log.wtf("message","undo !");
     }
 
 

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
@@ -18,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.action.DeleteLineAction;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogFunction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
@@ -25,7 +29,10 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.operator.Oper
 import com.example.vladimirkarassouloff.projetter.myelementsstring.logic.LogicString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableString;
+import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 
@@ -108,8 +115,18 @@ public abstract class Production extends TextView {
     }
 
     public void supprimer(){
+        if(getParent()!=null && getParent().getParent()!=null && getParent().getParent() instanceof AlgoView) {
+            int line = ((ViewGroup)getParent()).indexOfChild(this);
+            List<View> oldView = new ArrayList<>();
+            oldView.add(this);
+            DeleteLineAction ala = new DeleteLineAction(line, oldView, (ViewGroup)getParent(), (AlgoView)(getParent().getParent()));
+            AlgoActivity.ACTION_TO_CONSUME.add(ala);
+            Intent intent = new Intent("doAction");
+            LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+        }
+            /*
         ViewGroup parent = (ViewGroup)getParent();
-        parent.removeView(this);
+        parent.removeView(this);*/
     }
 
 

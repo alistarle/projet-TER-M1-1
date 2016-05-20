@@ -16,8 +16,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.action.Action;
+import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
+import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.ProductionBraceCloser;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonctionInstanciation;
@@ -41,7 +44,7 @@ public class AlgoView extends ScrollView {
     private Drawable separator;
     private TextView myCustomSeparator;
 
-    private static float MARGE = 25f;
+    private static float MARGE = 15f;
 
 
 
@@ -211,15 +214,20 @@ public class AlgoView extends ScrollView {
             else if(currentState == ActionUser.line){
                 List<View> newViews = de.onDraggedOnLine(ll);
                 //Log.i("Drop ligne "+lineInsert,"Drop ligne "+lineInsert+"\n\n");
-                if(newViews != null){
+                if(newViews != null && newViews.size() > 0){
                     for (View vNew : newViews) {
-                        vNew.setMinimumHeight(100);
-                        //vNew.setPadding(5, 5, 5, 5);
+                        vNew.setMinimumHeight(40);
+                        vNew.setPadding(5, 5, 5, 10);
 
-                        ll.addView(vNew,lineInsert);
-                        lineInsert++;
+                        /*ll.addView(vNew,lineInsert);
+                        lineInsert++;*/
                     }
+                    AddLineAction ala = new AddLineAction(lineInsert,newViews,ll,this);
+                    AlgoActivity.ACTION_TO_CONSUME.add(ala);
+                    Intent intent = new Intent("doAction");
+                    LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                 }
+
             }
             else{
                 Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
@@ -249,6 +257,8 @@ public class AlgoView extends ScrollView {
 
 
         }
+        refreshText();
+        autoIndent();
     }
 
 
@@ -308,7 +318,7 @@ public class AlgoView extends ScrollView {
         return i;
     }
 
-    private void refreshText(){
+    public void refreshText(){
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
             if(v instanceof Production){
@@ -328,7 +338,7 @@ public class AlgoView extends ScrollView {
     }
 
 
-    private void autoIndent(){
+    public void autoIndent(){
         int tab = 0;
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
