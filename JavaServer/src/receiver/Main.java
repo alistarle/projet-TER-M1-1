@@ -49,7 +49,14 @@ public class Main {
                         break;
                     }
                     else if(reponse.equals("execute_code")){
-                        out.println(Compiler.compileCode(envoie));
+                        try {
+                            out.println(Compiler.compileCode(envoie));
+                            System.out.println("Compilation réussie !");
+                            out.println("compilation_success");
+                        }catch (Exception e){
+                            System.out.println("Erreur de compilation !!!");
+                            out.println("compilation_failed : "+e.getMessage());
+                        }
                     }
 
                 }
