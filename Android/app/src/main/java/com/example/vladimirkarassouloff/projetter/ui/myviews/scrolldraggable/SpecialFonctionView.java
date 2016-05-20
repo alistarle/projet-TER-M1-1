@@ -8,8 +8,13 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.spec
 import com.example.vladimirkarassouloff.projetter.ui.myelements.ElementNumber;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementAllumerLed;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementEteindreLed;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementInfrarougeCentre;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementInfrarougeDroit;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementInfrarougeGauche;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementMoteur;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementOdometre;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementTournerTete;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.fonctionspeciale.ElementUltrason;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.logic.ElementLogicAnd;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.logic.ElementLogicEq;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.logic.ElementLogicInf;
@@ -69,16 +74,18 @@ public class SpecialFonctionView extends ScrollDraggableElementView {
         this.addBlankLine();
 
 
-        headerInfrarouge = this.addHeader("Infrarouge : ");
-        this.addDraggableElementAfter(headerInfrarouge,new ElementLogicInf(getContext()));
+        headerInfrarouge = this.addHeader("Infrarouges : ");
+        this.addDraggableElementAfter(headerInfrarouge,new ElementInfrarougeGauche(getContext()));
+        this.addDraggableElementAfter(headerInfrarouge,new ElementInfrarougeCentre(getContext()));
+        this.addDraggableElementAfter(headerInfrarouge,new ElementInfrarougeDroit(getContext()));
         this.addBlankLine();
 
         headerOdometres = this.addHeader("Odometre : ");
-        this.addDraggableElementAfter(headerInfrarouge,new ElementLogicInf(getContext()));
+        this.addDraggableElementAfter(headerOdometres,new ElementOdometre(getContext()));
         this.addBlankLine();
 
         headerUltrason = this.addHeader("Ultrason : ");
-        this.addDraggableElementAfter(headerInfrarouge,new ElementLogicInf(getContext()));
+        this.addDraggableElementAfter(headerUltrason,new ElementUltrason(getContext()));
         this.addBlankLine();
     }
 
