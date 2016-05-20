@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="saveSlot1" type="id">saveSlot1</item>
+    <item name="saveSlot2" type="id">saveSlot2</item>
+    <item name="saveSlot3" type="id">saveSlot3</item>
+</resources>

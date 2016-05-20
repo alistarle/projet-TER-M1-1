@@ -1,6 +1,5 @@
 package com.example.vladimirkarassouloff.projetter.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,17 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.SystemClock;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,6 +25,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
@@ -37,16 +37,14 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString
 import com.example.vladimirkarassouloff.projetter.network.NetworkInfo;
 import com.example.vladimirkarassouloff.projetter.network.NetworkTask;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.mypopups.PopupLoad;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptConnectionView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -55,7 +53,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
-import java.util.Vector;
 
 
 public class AlgoActivity extends AppCompatActivity {
@@ -298,15 +295,87 @@ public class AlgoActivity extends AppCompatActivity {
             viewAnimator.setDisplayedChild(2);
             return true;
         }else if(id == R.id.action_save){
-            actionSave(1);
+            showSavePrompt();
         }else if(id == R.id.action_load){
-            actionLoad(1);
+            showLoadPrompt();
         }
 
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void showSavePrompt() {
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.popup_save, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final RadioButton radio1 = (RadioButton)promptsView.findViewById(R.id.saveSlot1);
+        final RadioButton radio2 = (RadioButton)promptsView.findViewById(R.id.saveSlot2);
+        final RadioButton radio3 = (RadioButton)promptsView.findViewById(R.id.saveSlot3);
+
+        alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        if(radio1.isChecked()){
+                            actionSave(1);
+                        }else if(radio2.isChecked()){
+                            actionSave(2);
+                        }else if(radio3.isChecked()){
+                            actionSave(3);
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
+
+    public void showLoadPrompt(){
+
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.popup_load, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final RadioButton radio1 = (RadioButton)promptsView.findViewById(R.id.saveSlot1);
+        final RadioButton radio2 = (RadioButton)promptsView.findViewById(R.id.saveSlot2);
+        final RadioButton radio3 = (RadioButton)promptsView.findViewById(R.id.saveSlot3);
+
+        alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(radio1.isChecked()){
+                            actionLoad(1);
+                        }else if(radio2.isChecked()){
+                            actionLoad(2);
+                        }else if(radio3.isChecked()){
+                            actionLoad(3);
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
 
     public void showConnexionPrompt() {
         LayoutInflater li = LayoutInflater.from(this);
@@ -323,6 +392,7 @@ public class AlgoActivity extends AppCompatActivity {
         alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                     }
                 })
                 .setNegativeButton("Cancel",
