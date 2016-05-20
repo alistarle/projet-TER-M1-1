@@ -1,3 +1,5 @@
+package receiver;
+
 /**
  * Created by Vladimir on 11/03/2016.
  */
