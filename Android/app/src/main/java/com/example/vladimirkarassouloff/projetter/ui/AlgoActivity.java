@@ -430,7 +430,7 @@ public class AlgoActivity extends AppCompatActivity {
                 algoScroll.getLl().addView(new Production(this,list.get(i)));
             }
             algoScroll.autoIndent();
-            
+
         }
 
     }

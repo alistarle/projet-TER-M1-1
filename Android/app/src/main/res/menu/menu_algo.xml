@@ -4,15 +4,20 @@
 
     <item android:id="@+id/action_save"
         android:title="Sauvegarder"
-        android:icon="@drawable/ic_action_save" />
+        android:icon="@drawable/ic_action_save"
+        app:showAsAction="always"/>
     <item android:id="@+id/action_load"
         android:title="Charger"
-        android:icon="@drawable/ic_action_load" />
-    <item
-        android:title="menu">
-        <menu>
+        android:icon="@drawable/ic_action_load"
+        app:showAsAction="always"/>
 
-            <item android:id="@+id/action_connect" android:title="Se connecter"
+    <item android:id="@+id/action_run"
+        android:title="Run"
+        android:icon="@drawable/ic_action_run"
+        app:showAsAction="always"/>
+
+
+    <item android:id="@+id/action_connect" android:title="Se connecter"
                 android:orderInCategory="100" app:showAsAction="never" />
             <item android:id="@+id/action_disconnect" android:title="Se déconnecter"
                 android:orderInCategory="100" app:showAsAction="never" />
@@ -24,9 +29,6 @@
                 android:orderInCategory="100" app:showAsAction="never" />
             <item android:id="@+id/action_show_operator" android:title="Afficher les opérateurs"
                 android:orderInCategory="100" app:showAsAction="never" />
-        </menu>
-
-    </item>
 
 
 
