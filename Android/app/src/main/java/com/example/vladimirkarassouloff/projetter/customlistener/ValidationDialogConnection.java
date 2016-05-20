@@ -56,8 +56,6 @@ public class ValidationDialogConnection extends ValidationDialogListener {
         editor.putInt("DEFAULT_PORT", Integer.parseInt(portEditText.getText().toString()));
 
         editor.apply();
-
-
         algoActivity.doConnect(new NetworkInfo(this.ipEditText.getText().toString(),Integer.parseInt(this.portEditText.getText().toString())));
 
     }

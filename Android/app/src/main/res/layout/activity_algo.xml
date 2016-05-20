@@ -34,6 +34,14 @@
             android:id="@+id/viewanimator"
             android:layout_weight="1">
 
+            <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.SpecialFonctionView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/specialScroll"
+                android:fillViewport="false"
+                android:nestedScrollingEnabled="false">
+            </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.SpecialFonctionView>
+
             <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -41,6 +49,8 @@
                 android:fillViewport="false"
                 android:nestedScrollingEnabled="false">
             </com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView>
+
+
 
             <com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView
                 android:layout_height="match_parent"
