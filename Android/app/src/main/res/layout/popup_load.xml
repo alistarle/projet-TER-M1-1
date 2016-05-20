@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10sp" >
+
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:text="Choisissez un slot de sauvegarde à charger" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@id/saveSlot1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Slot 1"/>
+        <RadioButton
+            android:id="@id/saveSlot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Slot 2"/>
+        <RadioButton
+            android:id="@id/saveSlot3"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Slot 3"/>
+
+
+    </RadioGroup>
+
+</LinearLayout> 
