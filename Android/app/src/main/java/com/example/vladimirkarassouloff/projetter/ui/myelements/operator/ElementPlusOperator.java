@@ -11,4 +11,5 @@ public class ElementPlusOperator extends ElementOperator{
     public ElementPlusOperator(Context context) {
         super(context, new OperatorPlusString());
     }
+
 }

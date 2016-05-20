@@ -11,7 +11,7 @@ local.properties
 Android/.idea/*
 /Android/.idea/
 Android/.idea/
-.DS_Store
+
 Android/build
 Android/captures
 Android/local.properties
@@ -30,7 +30,7 @@ Android/local.properties
 
 /Android/build
 /Android/captures
-/Android/.idea/workspace.xml
+Android/.idea/workspace.xml
 /local.properties
 
 ./Android/build

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
@@ -12,12 +14,16 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.action.DeleteLineAction;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogFunction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
@@ -25,7 +31,10 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.operator.Oper
 import com.example.vladimirkarassouloff.projetter.myelementsstring.logic.LogicString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableString;
+import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 
@@ -35,7 +44,7 @@ import java.util.List;
 /**
  * Created by Vladimir on 14/02/2016.
  */
-public abstract class Production extends TextView {
+public class Production extends TextView {
 
     protected ElementString basicElement;
 
@@ -54,6 +63,7 @@ public abstract class Production extends TextView {
         this.basicElement = new ElementString();
         init();
     }
+
 
 
 
@@ -95,7 +105,36 @@ public abstract class Production extends TextView {
                                            supprimer();
                                        }
                                         else if(which == 1){
-                                           modifier();
+                                           final List<ElementString> listEditableElements = getListElementEditable(basicElement);
+                                           if(listEditableElements.size()==0){
+                                               Toast.makeText(getContext(),"Rien a modifier",Toast.LENGTH_SHORT);
+                                           }
+                                           else if(listEditableElements.size()==1){
+                                                modifier(listEditableElements.get(0));
+                                           }
+                                           else{
+                                               //choix
+                                               List<String> listString = new ArrayList<String>();
+                                               for(ElementString es : listEditableElements){
+                                                   listString.add(es.getBasicText());
+                                               }
+                                               ArrayAdapter<String> itensAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
+                                               android.support.v7.app.AlertDialog dialog2;
+                                               android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                               builder.setTitle("Choisir quel element modifier");
+                                               builder.setAdapter(itensAdapter, new DialogInterface.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(DialogInterface dialog2, int which) {
+                                                       Log.wtf("mdr","on a click sur "+which);
+                                                       modifier(listEditableElements.get(which));
+                                                       /*Intent intent = new Intent("autoIndent");
+                                                       LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
+                                                   }
+                                               });
+                                               dialog2 = builder.create();
+                                               dialog2.show();
+                                           }
+                                           //modifier();
                                        }
                                     }
                                 });
@@ -108,12 +147,22 @@ public abstract class Production extends TextView {
     }
 
     public void supprimer(){
+        if(getParent()!=null && getParent().getParent()!=null && getParent().getParent() instanceof AlgoView) {
+            int line = ((ViewGroup)getParent()).indexOfChild(this);
+            List<View> oldView = new ArrayList<>();
+            oldView.add(this);
+            DeleteLineAction ala = new DeleteLineAction(line, oldView, (ViewGroup)getParent(), (AlgoView)(getParent().getParent()));
+            AlgoActivity.ACTION_TO_CONSUME.add(ala);
+            Intent intent = new Intent("doAction");
+            LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+        }
+            /*
         ViewGroup parent = (ViewGroup)getParent();
-        parent.removeView(this);
+        parent.removeView(this);*/
     }
 
 
-    public void modifier(){
+    public void modifier(final ElementString elementToChange){
         LayoutInflater li = LayoutInflater.from(getContext());
         View promptsView = li.inflate(R.layout.modifyproduction, null);
 
@@ -201,15 +250,15 @@ public abstract class Production extends TextView {
         //on place les elements et on bind l'event
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(30, 0, 30, 0);
+        layoutParams.setMargins(10, 0, 10, 0);
 
         List<ElementString> arrayElements = new ArrayList<>();
-        for(ElementString es : basicElement.components) {
+        for(ElementString es : elementToChange.components) {
             arrayElements.add(es);
             Production prod = new Production(llElem.getContext(),es) {
                 @Override
                 public String getBasicText() {
-                    return basicElement.toString();
+                    return elementToChange.toString();
                 }
             };
             prod.setOnTouchListener(
@@ -322,8 +371,8 @@ public abstract class Production extends TextView {
             int relativeLeft = viewLocation[0] - rootLocation[0];
             int relativeTop  = viewLocation[1] - rootLocation[1];
 
-            Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
-            Log.wtf("message",String.valueOf(Math.abs( x-(relativeLeft+v.getWidth()/2)))+" est la distance entre les block");
+           /* Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
+            Log.wtf("message",String.valueOf(Math.abs( x-(relativeLeft+v.getWidth()/2)))+" est la distance entre les block");*/
             if(Math.abs( x-(relativeLeft+v.getWidth()/2)) < Math.abs(distanceMin)){
                 distanceMin = x-(relativeLeft+v.getWidth()/2);
                 nearestColumn = i;
@@ -340,87 +389,87 @@ public abstract class Production extends TextView {
         return nearestColumn+1;
     }
 
-    public abstract String getBasicText();
+
+
+
+
+
+
+
+    public String getBasicText(){
+        return basicElement.getBasicText();
+    }
+
 
     public void refreshText(){
-        this.setText(getBasicText());
+        this.setText(basicElement.getBasicText());
     }
 
 
     public boolean supportDropIf(){
-        return false;
+        return basicElement.supportDropIf();
     }
 
     public boolean supportDropElse(){
-        return false;
+        return basicElement.supportDropElse();
     }
 
     public boolean supportDropElseIf(){
-        return false;
+        return basicElement.supportDropElseIf();
     }
 
     public boolean supportDropVariable(){
-        return false;
+        return basicElement.supportDropVariable();
+    }
+
+    public boolean supportDropFonctionInstanciation(){
+        return basicElement.supportDropFonctionInstanciation();
+    }
+    public boolean supportDropFonction(){
+        return basicElement.supportDropFonction();
     }
 
     public boolean supportDropVariableInstanciation(){
-        return false;
+        return basicElement.supportDropVariableInstanciation();
     }
 
-    public boolean supportDropNumber(){return false;}
+    public boolean supportDropNumber(){return basicElement.supportDropNumber();}
 
     public boolean supportDropLogic(LogicString op){
-        return false;
+        return basicElement.supportDropLogic(op);
     }
 
 
     public boolean supportDropOperator(){
-        return false;
+        return basicElement.supportDropOperator();
     }
 
 
 
 
-    //sert a l'indentation
     public int tabChanger(){
-        return 0;
+        return basicElement.tabChanger();
     }
-
 
 
     public void onDrop(ElementString s) {
-        if (s instanceof OperatorString) {
-            onDrop((OperatorString)s);
-        } else if (s instanceof VariableString) {
-            onDrop((VariableString) s);
-        } else if (s instanceof VariableInstanciationString) {
-            onDrop((VariableInstanciationString)s);
-        } else if (s instanceof LogicString) {
-            onDrop((LogicString) s);
-        } else if (s instanceof NumberString){
-            onDrop((NumberString)s);
-        }
-        else {
-            Log.i("Drop not supported", "Drop not supported");
-        }
+        basicElement.onDrop(s);
     }
 
     public void onDrop(OperatorString el){
-        Log.i("DROP NOT IMPLEMENTED", "logstring");
+        basicElement.onDrop(el);
     }
     public void onDrop(VariableString ev){
-        Log.i("DROP NOT IMPLEMENTED", "VariableString");
-
+        basicElement.onDrop(ev);
     }
     public void onDrop(VariableInstanciationString evi){
-        Log.i("DROP NOT IMPLEMENTED", "VariableInstanciationString");
-
+        basicElement.onDrop(evi);
     }
     public void onDrop(LogicString os){
-        Log.i("DROP NOT IMPLEMENTED", "OperatorString");
+        basicElement.onDrop(os);
     }
-    public void onDrop(NumberString ns){
-        Log.i("DROP NOT IMPLEMENTED", "NumberString");
+    public void onDrop(NumberString ns) {
+        basicElement.onDrop(ns);
     }
 
 
@@ -453,5 +502,16 @@ public abstract class Production extends TextView {
 
     public ElementString getBasicElement() {
         return basicElement;
+    }
+
+    public List<ElementString> getListElementSupporting(ElementString newElement){
+        List<ElementString> supporting = new ArrayList<>();
+        basicElement.addAllElementSupportingDrop(supporting,newElement);
+        return supporting;
+    }
+    public List<ElementString> getListElementEditable(ElementString elementString){
+        List<ElementString> editable = new ArrayList<>();
+        elementString.addAllElementEditable(editable);
+        return editable;
     }
 }

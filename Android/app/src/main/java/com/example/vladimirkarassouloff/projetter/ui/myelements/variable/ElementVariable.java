@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.variable.ProductionVariable;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableString;
 
@@ -38,7 +37,8 @@ public class ElementVariable extends TextView implements DraggableElement {
     @Override
     public List<View> onDraggedOnLine(View v) {
         List<View> ar = new ArrayList<View>();
-        ProductionVariable pv = new ProductionVariable(getContext(),name);
+        //ProductionVariable pv = new ProductionVariable(getContext(),name);
+        Production pv = new Production(getContext(), new VariableString(name));
         ar.add(pv);
         return ar;
     }
@@ -56,5 +56,10 @@ public class ElementVariable extends TextView implements DraggableElement {
     @Override
     public ElementString onDraggedOnBlock(Production block) {
         return new VariableString(name);
+    }
+
+    @Override
+    public void onDropOver(final Production block) {
+
     }
 }

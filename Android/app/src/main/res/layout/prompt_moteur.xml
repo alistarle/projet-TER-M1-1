@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entrez la direction et la vitesse: "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android:id="@+id/radioDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioForward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avancer"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reculer" />
+        <RadioButton
+            android:id="@+id/radioLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tourner a gauche" />
+        <RadioButton
+            android:id="@+id/radioRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tourner a droite" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioVitesse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioLent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lente"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioMoyenne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moyenne" />
+        <RadioButton
+            android:id="@+id/radioRapide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rapide" />
+
+    </RadioGroup>
+
+
+</LinearLayout>

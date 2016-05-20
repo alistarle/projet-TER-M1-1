@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,10 +45,17 @@ public class ElementNumber extends TextView implements DraggableElement {
     }
 
     @Override
-    public ElementString onDraggedOnBlock(final Production block) {
+    public ElementString onDraggedOnBlock(Production block) {
         tv = new NumberString();
+        return tv;
+    }
+    @Override
+    public List<View> onDraggedOnLine(View v) {
+        return null;
+    }
 
-
+    @Override
+    public void onDropOver(final Production block) {
         LayoutInflater li = LayoutInflater.from(getContext());
         View promptsView = li.inflate(R.layout.promptnumber, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
@@ -82,13 +88,5 @@ public class ElementNumber extends TextView implements DraggableElement {
         theButton.setOnClickListener(new ValidationDialogNumber(alertDialog,promptsView,block,tv));
 
 
-
-        return tv;
     }
-    @Override
-    public List<View> onDraggedOnLine(View v) {
-        return null;
-    }
-
-
 }

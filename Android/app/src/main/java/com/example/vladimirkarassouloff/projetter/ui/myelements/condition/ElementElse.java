@@ -5,10 +5,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.condition.ElseString;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.ProductionBraceCloser;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.condition.ProductionElse;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 
 import java.util.ArrayList;
@@ -30,10 +30,14 @@ public class ElementElse extends TextView implements DraggableElement {
     @Override
     public List<View> onDraggedOnLine(View v){
         List<View> array = new ArrayList<View>();
-        ProductionElse tv = new ProductionElse(v.getContext());
-        ProductionBraceCloser pb = new ProductionBraceCloser(v.getContext());
-        array.add(tv);
-        array.add(pb);
+        //ProductionElse tv = new ProductionElse(v.getContext());
+        Production p1 = new Production(v.getContext(),new ElseString());
+        //ProductionBraceCloser pb = new ProductionBraceCloser(v.getContext());
+        Production p2 = new Production(v.getContext(),new BraceCloserString());
+        array.add(p1);
+        //array.add(tv);
+        array.add(p2);
+        //array.add(pb);
         return array;
     }
 
@@ -48,4 +52,11 @@ public class ElementElse extends TextView implements DraggableElement {
     public boolean isDropSupported(Production p) {
         return false;
     }
+
+    @Override
+    public void onDropOver(final Production block) {
+
+    }
+
+
 }

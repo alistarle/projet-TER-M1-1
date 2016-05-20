@@ -1,16 +1,37 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".ui.AlgoActivity">
+
+    <item android:id="@+id/action_save"
+        android:title="Sauvegarder"
+        android:icon="@drawable/ic_action_save"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_load"
+        android:title="Charger"
+        android:icon="@drawable/ic_action_load"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_run"
+        android:title="Run"
+        android:icon="@drawable/ic_action_run"
+        app:showAsAction="always"/>
+
+
     <item android:id="@+id/action_connect" android:title="Se connecter"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_disconnect" android:title="Se déconnecter"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_execute" android:title="Executer le code"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_show_stuct" android:title="Afficher les structures"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_show_name" android:title="Afficher les variables et fonctions"
-        android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_show_operator" android:title="Afficher les opérateurs"
-        android:orderInCategory="100" app:showAsAction="never" />
+                android:orderInCategory="100" app:showAsAction="never" />
+            <item android:id="@+id/action_disconnect" android:title="Se déconnecter"
+                android:orderInCategory="100" app:showAsAction="never" />
+            <item android:id="@+id/action_execute" android:title="Executer le code"
+                android:orderInCategory="100" app:showAsAction="never" />
+            <item android:id="@+id/action_show_stuct" android:title="Afficher les structures"
+                android:orderInCategory="100" app:showAsAction="never" />
+            <item android:id="@+id/action_show_name" android:title="Afficher les variables et fonctions"
+                android:orderInCategory="100" app:showAsAction="never" />
+            <item android:id="@+id/action_show_operator" android:title="Afficher les opérateurs"
+                android:orderInCategory="100" app:showAsAction="never" />
+
+
+
 </menu>
+
+

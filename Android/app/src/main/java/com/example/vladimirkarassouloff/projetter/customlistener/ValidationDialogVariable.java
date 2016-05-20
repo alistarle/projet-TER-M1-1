@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.variable.ProductionVariableInstanciation;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 
 /**
@@ -49,12 +49,19 @@ public class ValidationDialogVariable extends ValidationDialogProduction{
 
     @Override
     public void onValid() {
-        ProductionVariableInstanciation pv = (ProductionVariableInstanciation) this.production;
+        /*ProductionVariableInstanciation pv = (ProductionVariableInstanciation) this.production;
         pv.setType(ptv.getType());
         pv.setName(et.getText().toString());
-        pv.refreshText();
+        pv.refreshText();*/
+        VariableInstanciationString vis = (VariableInstanciationString) production.getBasicElement();
+        vis.setType(ptv.getType());
+        vis.setName(et.getText().toString());
+        //production.refreshText();
+
         Intent intent = new Intent("newVariable");
         intent.putExtra("variable", et.getText().toString());
         LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
+        Intent intent2 = new Intent("autoIndent");
+        LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent2);
     }
 }

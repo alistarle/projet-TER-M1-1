@@ -33,6 +33,17 @@ public class FonctionInstanciationString extends ElementString {
 
     @Override
     public String toString() {
-        return this.type+" "+this.name;
+        return this.type+" "+this.name+" ("+getComponentString()+") {";
+    }
+
+    @Override
+    public int tabChanger() {
+        return 1;
+    }
+
+
+    @Override
+    public boolean supportDropVariableInstanciation() {
+        return true;
     }
 }

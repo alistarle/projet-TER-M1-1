@@ -31,15 +31,17 @@ import android.widget.TextView;
 import android.widget.ViewAnimator;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogConnection;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.network.NetworkInfo;
 import com.example.vladimirkarassouloff.projetter.network.NetworkTask;
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptConnectionView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -50,6 +52,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import java.util.Vector;
@@ -62,7 +65,7 @@ public class AlgoActivity extends AppCompatActivity {
     private Button undoActionButton;
     private Stack<com.example.vladimirkarassouloff.projetter.action.Action> redoStack;
     private Stack<com.example.vladimirkarassouloff.projetter.action.Action> undoStack;
-
+    public static List<Action> ACTION_TO_CONSUME = new ArrayList<>();
 
 
     //connecte a un robot
@@ -80,6 +83,8 @@ public class AlgoActivity extends AppCompatActivity {
     private MenuItem menuConnect;
     private MenuItem menuExecuteCode;
     private MenuItem menuDisconnect;
+    private MenuItem menuSave;
+    private MenuItem menuLoad;
 
     private TextView test;
     private TextView drag;
@@ -105,11 +110,21 @@ public class AlgoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algo);
 
-
+        //DO UNDO REDO
+        redoStack = new Stack<Action>();
+        undoStack = new Stack<Action>();
         redoActionButton = (Button) findViewById(R.id.redo);
         undoActionButton = (Button) findViewById(R.id.undo);
-
-
+        redoActionButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                redoAction();
+            }
+        });
+        undoActionButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                undoAction();
+            }
+        });
 
         //Gestion des main scoll
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
@@ -168,18 +183,44 @@ public class AlgoActivity extends AppCompatActivity {
                     setState(ConnectionState.disconnected);
                 }
                 else if(intent.getAction().equals("doAction")){
-                    //intent.getBundleExtra("action");
-                    //Action action = (Action)intent.getExtras("action");
-                    com.example.vladimirkarassouloff.projetter.action.Action action = (com.example.vladimirkarassouloff.projetter.action.Action)intent.getSerializableExtra("action");
-
+                    consumeActions();
+                    algoScroll.autoIndent();
+                }
+                else if(intent.getAction().equals("removeLastAction")){
+                    removeLastAction();
+                    algoScroll.autoIndent();
+                }
+                else if(intent.getAction().equals("autoIndent")){
+                    algoScroll.autoIndent();
                 }
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("action"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
 
     }
+
+
+    public void removeLastAction(){
+        undoAction();
+        if(redoStack.size()>0){
+            redoStack.pop();
+        }
+    }
+
+    public void consumeActions(){
+        Iterator<Action> it = ACTION_TO_CONSUME.iterator();
+        while(it.hasNext()){
+            Action a = it.next();
+            doAction(a);
+            it.remove();
+        }
+        Log.wtf("message","on a consumme les actions");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -188,29 +229,41 @@ public class AlgoActivity extends AppCompatActivity {
         this.menuConnect = (MenuItem) menu.findItem(R.id.action_connect);
         this.menuDisconnect = (MenuItem) menu.findItem(R.id.action_disconnect);
         this.menuExecuteCode = (MenuItem) menu.findItem(R.id.action_execute);
+        this.menuSave = (MenuItem) menu.findItem(R.id.action_save);
+        this.menuLoad = (MenuItem) menu.findItem(R.id.action_load);
+
+
         return true;
     }
 
 
-    private void doAction(com.example.vladimirkarassouloff.projetter.action.Action a){
+    private void doAction(Action a){
         a.doAction();
         undoStack.push(a);
+        redoStack.clear();
+        Log.wtf("message","Action !");
     }
 
     private void redoAction(){
-        com.example.vladimirkarassouloff.projetter.action.Action a = redoStack.pop();
-        if(a != null){
-            a.doAction();
-            undoStack.push(a);
+        if(redoStack.size() > 0) {
+            Action a = redoStack.pop();
+            if (a != null) {
+                a.doAction();
+                undoStack.push(a);
+            }
         }
+        Log.wtf("message","redo! !");
     }
 
     private void undoAction(){
-        com.example.vladimirkarassouloff.projetter.action.Action a = undoStack.pop();
-        if(a != null){
-            a.undoAction();
-            redoStack.push(a);
+        if(undoStack.size() > 0) {
+            Action a = undoStack.pop();
+            if (a != null) {
+                a.undoAction();
+                redoStack.push(a);
+            }
         }
+        Log.wtf("message","undo !");
     }
 
 
@@ -244,6 +297,10 @@ public class AlgoActivity extends AppCompatActivity {
         } else if (id == R.id.action_show_operator && viewAnimator.getDisplayedChild() != 2) {
             viewAnimator.setDisplayedChild(2);
             return true;
+        }else if(id == R.id.action_save){
+            actionSave(1);
+        }else if(id == R.id.action_load){
+            actionLoad(1);
         }
 
 
@@ -329,15 +386,27 @@ public class AlgoActivity extends AppCompatActivity {
     }
 
 
+    private void actionSave(int slot){
+        try {
+            saveAlgo(slot);
+        } catch (IOException e) {
+            System.out.println("failed to export in file "+ slot);
+            e.printStackTrace();
+        }
+    }
     private void saveAlgo(int slot) throws IOException {
         // Write to disk with FileOutputStream
-        FileOutputStream f_out = new FileOutputStream("slot" + slot + ".data");
+        FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
         // Write object with ObjectOutputStream
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 
-        ArrayList<View> list = new ArrayList<>();
+        ArrayList<ElementString> list = new ArrayList<>();
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
-            list.add(algoScroll.getLl().getChildAt(i));
+            Object element = algoScroll.getLl().getChildAt(i);
+                if(element instanceof Production){
+                    list.add(((Production) element).getBasicElement());
+                    //list.add(algoScroll.getLl().getChildAt(i));
+                }
         }
         // Write object out to disk
         obj_out.writeObject(list);
@@ -347,23 +416,23 @@ public class AlgoActivity extends AppCompatActivity {
     private void loadAlgo(int slot) throws IOException, ClassNotFoundException {
         // Read from disk using FileInputStream
         FileInputStream f_in = new
-                FileInputStream("slot" + slot + ".data");
+                FileInputStream("/sdcard/slot" + slot + ".data");
 
         // Read object using ObjectInputStream
         ObjectInputStream obj_in = new ObjectInputStream(f_in);
 
         // Read an object
         Object obj = obj_in.readObject();
+        if(obj instanceof ArrayList){
+            ArrayList<ElementString> list = ((ArrayList<ElementString>)obj);
+            algoScroll.getLl().removeAllViews();
+            for(int i = 0 ; i < list.size() ; i ++){
+                algoScroll.getLl().addView(new Production(this,list.get(i)));
+            }
+            algoScroll.autoIndent();
 
-        //if (obj instanceof ArrayList<View>) {
-        // Cast object to a Vector
-        obj = (ArrayList<View>) obj;
-        algoScroll.getLl().removeAllViews();
-        for(int i = 0 ; i<((ArrayList<View>) obj).size() ; i++ ){
-            algoScroll.getLl().addView(((ArrayList<View>) obj).get(i));
         }
-        // Do something with vector....
-        //}
+
     }
 
 
@@ -373,6 +442,16 @@ public class AlgoActivity extends AppCompatActivity {
             saveAlgo(slot);
         } catch (IOException e) {
             System.out.println("failed to save file to slot " + slot);
+        }
+    }
+
+    public void actionLoad(int slot) {
+        try {
+            loadAlgo(slot);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("failed to load file from slot " + slot);
         }
     }
 
