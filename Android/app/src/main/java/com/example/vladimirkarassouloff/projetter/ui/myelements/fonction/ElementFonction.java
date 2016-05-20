@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionString;
 
@@ -38,8 +37,10 @@ public class ElementFonction extends TextView implements DraggableElement {
     @Override
     public List<View> onDraggedOnLine(View v) {
         List<View> ar = new ArrayList<View>();
-        ProductionFonction pv = new ProductionFonction(getContext(),element.toString());
-        ar.add(pv);
+        /*ProductionFonction pv = new ProductionFonction(getContext(),element.toString());
+        ar.add(pv);*/
+        Production p = new Production(getContext(),element);
+        ar.add(p);
         return ar;
     }
 

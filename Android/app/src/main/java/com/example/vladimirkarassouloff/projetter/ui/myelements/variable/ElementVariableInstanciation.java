@@ -19,7 +19,6 @@ import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogVariable;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.variable.ProductionVariableInstanciation;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
@@ -36,7 +35,7 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
     private String name;
     private String type;
 
-    private ProductionVariableInstanciation tv;
+    private Production tv;
 
     public ElementVariableInstanciation(Context context){
         super(context);
@@ -55,7 +54,7 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
     @Override
     public List<View> onDraggedOnLine(View v) {
         List<View> array = new ArrayList<View>();
-        tv = new ProductionVariableInstanciation(v.getContext());
+        tv = new Production(v.getContext(),new VariableInstanciationString(type,name));
         array.add(tv);
 
 

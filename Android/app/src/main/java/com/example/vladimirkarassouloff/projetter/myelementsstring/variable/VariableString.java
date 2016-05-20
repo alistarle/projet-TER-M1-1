@@ -24,4 +24,19 @@ public class VariableString extends ElementString {
     public String toString() {
         return this.name;
     }
+
+    @Override
+    public boolean supportDropNumber() {
+        return true;
+    }
+
+    @Override
+    public boolean supportDropOperator() {
+        return true;
+    }
+
+    @Override
+    public boolean supportDropVariable() {
+        return true;
+    }
 }

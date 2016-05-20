@@ -180,13 +180,14 @@ public class AlgoActivity extends AppCompatActivity {
                 }
                 else if(intent.getAction().equals("doAction")){
                     consumeActions();
-                    //intent.getBundleExtra("action");
-                    //Action action = (Action)intent.getExtras("action");
-                    //com.example.vladimirkarassouloff.projetter.action.Action action = (com.example.vladimirkarassouloff.projetter.action.Action)intent.getSerializableExtra("action");
-
+                    algoScroll.autoIndent();
                 }
                 else if(intent.getAction().equals("removeLastAction")){
                     removeLastAction();
+                    algoScroll.autoIndent();
+                }
+                else if(intent.getAction().equals("autoIndent")){
+                    algoScroll.autoIndent();
                 }
             }
         };
@@ -194,6 +195,7 @@ public class AlgoActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
 
     }
 

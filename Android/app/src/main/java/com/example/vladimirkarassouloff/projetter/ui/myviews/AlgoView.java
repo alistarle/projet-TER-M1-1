@@ -17,13 +17,12 @@ import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.ProductionBraceCloser;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.*;
@@ -138,15 +137,17 @@ public class AlgoView extends ScrollView {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
+        Production main = new Production(getContext(),new FonctionInstanciationString("main","void"));
 
-        ProductionFonctionInstanciation main = new ProductionFonctionInstanciation(getContext(),"main","void");
+        //ProductionFonctionInstanciation main = new ProductionFonctionInstanciation(getContext(),"main","void");
         main.addComponent(new NumberString("43"));
         main.addComponent(new NumberString("12"));
         main.addComponent(new NumberString("65"));
         main.addComponent(new NumberString("124"));
         main.addComponent(new NumberString("55512"));
         ll.addView(main,0);
-        ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
+        //ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
+        Production pbc = new Production(getContext(),new BraceCloserString());
         ll.addView(pbc,1);
         refreshText();
     }
@@ -309,8 +310,8 @@ public class AlgoView extends ScrollView {
             int relativeLeft = viewLocation[0] - rootLocation[0];
             int relativeTop  = viewLocation[1] - rootLocation[1];
 
-            //Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
-            if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y){
+            //if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y){
+            if(relativeTop+v.getHeight()/2 > y){
                 return i;
 
             }

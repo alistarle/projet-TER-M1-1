@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * Created by Vladimir on 14/02/2016.
  */
-public abstract class Production extends TextView {
+public class Production extends TextView {
 
     protected ElementString basicElement;
 
@@ -61,6 +61,7 @@ public abstract class Production extends TextView {
         this.basicElement = new ElementString();
         init();
     }
+
 
 
 
@@ -218,7 +219,7 @@ public abstract class Production extends TextView {
         //on place les elements et on bind l'event
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(30, 0, 30, 0);
+        layoutParams.setMargins(10, 0, 10, 0);
 
         List<ElementString> arrayElements = new ArrayList<>();
         for(ElementString es : basicElement.components) {
@@ -357,87 +358,80 @@ public abstract class Production extends TextView {
         return nearestColumn+1;
     }
 
-    public abstract String getBasicText();
+
+
+
+
+
+
+
+    public String getBasicText(){
+        return basicElement.getBasicText();
+    }
+
 
     public void refreshText(){
-        this.setText(getBasicText());
+        this.setText(basicElement.getBasicText());
     }
 
 
     public boolean supportDropIf(){
-        return false;
+        return basicElement.supportDropIf();
     }
 
     public boolean supportDropElse(){
-        return false;
+        return basicElement.supportDropElse();
     }
 
     public boolean supportDropElseIf(){
-        return false;
+        return basicElement.supportDropElseIf();
     }
 
     public boolean supportDropVariable(){
-        return false;
+        return basicElement.supportDropVariable();
     }
 
     public boolean supportDropVariableInstanciation(){
-        return false;
+        return basicElement.supportDropVariableInstanciation();
     }
 
-    public boolean supportDropNumber(){return false;}
+    public boolean supportDropNumber(){return basicElement.supportDropNumber();}
 
     public boolean supportDropLogic(LogicString op){
-        return false;
+        return basicElement.supportDropLogic(op);
     }
 
 
     public boolean supportDropOperator(){
-        return false;
+        return basicElement.supportDropOperator();
     }
 
 
 
 
-    //sert a l'indentation
     public int tabChanger(){
-        return 0;
+        return basicElement.tabChanger();
     }
-
 
 
     public void onDrop(ElementString s) {
-        if (s instanceof OperatorString) {
-            onDrop((OperatorString)s);
-        } else if (s instanceof VariableString) {
-            onDrop((VariableString) s);
-        } else if (s instanceof VariableInstanciationString) {
-            onDrop((VariableInstanciationString)s);
-        } else if (s instanceof LogicString) {
-            onDrop((LogicString) s);
-        } else if (s instanceof NumberString){
-            onDrop((NumberString)s);
-        }
-        else {
-            Log.i("Drop not supported", "Drop not supported");
-        }
+        basicElement.onDrop(s);
     }
 
     public void onDrop(OperatorString el){
-        Log.i("DROP NOT IMPLEMENTED", "logstring");
+        basicElement.onDrop(el);
     }
     public void onDrop(VariableString ev){
-        Log.i("DROP NOT IMPLEMENTED", "VariableString");
-
+        basicElement.onDrop(ev);
     }
     public void onDrop(VariableInstanciationString evi){
-        Log.i("DROP NOT IMPLEMENTED", "VariableInstanciationString");
-
+        basicElement.onDrop(evi);
     }
     public void onDrop(LogicString os){
-        Log.i("DROP NOT IMPLEMENTED", "OperatorString");
+        basicElement.onDrop(os);
     }
-    public void onDrop(NumberString ns){
-        Log.i("DROP NOT IMPLEMENTED", "NumberString");
+    public void onDrop(NumberString ns) {
+        basicElement.onDrop(ns);
     }
 
 

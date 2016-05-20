@@ -5,10 +5,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.condition.IfString;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.ProductionBraceCloser;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.condition.ProductionIf;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 
 import java.util.ArrayList;
@@ -31,10 +31,14 @@ public class ElementIf extends TextView implements DraggableElement {
     @Override
     public List<View> onDraggedOnLine(View v){
         List<View> array = new ArrayList<View>();
-        ProductionIf tv = new ProductionIf(v.getContext());
+        /*ProductionIf tv = new ProductionIf(v.getContext());
         ProductionBraceCloser pb = new ProductionBraceCloser(v.getContext());
         array.add(tv);
-        array.add(pb);
+        array.add(pb);*/
+        Production p1 = new Production(v.getContext(),new IfString());
+        Production p2 = new Production(v.getContext(),new BraceCloserString());
+        array.add(p1);
+        array.add(p2);
         return array;
     }
 
