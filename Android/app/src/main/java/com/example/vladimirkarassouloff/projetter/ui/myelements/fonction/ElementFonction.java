@@ -39,7 +39,7 @@ public class ElementFonction extends TextView implements DraggableElement {
         List<View> ar = new ArrayList<View>();
         /*ProductionFonction pv = new ProductionFonction(getContext(),element.toString());
         ar.add(pv);*/
-        Production p = new Production(getContext(),element);
+        Production p = new Production(getContext(), new FonctionString(element.getName()));
         ar.add(p);
         return ar;
     }
@@ -48,12 +48,16 @@ public class ElementFonction extends TextView implements DraggableElement {
 
     @Override
     public boolean isDropSupported(Production p) {
-        return false;
+        return p.supportDropFonction();
     }
 
     @Override
     public ElementString onDraggedOnBlock(Production block) {
-        return null;
+        return new FonctionString(element.getName());
     }
 
+    @Override
+    public void onDropOver(final Production block) {
+
+    }
 }

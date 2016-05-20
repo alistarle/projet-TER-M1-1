@@ -1,28 +1,27 @@
 package com.example.vladimirkarassouloff.projetter.ui.myviews;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
-import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.*;
@@ -30,9 +29,8 @@ import com.example.vladimirkarassouloff.projetter.ui.myelements.condition.Elemen
 import com.example.vladimirkarassouloff.projetter.ui.myelements.variable.ElementVariableInstanciation;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by Vladimir on 12/02/2016.
@@ -162,18 +160,14 @@ public class AlgoView extends ScrollView {
                     View b = getBlock(event.getX(), event.getY());
                     if (b instanceof Production) {
                         Production p = (Production) b;
-                        if (de.isDropSupported(p)) {
-                            //p.onDrop(de.onDraggedOnBlock());
+                        ElementString newElement = de.onDraggedOnBlock(p);
 
-                            /*****/
-                            /**TO DO ONSHOWDROP**/
-                            /*****/
-
+                        List<ElementString> supporting = p.getListElementSupporting(newElement);
+                        Log.wtf("message","On a trouve "+supporting.size()+" elements supportant le drop");
+                        if(supporting.size() > 0){
                             b.setBackground(separator);
                             currentState = ActionUser.drop;
                             dropBlock = b;
-                            //Log.i("On a trouve un block", "On a trouve un block");
-
                         }
                     }
                 }
@@ -196,20 +190,54 @@ public class AlgoView extends ScrollView {
     private void doInsert(DragEvent event, View v){
         View view = (View) event.getLocalState();
         if (view instanceof DraggableElement) {
-            DraggableElement de = (DraggableElement) view;
+            final DraggableElement de = (DraggableElement) view;
             ScrollView container = (ScrollView) v;
 
 
             if(currentState == ActionUser.drop){
                 View clickedBlock = getBlock(event.getX(),event.getY());
                 if(clickedBlock instanceof Production) {
-                    Production p = (Production) clickedBlock;
+                    final Production p = (Production) clickedBlock;
+
+
+                    final ElementString newElement = de.onDraggedOnBlock(p);
+                    /*
                     if (de.isDropSupported(p)) {
                         p.onDrop(de.onDraggedOnBlock(p));
-                        //v.setBackground(separator);
-                        //Log.i("Drop block ", "Drop block \n\n");
-
+                    }*/
+                    final List<ElementString> supporting = p.getListElementSupporting(newElement);
+                    Log.wtf("message","On a trouve "+supporting.size()+" elements supportant le drop");
+                    if(supporting.size() == 0){
+                        Log.wtf("message","pas de support du drop");
                     }
+                    else if(supporting.size() == 1){
+                        supporting.get(0).onDrop(newElement);
+                        de.onDropOver(p);
+                    }
+                    else{
+                        //choix du drop
+                        List<String> listString = new ArrayList<String>();
+                        for(ElementString es : supporting){
+                            listString.add(es.getBasicText());
+                        }
+                        ArrayAdapter<String> itensAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
+                        AlertDialog dialog;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Choisir sur quoi dropper l'element");
+                        builder.setAdapter(itensAdapter, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.wtf("mdr","on a click sur "+which);
+                                supporting.get(which).onDrop(newElement);
+                                de.onDropOver(p);
+                                Intent intent = new Intent("autoIndent");
+                                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+                            }
+                        });
+                        dialog = builder.create();
+                        dialog.show();
+                    }
+                    //de.onDropOver(p);
                 }
             }
             else if(currentState == ActionUser.line){
@@ -283,7 +311,7 @@ public class AlgoView extends ScrollView {
             int relativeLeft = viewLocation[0] - rootLocation[0];
             int relativeTop  = viewLocation[1] - rootLocation[1];
 
-            Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
+            //Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
            if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y && relativeTop +v.getHeight()/2 - AlgoView.MARGE < y){
                 return v;
 

@@ -14,10 +14,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
@@ -103,7 +105,36 @@ public class Production extends TextView {
                                            supprimer();
                                        }
                                         else if(which == 1){
-                                           modifier();
+                                           final List<ElementString> listEditableElements = getListElementEditable(basicElement);
+                                           if(listEditableElements.size()==0){
+                                               Toast.makeText(getContext(),"Rien a modifier",Toast.LENGTH_SHORT);
+                                           }
+                                           else if(listEditableElements.size()==1){
+                                                modifier(listEditableElements.get(0));
+                                           }
+                                           else{
+                                               //choix
+                                               List<String> listString = new ArrayList<String>();
+                                               for(ElementString es : listEditableElements){
+                                                   listString.add(es.getBasicText());
+                                               }
+                                               ArrayAdapter<String> itensAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
+                                               android.support.v7.app.AlertDialog dialog2;
+                                               android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                               builder.setTitle("Choisir quel element modifier");
+                                               builder.setAdapter(itensAdapter, new DialogInterface.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(DialogInterface dialog2, int which) {
+                                                       Log.wtf("mdr","on a click sur "+which);
+                                                       modifier(listEditableElements.get(which));
+                                                       /*Intent intent = new Intent("autoIndent");
+                                                       LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
+                                                   }
+                                               });
+                                               dialog2 = builder.create();
+                                               dialog2.show();
+                                           }
+                                           //modifier();
                                        }
                                     }
                                 });
@@ -131,7 +162,7 @@ public class Production extends TextView {
     }
 
 
-    public void modifier(){
+    public void modifier(final ElementString elementToChange){
         LayoutInflater li = LayoutInflater.from(getContext());
         View promptsView = li.inflate(R.layout.modifyproduction, null);
 
@@ -222,12 +253,12 @@ public class Production extends TextView {
         layoutParams.setMargins(10, 0, 10, 0);
 
         List<ElementString> arrayElements = new ArrayList<>();
-        for(ElementString es : basicElement.components) {
+        for(ElementString es : elementToChange.components) {
             arrayElements.add(es);
             Production prod = new Production(llElem.getContext(),es) {
                 @Override
                 public String getBasicText() {
-                    return basicElement.toString();
+                    return elementToChange.toString();
                 }
             };
             prod.setOnTouchListener(
@@ -340,8 +371,8 @@ public class Production extends TextView {
             int relativeLeft = viewLocation[0] - rootLocation[0];
             int relativeTop  = viewLocation[1] - rootLocation[1];
 
-            Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
-            Log.wtf("message",String.valueOf(Math.abs( x-(relativeLeft+v.getWidth()/2)))+" est la distance entre les block");
+           /* Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
+            Log.wtf("message",String.valueOf(Math.abs( x-(relativeLeft+v.getWidth()/2)))+" est la distance entre les block");*/
             if(Math.abs( x-(relativeLeft+v.getWidth()/2)) < Math.abs(distanceMin)){
                 distanceMin = x-(relativeLeft+v.getWidth()/2);
                 nearestColumn = i;
@@ -389,6 +420,13 @@ public class Production extends TextView {
 
     public boolean supportDropVariable(){
         return basicElement.supportDropVariable();
+    }
+
+    public boolean supportDropFonctionInstanciation(){
+        return basicElement.supportDropFonctionInstanciation();
+    }
+    public boolean supportDropFonction(){
+        return basicElement.supportDropFonction();
     }
 
     public boolean supportDropVariableInstanciation(){
@@ -464,5 +502,16 @@ public class Production extends TextView {
 
     public ElementString getBasicElement() {
         return basicElement;
+    }
+
+    public List<ElementString> getListElementSupporting(ElementString newElement){
+        List<ElementString> supporting = new ArrayList<>();
+        basicElement.addAllElementSupportingDrop(supporting,newElement);
+        return supporting;
+    }
+    public List<ElementString> getListElementEditable(ElementString elementString){
+        List<ElementString> editable = new ArrayList<>();
+        elementString.addAllElementEditable(editable);
+        return editable;
     }
 }

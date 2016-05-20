@@ -36,4 +36,9 @@ public class IfString extends ElementString {
     public boolean supportDropVariable() {
         return true;
     }
+
+    @Override
+    public boolean supportDropFonction() {
+        return true;
+    }
 }

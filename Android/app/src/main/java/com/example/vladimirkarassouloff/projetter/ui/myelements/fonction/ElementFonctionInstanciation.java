@@ -8,7 +8,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -131,11 +130,17 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
 
     @Override
     public boolean isDropSupported(Production p) {
-        return p.supportDropVariableInstanciation();
+        return p.supportDropFonctionInstanciation();
     }
 
     public void refreshTextView(){
         tv.refreshText();
+    }
+
+
+    @Override
+    public void onDropOver(final Production block) {
+
     }
 
 }

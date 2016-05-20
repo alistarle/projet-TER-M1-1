@@ -45,4 +45,9 @@ public class ElementOperator extends TextView implements DraggableElement {
         return op;
     }
 
+    @Override
+    public void onDropOver(final Production block) {
+
+    }
+
 }

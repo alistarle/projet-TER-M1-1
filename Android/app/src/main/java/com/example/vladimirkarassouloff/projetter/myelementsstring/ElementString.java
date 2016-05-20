@@ -2,6 +2,8 @@ package com.example.vladimirkarassouloff.projetter.myelementsstring;
 
 import android.util.Log;
 
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.logic.LogicString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.operator.OperatorString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
@@ -41,10 +43,13 @@ public class ElementString {
         for(int i = 0 ; i < components.size() ; i++){
             s += components.get(i).getBasicText();
             if(i < components.size()-1){
-                s+=",";
+                s+=separator();
             }
         }
         return s;
+    }
+    protected String separator(){
+        return ",";
     }
 
     //sert a l'indentation
@@ -84,7 +89,10 @@ public class ElementString {
         return false;
     }
     public void onDrop(VariableInstanciationString evi){
-        Log.i("DROP NOT IMPLEMENTED", "VariableInstanciationString");
+        if(supportDropVariableInstanciation()){
+            components.add(evi);
+        }
+
     }
 
     public boolean supportDropNumber(){return false;}
@@ -114,7 +122,51 @@ public class ElementString {
         }
     }
 
+    public boolean supportDropFonction(){
+        return false;
+    }
+    public void onDrop(FonctionString el){
+        if(supportDropFonction()){
+            components.add(el);
+        }
+    }
 
+    public boolean supportDropFonctionInstanciation(){
+        return false;
+    }
+    public void onDrop(FonctionInstanciationString el){
+        if(supportDropFonctionInstanciation()){
+            components.add(el);
+        }
+    }
+
+
+
+
+    public boolean supportDrop(ElementString es){
+
+        if(es instanceof OperatorString) {
+            return supportDropOperator();
+        } else if (es instanceof VariableString) {
+            return supportDropVariable();
+        } else if (es instanceof VariableInstanciationString) {
+            return supportDropVariableInstanciation();
+        } else if (es instanceof LogicString) {
+            return supportDropLogic((LogicString) es);
+        } else if (es instanceof NumberString){
+            return supportDropNumber();
+        }
+        else if (es instanceof FonctionString){
+            return supportDropFonction();
+        }
+        else if (es instanceof FonctionInstanciationString){
+            return supportDropFonctionInstanciation();
+        }
+        else {
+            Log.wtf("message", "instanceof non trouvée : drop not supported");
+        }
+        return false;
+    }
 
     public void onDrop(ElementString s) {
         if (s instanceof OperatorString) {
@@ -128,12 +180,32 @@ public class ElementString {
         } else if (s instanceof NumberString){
             onDrop((NumberString)s);
         }
+        else if (s instanceof FonctionString){
+            onDrop((FonctionString)s);
+        }
         else {
-            Log.i("Drop not supported", "Drop not supported");
+            Log.wtf("message", "Drop not supported");
         }
     }
 
 
+    public void addAllElementSupportingDrop(List<ElementString> array, ElementString testDrop){
+        if(this.supportDrop(testDrop)){
+            array.add(this);
+        }
+        for(ElementString comp : components){
+            comp.addAllElementSupportingDrop(array,testDrop);
+        }
+    }
+
+    public void addAllElementEditable(List<ElementString> array){
+        if(this.components.size() > 0){
+            array.add(this);
+        }
+        for(ElementString comp : components){
+            comp.addAllElementEditable(array);
+        }
+    }
 
 
 
