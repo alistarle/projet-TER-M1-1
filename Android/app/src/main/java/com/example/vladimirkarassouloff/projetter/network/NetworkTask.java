@@ -18,6 +18,8 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.os.Handler;
 /**
@@ -43,6 +45,7 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
     private static long RETRY_SLEEP_TIME = 5000;
     private int currentTry;
 
+    private static String MESSAGE;
 
     public NetworkTask(){
         this.currentTry = 0;
@@ -65,6 +68,11 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
     @Override
     protected String doInBackground(Void... params) {
         Log.wtf("Task", "doInBackground");
+
+        Pattern patternFailed = Pattern.compile("compilation_failed");
+        Matcher matcherFailed;// = patternFailed.matcher("Hugo Etiévant");
+
+
         if(TASK_ALREADY_CONNECTED){
             Log.wtf("Network","Task already running !");
             return "";
@@ -75,7 +83,7 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
 
 
         InetSocketAddress address;
-        String fromServer, fromUser = "SALUT MDR";
+        String fromServer = "", fromUser = "SALUT MDR";
 
         if(this.ni == null){
             Log.wtf("NETWORK","Ni null");
@@ -118,10 +126,25 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
                     //Scanner stdIn = new Scanner(System.in);
                     while ((fromServer = in.readLine()) != null) {
                         Log.wtf("Network", "from Server: " + fromServer);
+                        matcherFailed = patternFailed.matcher(fromServer);
+                        MESSAGE = fromServer;
                         if (fromServer.equals("disconnect")) {
                             break;
                         }
-
+                        else if(fromServer.equals("compilation_success")){
+                            handler.post(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(MyApp.context, "Compilation réussie ! ", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        else if(matcherFailed.find()){
+                            handler.post(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(MyApp.context, "Echec de compilation : "+MESSAGE, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                         //fromUser = stdIn.next();
                         /*if (fromUser != null) {
                             Log.wtf("Network", "sending: " + fromUser);
