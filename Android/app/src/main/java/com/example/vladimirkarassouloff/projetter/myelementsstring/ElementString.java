@@ -7,13 +7,14 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.operator.Oper
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableString;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Vladimir on 17/02/2016.
  */
-public class ElementString {
+public class ElementString implements Serializable {
     public List<ElementString> components;
 
     public ElementString(List<ElementString> components) {
