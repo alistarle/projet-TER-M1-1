@@ -57,4 +57,9 @@ public class ElementVariable extends TextView implements DraggableElement {
     public ElementString onDraggedOnBlock(Production block) {
         return new VariableString(name);
     }
+
+    @Override
+    public void onDropOver(final Production block) {
+
+    }
 }

@@ -52,4 +52,11 @@ public class ElementElse extends TextView implements DraggableElement {
     public boolean isDropSupported(Production p) {
         return false;
     }
+
+    @Override
+    public void onDropOver(final Production block) {
+
+    }
+
+
 }

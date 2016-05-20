@@ -36,8 +36,9 @@ public class FonctionString extends ElementString  {
         return true;
     }
 
+
     @Override
-    public boolean supportDropOperator() {
+    public boolean supportDropFonction() {
         return true;
     }
 
