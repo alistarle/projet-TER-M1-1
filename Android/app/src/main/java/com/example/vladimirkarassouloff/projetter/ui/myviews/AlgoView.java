@@ -1,15 +1,28 @@
 package com.example.vladimirkarassouloff.projetter.ui.myviews;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.action.Action;
+import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
+import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.*;
@@ -19,6 +32,7 @@ import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Produc
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Vladimir on 12/02/2016.
@@ -29,15 +43,19 @@ public class AlgoView extends ScrollView {
     private Drawable separator;
     private TextView myCustomSeparator;
 
-    private static float MARGE = 25f;
+    private static float MARGE = 15f;
+
+
+
+
 
     private int lineInsert;
     private View dropBlock;
-    private enum Action {
+    private enum ActionUser {
         drop,
         line
     }
-    private Action currentState;
+    private ActionUser currentState;
 
     public AlgoView(Context context){
         super(context);
@@ -53,6 +71,8 @@ public class AlgoView extends ScrollView {
 
     protected void init() {
         //this.setBackgroundColor(Color.CYAN);
+
+
         ll = new LinearLayout(this.getContext());
         this.addView(ll);
         ll.setOrientation(LinearLayout.VERTICAL);
@@ -61,7 +81,7 @@ public class AlgoView extends ScrollView {
         myCustomSeparator.setText(" ");
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
-        ll.addView(myCustomSeparator);
+        //ll.addView(myCustomSeparator);
 
         this.setOnDragListener(new View.OnDragListener() {
 
@@ -101,19 +121,38 @@ public class AlgoView extends ScrollView {
         });
 
 
-
+        //main.refreshTextView();
 
         if(Debug.DEBUG_APP){
             ll.addView((new ElementVariableInstanciation(getContext())).onDraggedOnLine(ll).get(0),lineInsert);
             ll.addView((new ElementIf(getContext())).onDraggedOnLine(ll).get(0),2);
             ll.addView((new ElementIf(getContext())).onDraggedOnLine(ll).get(1),3);
-            refreshText();
+
         }
 
 
     }
 
-    private void showInsertResult(DragEvent event,View v){
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        Production main = new Production(getContext(),new FonctionInstanciationString("main","void"));
+
+        //ProductionFonctionInstanciation main = new ProductionFonctionInstanciation(getContext(),"main","void");
+        main.addComponent(new NumberString("43"));
+        main.addComponent(new NumberString("12"));
+        main.addComponent(new NumberString("65"));
+        main.addComponent(new NumberString("124"));
+        main.addComponent(new NumberString("55512"));
+        ll.addView(main,0);
+        //ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
+        Production pbc = new Production(getContext(),new BraceCloserString());
+        ll.addView(pbc,1);
+        refreshText();
+    }
+
+    private void showInsertResult(DragEvent event, View v){
         //on regarde si on dragg sur un block
         View view = (View) event.getLocalState();
         if (testIfInsideBlock(event.getX(), event.getY())) {
@@ -131,7 +170,7 @@ public class AlgoView extends ScrollView {
                             /*****/
 
                             b.setBackground(separator);
-                            currentState = Action.drop;
+                            currentState = ActionUser.drop;
                             dropBlock = b;
                             //Log.i("On a trouve un block", "On a trouve un block");
 
@@ -144,12 +183,15 @@ public class AlgoView extends ScrollView {
             else {
                 int i = getBlockSuivant(event.getX(),event.getY());
                 //Log.i("Block suivant trouve " + i, "Block suivant trouve " + i);
-                currentState = Action.line;
+                currentState = ActionUser.line;
                 lineInsert = i;
                 ll.addView(myCustomSeparator, i);
             }
 
     }
+
+
+
 
     private void doInsert(DragEvent event, View v){
         View view = (View) event.getLocalState();
@@ -158,7 +200,7 @@ public class AlgoView extends ScrollView {
             ScrollView container = (ScrollView) v;
 
 
-            if(currentState == Action.drop){
+            if(currentState == ActionUser.drop){
                 View clickedBlock = getBlock(event.getX(),event.getY());
                 if(clickedBlock instanceof Production) {
                     Production p = (Production) clickedBlock;
@@ -170,18 +212,23 @@ public class AlgoView extends ScrollView {
                     }
                 }
             }
-            else if(currentState == Action.line){
+            else if(currentState == ActionUser.line){
                 List<View> newViews = de.onDraggedOnLine(ll);
                 //Log.i("Drop ligne "+lineInsert,"Drop ligne "+lineInsert+"\n\n");
-                if(newViews != null){
+                if(newViews != null && newViews.size() > 0){
                     for (View vNew : newViews) {
-                        vNew.setMinimumHeight(100);
-                        //vNew.setPadding(5, 5, 5, 5);
+                        vNew.setMinimumHeight(40);
+                        vNew.setPadding(5, 5, 5, 10);
 
-                        ll.addView(vNew,lineInsert);
-                        lineInsert++;
+                        /*ll.addView(vNew,lineInsert);
+                        lineInsert++;*/
                     }
+                    AddLineAction ala = new AddLineAction(lineInsert,newViews,ll,this);
+                    AlgoActivity.ACTION_TO_CONSUME.add(ala);
+                    Intent intent = new Intent("doAction");
+                    LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                 }
+
             }
             else{
                 Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
@@ -211,6 +258,8 @@ public class AlgoView extends ScrollView {
 
 
         }
+        refreshText();
+        autoIndent();
     }
 
 
@@ -261,8 +310,8 @@ public class AlgoView extends ScrollView {
             int relativeLeft = viewLocation[0] - rootLocation[0];
             int relativeTop  = viewLocation[1] - rootLocation[1];
 
-            //Log.i("Pos",v.getClass().toString()+" se trouve a "+relativeLeft+","+relativeTop+"    et le curseur est a "+y);
-            if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y){
+            //if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y){
+            if(relativeTop+v.getHeight()/2 > y){
                 return i;
 
             }
@@ -270,7 +319,7 @@ public class AlgoView extends ScrollView {
         return i;
     }
 
-    private void refreshText(){
+    public void refreshText(){
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
             if(v instanceof Production){
@@ -281,14 +330,16 @@ public class AlgoView extends ScrollView {
     }
 
     private void resetSeparator(){
-        ll.removeView(myCustomSeparator);
+        if(myCustomSeparator.getParent() != null) {
+            ll.removeView(myCustomSeparator);
+        }
         for(int i = 0 ; i < ll.getChildCount() ; i++) {
             ll.getChildAt(i).setBackground(null);
         }
     }
 
 
-    private void autoIndent(){
+    public void autoIndent(){
         int tab = 0;
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
@@ -325,5 +376,9 @@ public class AlgoView extends ScrollView {
     public LinearLayout getLl() {
         return ll;
     }
+
+
+
+
 
 }

@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
 
 /**
@@ -23,12 +23,21 @@ public class ValidationDialogFunction extends ValidationDialogVariable {
     }
     @Override
     public void onValid() {
-        ProductionFonctionInstanciation pv = (ProductionFonctionInstanciation) this.production;
+        /*ProductionFonctionInstanciation pv = (ProductionFonctionInstanciation) this.production;
         pv.setType(ptv.getType());
         pv.setName(et.getText().toString());
-        pv.refreshText();
+        pv.refreshText();*/
+        //Production pv = new Production()
+        FonctionInstanciationString fis = (FonctionInstanciationString) production.getBasicElement();
+        fis.setType(ptv.getType());
+        fis.setName(et.getText().toString());
+        //production.refreshText();
+
+
         Intent intent = new Intent("newFunction");
         intent.putExtra("function", et.getText().toString());
         LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
+        Intent intent2 = new Intent("autoIndent");
+        LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent2);
     }
 }

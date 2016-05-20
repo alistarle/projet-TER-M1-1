@@ -3,6 +3,8 @@ package com.example.vladimirkarassouloff.projetter.ui.myelements.fonction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogFunction;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.ProductionBraceCloser;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.fonction.ProductionFonctionInstanciation;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
@@ -33,8 +35,8 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
 
     private FonctionInstanciationString element;
 
-    private ProductionFonctionInstanciation tv;
-    private ProductionBraceCloser bc;
+    private Production tv;
+    private Production bc;
 
     public ElementFonctionInstanciation(Context context){
         super(context);
@@ -42,6 +44,14 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
     }
     public ElementFonctionInstanciation(Context context, AttributeSet attrs){
         super(context, attrs);
+    }
+    public ElementFonctionInstanciation(Context context, FonctionInstanciationString element){
+        super(context);
+        //refreshTextView();
+    }
+    public ElementFonctionInstanciation(Context context, AttributeSet attrs, FonctionInstanciationString element){
+        super(context, attrs);
+        //refreshTextView();
     }
 
     public String getType(){
@@ -53,8 +63,8 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
     @Override
     public List<View> onDraggedOnLine(View v) {
         List<View> array = new ArrayList<View>();
-        tv = new ProductionFonctionInstanciation(v.getContext());
-        bc = new ProductionBraceCloser(v.getContext());
+        tv = new Production(v.getContext(), new FonctionInstanciationString("DefaultFunction","DefaultFunction"));
+        bc = new Production(v.getContext(),new BraceCloserString());
 
         array.add(tv);
         array.add(bc);
@@ -96,9 +106,11 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                ViewGroup owner = (ViewGroup) tv.getParent();
+                                /*ViewGroup owner = (ViewGroup) tv.getParent();
                                 owner.removeView(tv);
-                                owner.removeView(bc);
+                                owner.removeView(bc);*/
+                                Intent intent = new Intent("removeLastAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });

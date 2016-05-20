@@ -23,6 +23,23 @@ public class FonctionString extends ElementString  {
 
     @Override
     public String toString() {
-        return this.name;
+        return this.name+"("+getComponentString()+")";
     }
+
+    @Override
+    public boolean supportDropVariable() {
+        return true;
+    }
+
+    @Override
+    public boolean supportDropNumber() {
+        return true;
+    }
+
+    @Override
+    public boolean supportDropOperator() {
+        return true;
+    }
+
+
 }

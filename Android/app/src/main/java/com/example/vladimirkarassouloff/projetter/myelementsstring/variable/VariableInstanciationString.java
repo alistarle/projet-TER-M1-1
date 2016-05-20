@@ -1,6 +1,7 @@
 package com.example.vladimirkarassouloff.projetter.myelementsstring.variable;
 
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.logic.LogicString;
 
 /**
  * Created by Vladimir on 17/02/2016.
@@ -33,5 +34,21 @@ public class VariableInstanciationString extends ElementString {
     @Override
     public String toString() {
         return this.type+" "+this.name;
+    }
+
+
+    @Override
+    public boolean supportDropNumber() {
+        return true;
+    }
+
+    @Override
+    public boolean supportDropOperator() {
+        return true;
+    }
+
+    @Override
+    public boolean supportDropVariable() {
+        return true;
     }
 }

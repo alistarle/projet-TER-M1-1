@@ -3,6 +3,8 @@ package com.example.vladimirkarassouloff.projetter.ui.myelements.variable;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogVariable;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.variable.ProductionVariableInstanciation;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.variable.VariableInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
@@ -33,7 +35,7 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
     private String name;
     private String type;
 
-    private ProductionVariableInstanciation tv;
+    private Production tv;
 
     public ElementVariableInstanciation(Context context){
         super(context);
@@ -52,7 +54,7 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
     @Override
     public List<View> onDraggedOnLine(View v) {
         List<View> array = new ArrayList<View>();
-        tv = new ProductionVariableInstanciation(v.getContext());
+        tv = new Production(v.getContext(),new VariableInstanciationString(type,name));
         array.add(tv);
 
 
@@ -89,8 +91,10 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                ViewGroup owner = (ViewGroup) tv.getParent();
-                                owner.removeView(tv);
+                                /*ViewGroup owner = (ViewGroup) tv.getParent();
+                                owner.removeView(tv);*/
+                                Intent intent = new Intent("removeLastAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });
