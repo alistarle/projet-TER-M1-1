@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
-import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.ReturnString;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -33,8 +32,8 @@ public class ElementReturn extends TextView implements DraggableElement {
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> ar = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> ar = new ArrayList<Production>();
         /*ProductionFonction pv = new ProductionFonction(getContext(),element.toString());
         ar.add(pv);*/
         Production p = new Production(getContext(), new ReturnString());

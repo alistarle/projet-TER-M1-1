@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
-import com.example.vladimirkarassouloff.projetter.myelementsstring.condition.IfString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.iterative.WhileString;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.DraggableElement;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -29,8 +28,8 @@ public class ElementWhile  extends TextView implements DraggableElement {
     }
 
     @Override
-    public List<View> onDraggedOnLine(View v){
-        List<View> array = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v){
+        List<Production> array = new ArrayList<Production>();
         Production p1 = new Production(v.getContext(),new WhileString());
         Production p2 = new Production(v.getContext(),new BraceCloserString());
         array.add(p1);

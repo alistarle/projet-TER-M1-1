@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
 import com.example.vladimirkarassouloff.projetter.action.DeleteLineAction;
+import com.example.vladimirkarassouloff.projetter.action.ModifyProductionAction;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogFunction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
@@ -84,6 +86,7 @@ public class Production extends TextView {
     }
 
     protected void init(){
+        this.setTextColor(Color.BLACK);
         this.separator = getResources().getDrawable(R.drawable.test);
         myCustomSeparator = new TextView(getContext());
         myCustomSeparator.setText(" ");
@@ -118,17 +121,14 @@ public class Production extends TextView {
                                                for(ElementString es : listEditableElements){
                                                    listString.add(es.getBasicText());
                                                }
-                                               ArrayAdapter<String> itensAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
+                                               ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
                                                android.support.v7.app.AlertDialog dialog2;
                                                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
                                                builder.setTitle("Choisir quel element modifier");
-                                               builder.setAdapter(itensAdapter, new DialogInterface.OnClickListener() {
+                                               builder.setAdapter(itemsAdapter, new DialogInterface.OnClickListener() {
                                                    @Override
                                                    public void onClick(DialogInterface dialog2, int which) {
-                                                       Log.wtf("mdr","on a click sur "+which);
                                                        modifier(listEditableElements.get(which));
-                                                       /*Intent intent = new Intent("autoIndent");
-                                                       LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
                                                    }
                                                });
                                                dialog2 = builder.create();
@@ -149,9 +149,9 @@ public class Production extends TextView {
     public void supprimer(){
         if(getParent()!=null && getParent().getParent()!=null && getParent().getParent() instanceof AlgoView) {
             int line = ((ViewGroup)getParent()).indexOfChild(this);
-            List<View> oldView = new ArrayList<>();
+            List<Production> oldView = new ArrayList<>();
             oldView.add(this);
-            DeleteLineAction ala = new DeleteLineAction(line, oldView, (ViewGroup)getParent(), (AlgoView)(getParent().getParent()));
+            DeleteLineAction ala = new DeleteLineAction(line, oldView);
             AlgoActivity.ACTION_TO_CONSUME.add(ala);
             Intent intent = new Intent("doAction");
             LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
@@ -300,9 +300,13 @@ public class Production extends TextView {
                                 newArray.add(pr.basicElement);
                             }
                         }
-                        elementToChange.components = newArray;
-                        Intent intent = new Intent("autoIndent");
-                        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+                        //elementToChange.components = newArray;
+                        ModifyProductionAction mpa = new ModifyProductionAction(elementToChange,newArray);
+                        AlgoActivity.ACTION_TO_CONSUME.add(mpa);
+                        Intent intent = new Intent("doAction");
+                        LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+                        /*Intent intent = new Intent("autoIndent");
+                        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
                     }
                 })
                 .setNegativeButton("Cancel",

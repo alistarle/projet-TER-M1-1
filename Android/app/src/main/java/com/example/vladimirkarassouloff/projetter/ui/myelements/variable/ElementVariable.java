@@ -35,8 +35,8 @@ public class ElementVariable extends TextView implements DraggableElement {
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> ar = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> ar = new ArrayList<Production>();
         //ProductionVariable pv = new ProductionVariable(getContext(),name);
         Production pv = new Production(getContext(), new VariableString(name));
         ar.add(pv);

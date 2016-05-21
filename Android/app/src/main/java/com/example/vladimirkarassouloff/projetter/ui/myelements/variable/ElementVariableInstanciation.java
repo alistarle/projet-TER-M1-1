@@ -51,8 +51,8 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> array = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> array = new ArrayList<Production>();
         vis = new VariableInstanciationString();
         Production tv = new Production(v.getContext(),vis);
         array.add(tv);

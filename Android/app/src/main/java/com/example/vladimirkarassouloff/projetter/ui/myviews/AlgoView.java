@@ -255,7 +255,7 @@ public class AlgoView extends ScrollView {
                 }
             }
             else if(currentState == ActionUser.line){
-                List<View> newViews = de.onDraggedOnLine(ll);
+                List<Production> newViews = de.onDraggedOnLine(ll);
                 //Log.i("Drop ligne "+lineInsert,"Drop ligne "+lineInsert+"\n\n");
                 if(newViews != null && newViews.size() > 0){
                     for (View vNew : newViews) {
@@ -265,7 +265,7 @@ public class AlgoView extends ScrollView {
                         /*ll.addView(vNew,lineInsert);
                         lineInsert++;*/
                     }
-                    AddLineAction ala = new AddLineAction(lineInsert,newViews,ll,this);
+                    AddLineAction ala = new AddLineAction(lineInsert,newViews);
                     AlgoActivity.ACTION_TO_CONSUME.add(ala);
                     Intent intent = new Intent("doAction");
                     LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);

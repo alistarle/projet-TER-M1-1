@@ -28,8 +28,8 @@ public class ElementElse extends TextView implements DraggableElement {
     }
 
     @Override
-    public List<View> onDraggedOnLine(View v){
-        List<View> array = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v){
+        List<Production> array = new ArrayList<Production>();
         //ProductionElse tv = new ProductionElse(v.getContext());
         Production p1 = new Production(v.getContext(),new ElseString());
         //ProductionBraceCloser pb = new ProductionBraceCloser(v.getContext());

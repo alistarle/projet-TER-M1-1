@@ -9,15 +9,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogMoteur;
-import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogRotation;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.Moteur;
-import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.TournerTete;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonction;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -41,8 +38,8 @@ public class ElementMoteur  extends ElementFonction {
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> ar = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> ar = new ArrayList<Production>();
         Moteur moteur = new Moteur();
         Production p = new Production(getContext(), moteur);
         ar.add(p);

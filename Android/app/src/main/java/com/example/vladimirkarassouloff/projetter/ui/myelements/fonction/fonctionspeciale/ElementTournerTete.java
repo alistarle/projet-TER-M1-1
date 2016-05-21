@@ -14,12 +14,10 @@ import android.widget.EditText;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogRotation;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
-import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.EteindreLed;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.TournerTete;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonction;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
-import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptConnectionView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +37,8 @@ public class ElementTournerTete  extends ElementFonction {
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> ar = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> ar = new ArrayList<Production>();
         TournerTete tournerTete = new TournerTete();
         Production p = new Production(getContext(), tournerTete);
         ar.add(p);

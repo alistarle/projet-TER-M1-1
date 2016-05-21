@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -195,18 +196,50 @@ public class AlgoActivity extends AppCompatActivity {
                 else if(intent.getAction().equals("autoIndent")){
                     algoScroll.autoIndent();
                 }
+                else if(intent.getAction().equals("addProductions")){
+                    //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                    int line = intent.getIntExtra("line",0);
+                    int i = 0;
+                    List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                    for(ElementString es : list){
+                        Production p = new Production(algoScroll.getLl().getContext(),es);
+                        addProduction(p,line+i);
+                        i++;
+                    }
+                    algoScroll.autoIndent();
+                }
+                else if(intent.getAction().equals("removeProductions")){
+                    int line = intent.getIntExtra("line",0);
+                    List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                    for(ElementString es : list){
+                        Production p = new Production(algoScroll.getLl().getContext(),es);
+                        removeProduction(p,line);
+                    }
+                    algoScroll.autoIndent();
+                }
             }
         };
+
+
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
 
     }
 
 
 
+    public void addProduction(Production prod,int line){
+        algoScroll.getLl().addView(prod,line);
+    }
+
+    public void removeProduction(Production prod,int line){
+        algoScroll.getLl().removeView(algoScroll.getLl().getChildAt(line));
+    }
 
 
 
