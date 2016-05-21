@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface DraggableElement {
 
-    public List<View> onDraggedOnLine(View v);
+    public List<Production> onDraggedOnLine(View v);
     public ElementString onDraggedOnBlock(Production block);
     public boolean isDropSupported(Production p);
     public void onDropOver(final Production block);

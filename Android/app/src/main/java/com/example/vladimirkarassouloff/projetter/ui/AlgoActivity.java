@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,6 +61,8 @@ import java.util.Stack;
 
 public class AlgoActivity extends AppCompatActivity {
 
+
+    public static DisplayMetrics metrics;
 
     private Button redoActionButton;
     private Button undoActionButton;
@@ -114,6 +118,8 @@ public class AlgoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algo);
+
+
 
         //DO UNDO REDO
         redoStack = new Stack<Action>();
@@ -198,13 +204,38 @@ public class AlgoActivity extends AppCompatActivity {
                 else if(intent.getAction().equals("autoIndent")){
                     algoScroll.autoIndent();
                 }
+                else if(intent.getAction().equals("addProductions")){
+                    //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                    int line = intent.getIntExtra("line",0);
+                    int i = 0;
+                    List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                    for(ElementString es : list){
+                        Production p = new Production(algoScroll.getLl().getContext(),es);
+                        addProduction(p,line+i);
+                        i++;
+                    }
+                    algoScroll.autoIndent();
+                }
+                else if(intent.getAction().equals("removeProductions")){
+                    int line = intent.getIntExtra("line",0);
+                    List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                    for(ElementString es : list){
+                        Production p = new Production(algoScroll.getLl().getContext(),es);
+                        removeProduction(p,line);
+                    }
+                    algoScroll.autoIndent();
+                }
             }
         };
+
+
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
 
         actionLoad(0);
 
@@ -213,6 +244,17 @@ public class AlgoActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
+
+
+    public void addProduction(Production prod,int line){
+        algoScroll.getLl().addView(prod,line);
+    }
+
+    public void removeProduction(Production prod,int line){
+        algoScroll.getLl().removeView(algoScroll.getLl().getChildAt(line));
+    }
+
+
 
     public void removeLastAction(){
         undoAction();

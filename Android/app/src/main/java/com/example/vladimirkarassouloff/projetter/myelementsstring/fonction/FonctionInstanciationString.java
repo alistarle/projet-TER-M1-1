@@ -54,4 +54,7 @@ public class FonctionInstanciationString extends ElementString {
     protected boolean allowDropOnComponent(){
         return false;
     }
+    protected String separator(){
+        return ",";
+    }
 }

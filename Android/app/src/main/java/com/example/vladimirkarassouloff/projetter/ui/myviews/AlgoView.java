@@ -8,9 +8,11 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -85,8 +87,12 @@ public class AlgoView extends ScrollView {
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
 
+
         lastLine = new TextView(getContext());
-        lastLine.setMinHeight(150);
+        lastLine.setMinHeight(300);
+        ll.addView(lastLine);
+
+
 
         this.setOnDragListener(new View.OnDragListener() {
 
@@ -155,11 +161,11 @@ public class AlgoView extends ScrollView {
         Production pbc = new Production(getContext(),new BraceCloserString());
         ll.addView(pbc,1);
 
-        ll.addView(lastLine);
 
-        //refreshText();
+
         autoIndent();
     }
+
 
     private void showInsertResult(DragEvent event, View v){
         //on regarde si on dragg sur un block
@@ -172,7 +178,6 @@ public class AlgoView extends ScrollView {
                     if (b instanceof Production) {
                         Production p = (Production) b;
                         ElementString newElement = de.onDraggedOnBlock(p);
-
                         List<ElementString> supporting = p.getListElementSupporting(newElement);
                         Log.wtf("message","On a trouve "+supporting.size()+" elements supportant le drop");
                         if(supporting.size() > 0){
@@ -185,13 +190,15 @@ public class AlgoView extends ScrollView {
 
             }
             //ou si on insere une nouvelle instruction
-            else {
-                int i = getBlockSuivant(event.getX(),event.getY());
-                //Log.i("Block suivant trouve " + i, "Block suivant trouve " + i);
-                currentState = ActionUser.line;
-                lineInsert = i;
-                ll.addView(myCustomSeparator, i);
+        else {
+            int i = getBlockSuivant(event.getX(),event.getY());
+            if(i == ll.getChildCount()){//on replace 1 cran en dessous, car on ne drag pas en dessous de la "lastLine"
+                i--;
             }
+            currentState = ActionUser.line;
+            lineInsert = i;
+            ll.addView(myCustomSeparator, i);
+        }
 
     }
 
@@ -203,14 +210,10 @@ public class AlgoView extends ScrollView {
         if (view instanceof DraggableElement) {
             final DraggableElement de = (DraggableElement) view;
             ScrollView container = (ScrollView) v;
-
-
             if(currentState == ActionUser.drop){
                 View clickedBlock = getBlock(event.getX(),event.getY());
                 if(clickedBlock instanceof Production) {
                     final Production p = (Production) clickedBlock;
-
-
                     final ElementString newElement = de.onDraggedOnBlock(p);
                     /*
                     if (de.isDropSupported(p)) {
@@ -252,7 +255,7 @@ public class AlgoView extends ScrollView {
                 }
             }
             else if(currentState == ActionUser.line){
-                List<View> newViews = de.onDraggedOnLine(ll);
+                List<Production> newViews = de.onDraggedOnLine(ll);
                 //Log.i("Drop ligne "+lineInsert,"Drop ligne "+lineInsert+"\n\n");
                 if(newViews != null && newViews.size() > 0){
                     for (View vNew : newViews) {
@@ -262,7 +265,7 @@ public class AlgoView extends ScrollView {
                         /*ll.addView(vNew,lineInsert);
                         lineInsert++;*/
                     }
-                    AddLineAction ala = new AddLineAction(lineInsert,newViews,ll,this);
+                    AddLineAction ala = new AddLineAction(lineInsert,newViews);
                     AlgoActivity.ACTION_TO_CONSUME.add(ala);
                     Intent intent = new Intent("doAction");
                     LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
@@ -338,21 +341,23 @@ public class AlgoView extends ScrollView {
             return 0;
         int i;
         for(i = 0 ; i < ll.getChildCount() ; i++){
-            View v = ll.getChildAt(i);
-            View rootLayout = v.getRootView().findViewById(android.R.id.content);
-            int[] viewLocation = new int[2];
-            v.getLocationInWindow(viewLocation);
+            if(ll.getChildAt(i) instanceof Production) {
+                View v = ll.getChildAt(i);
+                View rootLayout = v.getRootView().findViewById(android.R.id.content);
+                int[] viewLocation = new int[2];
+                v.getLocationInWindow(viewLocation);
 
-            int[] rootLocation = new int[2];
-            rootLayout.getLocationInWindow(rootLocation);
+                int[] rootLocation = new int[2];
+                rootLayout.getLocationInWindow(rootLocation);
 
-            int relativeLeft = viewLocation[0] - rootLocation[0];
-            int relativeTop  = viewLocation[1] - rootLocation[1];
+                int relativeLeft = viewLocation[0] - rootLocation[0];
+                int relativeTop = viewLocation[1] - rootLocation[1];
 
-            //if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y){
-            if(relativeTop+v.getHeight()/2 > y){
-                return i;
+                //if(relativeTop+v.getHeight()/2+ AlgoView.MARGE > y){
+                if (relativeTop + v.getHeight() / 2 > y) {
+                    return i;
 
+                }
             }
         }
         return i;
@@ -406,6 +411,9 @@ public class AlgoView extends ScrollView {
             ll.removeView(lastLine);
         }
         ll.addView(lastLine);
+        //lastLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        //lastLine.setBackgroundColor(Color.BLACK);
+
     }
 
     public String getAlgorithme(){
