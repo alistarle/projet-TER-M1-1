@@ -54,6 +54,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -522,11 +523,12 @@ public class AlgoActivity extends AppCompatActivity {
     private void saveAlgo(int slot) throws IOException {
         FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-        ArrayList<ElementString> list = new ArrayList<>();
+
+        HashMap<String,ElementString> list = new HashMap<>();
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
             Object element = algoScroll.getLl().getChildAt(i);
                 if(element instanceof Production){
-                    list.add(((Production) element).getBasicElement());
+                    list.put("ALGO",((Production) element).getBasicElement());
                 }
         }
         obj_out.writeObject(list);
@@ -549,8 +551,6 @@ public class AlgoActivity extends AppCompatActivity {
         }
 
     }
-
-
     public void actionSave(View view) {
         int slot = 1;
         try {
