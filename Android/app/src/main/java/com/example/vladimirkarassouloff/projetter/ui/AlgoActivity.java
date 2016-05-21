@@ -43,6 +43,7 @@ import com.example.vladimirkarassouloff.projetter.ui.myviews.mypopups.PopupLoad;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptConnectionView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
 
@@ -93,6 +94,8 @@ public class AlgoActivity extends AppCompatActivity {
 
     //scroll droite
     private ElementsView elementsScroll;
+    private NameView nameView;
+
 
     //scroll gauche
     private AlgoView algoScroll;
@@ -132,6 +135,7 @@ public class AlgoActivity extends AppCompatActivity {
         //Gestion des main scoll
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         elementsScroll = (ElementsView) findViewById(R.id.elementsScroll);
+        nameView = (NameView) findViewById(R.id.namesScroll);
         algoScroll = (AlgoView) findViewById(R.id.algoScroll);
 
 
@@ -217,6 +221,16 @@ public class AlgoActivity extends AppCompatActivity {
                     }
                     algoScroll.autoIndent();
                 }
+                else if(intent.getAction().equals("moveProduction")){
+                    int lineFrom = intent.getIntExtra("from",0);
+                    int lineTo = intent.getIntExtra("to",0);
+                    if(algoScroll.getLl().getChildAt(lineFrom) != null){
+                        View v = algoScroll.getLl().getChildAt(lineFrom);
+                        algoScroll.getLl().removeView(v);
+                        algoScroll.getLl().addView(v,lineTo);
+                        algoScroll.autoIndent();
+                    }
+                }
             }
         };
 
@@ -228,6 +242,7 @@ public class AlgoActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
 
     }
 

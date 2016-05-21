@@ -1,5 +1,6 @@
 package com.example.vladimirkarassouloff.projetter.myelementsstring;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
@@ -231,7 +232,12 @@ public class ElementString implements Serializable {
 
 
 
-
+    public int getBackgroundColorDefault(){
+        return Color.rgb(255,255,255);
+    }
+    public int getBackgroundColorOnTouch(){
+        return Color.rgb(128,128,128);
+    }
 
 
 

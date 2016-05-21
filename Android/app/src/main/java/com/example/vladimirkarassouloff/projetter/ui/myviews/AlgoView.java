@@ -18,7 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.action.MoveLineAction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
@@ -57,7 +59,8 @@ public class AlgoView extends ScrollView {
 
     private enum ActionUser {
         drop,
-        line
+        line,
+        linemove
     }
     private ActionUser currentState;
 
@@ -98,6 +101,9 @@ public class AlgoView extends ScrollView {
 
             @Override
             public boolean onDrag(View v, DragEvent event) {
+                if((View)event.getLocalState() instanceof Production){
+                    currentState = ActionUser.linemove;
+                }
 
                 int action = event.getAction();
                 switch (event.getAction()) {
@@ -207,10 +213,8 @@ public class AlgoView extends ScrollView {
 
     private void doInsert(DragEvent event, View v){
         View view = (View) event.getLocalState();
-        if (view instanceof DraggableElement) {
-            final DraggableElement de = (DraggableElement) view;
-            ScrollView container = (ScrollView) v;
-            if(currentState == ActionUser.drop){
+            if(currentState == ActionUser.drop && view instanceof DraggableElement){
+                final DraggableElement de = (DraggableElement) view;
                 View clickedBlock = getBlock(event.getX(),event.getY());
                 if(clickedBlock instanceof Production) {
                     final Production p = (Production) clickedBlock;
@@ -254,17 +258,15 @@ public class AlgoView extends ScrollView {
                     //de.onDropOver(p);
                 }
             }
-            else if(currentState == ActionUser.line){
+            else if(currentState == ActionUser.line && view instanceof DraggableElement){
+                final DraggableElement de = (DraggableElement) view;
                 List<Production> newViews = de.onDraggedOnLine(ll);
                 //Log.i("Drop ligne "+lineInsert,"Drop ligne "+lineInsert+"\n\n");
                 if(newViews != null && newViews.size() > 0){
-                    for (View vNew : newViews) {
+                    /*for (View vNew : newViews) {
                         vNew.setMinimumHeight(40);
                         vNew.setPadding(5, 5, 5, 10);
-
-                        /*ll.addView(vNew,lineInsert);
-                        lineInsert++;*/
-                    }
+                    }*/
                     AddLineAction ala = new AddLineAction(lineInsert,newViews);
                     AlgoActivity.ACTION_TO_CONSUME.add(ala);
                     Intent intent = new Intent("doAction");
@@ -272,35 +274,19 @@ public class AlgoView extends ScrollView {
                 }
 
             }
+            else if(currentState == ActionUser.linemove && view instanceof Production){
+                MoveLineAction ala = new MoveLineAction(ll.indexOfChild(view),lineInsert);
+                AlgoActivity.ACTION_TO_CONSUME.add(ala);
+                Intent intent = new Intent("doAction");
+                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+            }
             else{
                 Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
                 Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
                 Log.wtf("ACTION NON GEREE\n", "ACTION NON GEREE\n");
             }
 
-            /*if(testIfInsideBlock(event.getX(),event.getY())){
-                View clickedBlock = getBlock(event.getX(),event.getY());
-                de.onDraggedOnBlock(clickedBlock);
-                //v.setBackground(separator);
-                Log.i("Drop block ","Drop block \n\n");
-            }
-            //ou si on insere une nouvelle instruction
-            else{
-                int i = getBlockSuivant(event.getX(), event.getY());
-                List<View> newViews = de.onDraggedOnLine(ll);
-                Log.i("Drop ligne "+i,"Drop ligne "+i+"\n\n");
-                for (View vNew : newViews) {
-                    vNew.setMinimumHeight(80);
-                    vNew.setPadding(5, 5, 5, 5);
-                    ll.addView(vNew,i);
-                    i++;
-                }
-                //ll.addView(myCustomSeparator,i);
-            }*/
 
-
-        }
-        //refreshText();
         autoIndent();
     }
 

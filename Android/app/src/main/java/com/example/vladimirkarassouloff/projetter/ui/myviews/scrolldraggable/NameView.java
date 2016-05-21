@@ -106,6 +106,19 @@ public class NameView extends ScrollDraggableElementView {
     }
 
 
+    public List<String> getFonctions() {
+        return fonctions;
+    }
 
+    public List<String> getVariables() {
+        return variables;
+    }
 
+    public void setVariables(List<String> variables) {
+        this.variables = variables;
+    }
+
+    public void setFonctions(List<String> fonctions) {
+        this.fonctions = fonctions;
+    }
 }
