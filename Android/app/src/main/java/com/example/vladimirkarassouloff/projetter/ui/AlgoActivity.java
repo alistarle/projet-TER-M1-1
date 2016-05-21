@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
@@ -30,6 +31,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import com.example.vladimirkarassouloff.projetter.R;
@@ -107,6 +109,12 @@ public class AlgoActivity extends AppCompatActivity {
     private DrawerLayout menuLayout; //Layout Principal
     private ListView menuElementsList; //Menu
     private ActionBarDrawerToggle menuToggle; //Gère l'ouverture et la fermeture du menu
+
+    @Override
+    public void onDestroy() {
+        actionSave(0);
+        super.onDestroy();
+    }
 
 
     @Override
@@ -244,8 +252,13 @@ public class AlgoActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
 
+        actionLoad(0);
+
     }
 
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
 
 
     public void addProduction(Production prod,int line){
@@ -522,33 +535,23 @@ public class AlgoActivity extends AppCompatActivity {
         }
     }
     private void saveAlgo(int slot) throws IOException {
-        // Write to disk with FileOutputStream
         FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
-        // Write object with ObjectOutputStream
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-
         ArrayList<ElementString> list = new ArrayList<>();
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
             Object element = algoScroll.getLl().getChildAt(i);
                 if(element instanceof Production){
                     list.add(((Production) element).getBasicElement());
-                    //list.add(algoScroll.getLl().getChildAt(i));
                 }
         }
-        // Write object out to disk
         obj_out.writeObject(list);
     }
 
 
     private void loadAlgo(int slot) throws IOException, ClassNotFoundException {
-        // Read from disk using FileInputStream
         FileInputStream f_in = new
                 FileInputStream("/sdcard/slot" + slot + ".data");
-
-        // Read object using ObjectInputStream
         ObjectInputStream obj_in = new ObjectInputStream(f_in);
-
-        // Read an object
         Object obj = obj_in.readObject();
         if(obj instanceof ArrayList){
             ArrayList<ElementString> list = ((ArrayList<ElementString>)obj);
