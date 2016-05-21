@@ -64,7 +64,7 @@ public class ElementString implements Serializable {
         return s;
     }
     protected String separator(){
-        return ",";
+        return " ";
     }
 
     //sert a l'indentation

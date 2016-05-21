@@ -40,7 +40,6 @@ public class AddLineAction extends Action {
             view.addView(production,i);
             i++;
         }
-        //algoView.refreshText();
         algoView.autoIndent();
     }
 

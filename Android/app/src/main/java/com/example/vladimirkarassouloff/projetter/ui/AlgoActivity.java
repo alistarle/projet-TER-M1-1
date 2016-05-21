@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,6 +58,8 @@ import java.util.Stack;
 
 public class AlgoActivity extends AppCompatActivity {
 
+
+    public static DisplayMetrics metrics;
 
     private Button redoActionButton;
     private Button undoActionButton;
@@ -106,6 +109,8 @@ public class AlgoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algo);
+
+
 
         //DO UNDO REDO
         redoStack = new Stack<Action>();
@@ -199,6 +204,10 @@ public class AlgoActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
 
     }
+
+
+
+
 
 
     public void removeLastAction(){

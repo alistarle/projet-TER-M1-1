@@ -28,10 +28,6 @@ public class IfString extends ElementString {
         return true;
     }
 
-    @Override
-    public boolean supportDropOperator() {
-        return true;
-    }
 
     @Override
     public boolean supportDropVariable() {
