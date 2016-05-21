@@ -10,9 +10,13 @@ public class VariableInstanciationString extends ElementString {
     private String type;
     private String name;
 
+    public VariableInstanciationString() {
+        this.type = "Nouvelle";
+        this.name = "Variable";
+    }
     public VariableInstanciationString(String type,String name) {
-        this.name = name;
         this.type = type;
+        this.name = name;
     }
 
     public String getName() {
@@ -33,9 +37,13 @@ public class VariableInstanciationString extends ElementString {
 
     @Override
     public String toString() {
-        return this.type+" "+this.name;
+        return this.type+" "+this.name+ " " + getComponentString();
     }
 
+    @Override
+    protected String separator() {
+        return " ";
+    }
 
     @Override
     public boolean supportDropNumber() {

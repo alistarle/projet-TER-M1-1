@@ -39,14 +39,28 @@ public class ElementString implements Serializable {
         }
     }
 
+
+    //precise si les composant devraient etre entouré de parentheses
+    protected boolean shouldWrapComponents(ElementString element){
+        return false;
+    }
+
     public String getComponentString(){
         String s = "";
+
         for(int i = 0 ; i < components.size() ; i++){
+            if(shouldWrapComponents(components.get(i)) && components.size() > 1){
+                s+="(";
+            }
             s += components.get(i).getBasicText();
+            if(shouldWrapComponents(components.get(i)) && components.size() > 1){
+                s+=")";
+            }
             if(i < components.size()-1){
                 s+=separator();
             }
         }
+
         return s;
     }
     protected String separator(){
@@ -190,12 +204,19 @@ public class ElementString implements Serializable {
     }
 
 
+
+    protected boolean allowDropOnComponent(){
+        return true;
+    }
+
     public void addAllElementSupportingDrop(List<ElementString> array, ElementString testDrop){
         if(this.supportDrop(testDrop)){
             array.add(this);
         }
-        for(ElementString comp : components){
-            comp.addAllElementSupportingDrop(array,testDrop);
+        if(this.allowDropOnComponent()) {
+            for (ElementString comp : components) {
+                comp.addAllElementSupportingDrop(array, testDrop);
+            }
         }
     }
 

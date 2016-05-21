@@ -3,6 +3,8 @@ package com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.foncti
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialo
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.Moteur;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.TournerTete;
+import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonction;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 
@@ -60,6 +63,8 @@ public class ElementMoteur  extends ElementFonction {
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent("removeLastAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });

@@ -9,6 +9,10 @@ public class FonctionInstanciationString extends ElementString {
     private String name;
     private String type;
 
+    public FonctionInstanciationString() {
+        this.name = "Nouvelle";
+        this.type = "Fonction";
+    }
     public FonctionInstanciationString(String name, String type) {
         this.name = name;
         this.type = type;
@@ -45,5 +49,9 @@ public class FonctionInstanciationString extends ElementString {
     @Override
     public boolean supportDropVariableInstanciation() {
         return true;
+    }
+
+    protected boolean allowDropOnComponent(){
+        return false;
     }
 }

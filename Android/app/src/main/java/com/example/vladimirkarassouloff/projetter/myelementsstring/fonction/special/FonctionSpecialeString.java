@@ -9,4 +9,25 @@ public class FonctionSpecialeString extends FonctionString {
     public FonctionSpecialeString(String name) {
         super(name);
     }
+
+    @Override
+    public boolean supportDropVariable() {
+        return false;
+    }
+
+    @Override
+    public boolean supportDropNumber() {
+        return false;
+    }
+
+
+    @Override
+    public boolean supportDropFonction() {
+        return false;
+    }
+
+    protected boolean allowDropOnComponent(){
+        return false;
+    }
+
 }

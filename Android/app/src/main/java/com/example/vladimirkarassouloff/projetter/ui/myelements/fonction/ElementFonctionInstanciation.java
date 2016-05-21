@@ -62,7 +62,7 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
     @Override
     public List<View> onDraggedOnLine(View v) {
         List<View> array = new ArrayList<View>();
-        tv = new Production(v.getContext(), new FonctionInstanciationString("DefaultFunction","DefaultFunction"));
+        tv = new Production(v.getContext(), new FonctionInstanciationString());
         bc = new Production(v.getContext(),new BraceCloserString());
 
         array.add(tv);

@@ -18,6 +18,11 @@ public class WhileString extends ElementString {
     }
 
     @Override
+    protected String separator() {
+        return " ";
+    }
+
+    @Override
     public boolean supportDropNumber() {
         return true;
     }

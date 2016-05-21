@@ -22,7 +22,12 @@ public class VariableString extends ElementString {
 
     @Override
     public String toString() {
-        return this.name;
+        return this.name+ " " + getComponentString();
+    }
+
+    @Override
+    protected String separator() {
+        return " ";
     }
 
     @Override

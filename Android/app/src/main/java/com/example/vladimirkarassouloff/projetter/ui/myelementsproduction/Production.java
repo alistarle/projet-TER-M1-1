@@ -90,7 +90,7 @@ public class Production extends TextView {
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
 
-        this.setText("Default");
+        this.refreshText();
         this.setPadding(5, 10, 5, 10);
         this.setOnLongClickListener(
                 new OnLongClickListener() {
@@ -107,7 +107,7 @@ public class Production extends TextView {
                                         else if(which == 1){
                                            final List<ElementString> listEditableElements = getListElementEditable(basicElement);
                                            if(listEditableElements.size()==0){
-                                               Toast.makeText(getContext(),"Rien a modifier",Toast.LENGTH_SHORT);
+                                               Toast.makeText(getContext(),"Rien a modifier",Toast.LENGTH_SHORT).show();
                                            }
                                            else if(listEditableElements.size()==1){
                                                 modifier(listEditableElements.get(0));
@@ -255,12 +255,7 @@ public class Production extends TextView {
         List<ElementString> arrayElements = new ArrayList<>();
         for(ElementString es : elementToChange.components) {
             arrayElements.add(es);
-            Production prod = new Production(llElem.getContext(),es) {
-                @Override
-                public String getBasicText() {
-                    return elementToChange.toString();
-                }
-            };
+            Production prod = new Production(llElem.getContext(),es);
             prod.setOnTouchListener(
                     new View.OnTouchListener() {
                         public boolean onTouch(View v, MotionEvent event) {
@@ -287,7 +282,7 @@ public class Production extends TextView {
                     }
             );
             prod.setOnLongClickListener(new OnLongClickListener(){public boolean onLongClick(View arg0) {return false;}});
-            prod.refreshText();
+
             llElem.addView(prod,layoutParams);
         }
 
@@ -305,13 +300,16 @@ public class Production extends TextView {
                                 newArray.add(pr.basicElement);
                             }
                         }
-                        basicElement.components = newArray;
-                        refreshText();
+                        elementToChange.components = newArray;
+                        Intent intent = new Intent("autoIndent");
+                        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                     }
                 })
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent("autoIndent");
+                                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });
@@ -401,8 +399,12 @@ public class Production extends TextView {
     }
 
 
-    public void refreshText(){
-        this.setText(basicElement.getBasicText());
+    public void refreshText() {
+        if (basicElement == null) {
+            this.setText("EmptyProduction");
+        } else {
+            this.setText(basicElement.getBasicText());
+        }
     }
 
 

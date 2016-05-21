@@ -3,6 +3,8 @@ package com.example.vladimirkarassouloff.projetter.ui.myelements;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +59,7 @@ public class ElementNumber extends TextView implements DraggableElement {
     @Override
     public void onDropOver(final Production block) {
         LayoutInflater li = LayoutInflater.from(getContext());
-        View promptsView = li.inflate(R.layout.promptnumber, null);
+        final View promptsView = li.inflate(R.layout.promptnumber, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
@@ -74,7 +76,8 @@ public class ElementNumber extends TextView implements DraggableElement {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 block.getBasicElement().components.remove(tv);
-                                block.refreshText();
+                                Intent intent = new Intent("autoIndent");
+                                LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });
