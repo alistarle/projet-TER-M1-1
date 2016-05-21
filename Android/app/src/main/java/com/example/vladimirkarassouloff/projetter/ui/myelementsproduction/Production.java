@@ -51,6 +51,10 @@ public class Production extends TextView {
     protected ElementString basicElement;
 
 
+    protected float initialXEvent, initialYEvent;
+    protected float MARGE_EVENT_DRAG = 100;
+    protected boolean isLongClickedTriggered;
+
     //Modification
     protected ViewGroup layoutParent;
     protected Drawable separator;
@@ -95,9 +99,52 @@ public class Production extends TextView {
 
         this.refreshText();
         this.setPadding(5, 10, 5, 10);
+
+        this.setOnTouchListener(
+                new View.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        float x = event.getX();
+                        float y = event.getY();
+                        setBackgroundColor(getBackgroundColorOnTouch());
+                        int action = event.getAction();
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                initialXEvent = event.getX();
+                                initialYEvent = event.getY();
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                //resetDraggableColor();
+                                isLongClickedTriggered = false;
+                                setBackgroundColor(getBackgroundColorDefault());
+                                break;
+                            case MotionEvent.ACTION_CANCEL:
+                                //resetDraggableColor();
+                                isLongClickedTriggered = false;
+                                setBackgroundColor(getBackgroundColorDefault());
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+                                Log.i("Debug ",initialXEvent+" "+x);
+                                if((x < initialXEvent-MARGE_EVENT_DRAG || x > initialXEvent+MARGE_EVENT_DRAG) && !isLongClickedTriggered) {
+                                    ClipData data2 = ClipData.newPlainText("", "");
+                                    View.DragShadowBuilder shadowBuilder2 = new View.DragShadowBuilder(v);
+                                    v.startDrag(data2, shadowBuilder2, v, 0);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                }
+
+        );
+
+
         this.setOnLongClickListener(
                 new OnLongClickListener() {
                     public boolean onLongClick(View arg0) {
+                        isLongClickedTriggered = true;
                         LayoutInflater li = LayoutInflater.from(getContext());
                         View promptsView = li.inflate(R.layout.longclickproductioncontext, null);
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
@@ -136,11 +183,13 @@ public class Production extends TextView {
                                            }
                                            //modifier();
                                        }
+                                        isLongClickedTriggered = false;
                                     }
                                 });
+
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
-                        return false;
+                        return true;
                     }
                 }
         );
@@ -520,4 +569,20 @@ public class Production extends TextView {
         elementString.addAllElementEditable(editable);
         return editable;
     }
+
+
+    public int getBackgroundColorDefault(){
+        if(basicElement == null){
+            return 0;
+        }
+        return basicElement.getBackgroundColorDefault();
+    }
+
+    public int getBackgroundColorOnTouch(){
+        if(basicElement == null){
+            return 0;
+        }
+        return basicElement.getBackgroundColorOnTouch();
+    }
+
 }
