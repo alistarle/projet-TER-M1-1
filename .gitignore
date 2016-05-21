@@ -9,9 +9,10 @@ Android/.gradle
 /local.properties
 local.properties
 
-./Android/.idea/*
-/Android/.idea/*
-Android/.idea/*
+./Android/.idea
+/Android/.idea
+Android/.idea
+./Android/.idea/
 /Android/.idea/
 Android/.idea/
 

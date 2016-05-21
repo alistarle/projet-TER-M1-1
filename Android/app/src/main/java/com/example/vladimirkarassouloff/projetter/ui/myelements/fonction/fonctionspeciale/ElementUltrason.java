@@ -41,11 +41,6 @@ public class ElementUltrason extends ElementFonction {
     }
 
     @Override
-    public ElementString onDraggedOnBlock(Production block) {
-        return null;
-    }
-
-    @Override
     public boolean isDropSupported(Production p) {
         return false;
     }

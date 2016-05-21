@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonction;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementReturn;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.variable.ElementVariable;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.variable.ElementVariableInstanciation;
 
@@ -71,6 +72,7 @@ public class NameView extends ScrollDraggableElementView {
         this.addHeader("Declarations : ");
         this.addDraggableElement(new ElementVariableInstanciation(getContext()));
         this.addDraggableElement(new ElementFonctionInstanciation(getContext()));
+        this.addDraggableElement(new ElementReturn(getContext()));
         this.addBlankLine();
 
 
