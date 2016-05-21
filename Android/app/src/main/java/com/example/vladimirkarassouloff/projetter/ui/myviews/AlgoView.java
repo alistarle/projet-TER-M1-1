@@ -3,6 +3,7 @@ package com.example.vladimirkarassouloff.projetter.ui.myviews;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
@@ -49,6 +50,9 @@ public class AlgoView extends ScrollView {
 
     private int lineInsert;
     private View dropBlock;
+
+    private TextView lastLine; //sert a empecher l'impossibilite d'inserer une ligne en bas de la scrollview
+
     private enum ActionUser {
         drop,
         line
@@ -74,12 +78,15 @@ public class AlgoView extends ScrollView {
         ll = new LinearLayout(this.getContext());
         this.addView(ll);
         ll.setOrientation(LinearLayout.VERTICAL);
+
         separator = getResources().getDrawable(R.drawable.test);
         myCustomSeparator = new TextView(getContext());
         myCustomSeparator.setText(" ");
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
-        //ll.addView(myCustomSeparator);
+
+        lastLine = new TextView(getContext());
+        lastLine.setMinHeight(150);
 
         this.setOnDragListener(new View.OnDragListener() {
 
@@ -106,7 +113,7 @@ public class AlgoView extends ScrollView {
                         break;
                     case DragEvent.ACTION_DROP:
                         doInsert(event, v);
-                        refreshText();
+                        //refreshText();
                         autoIndent();
                         break;
                     case DragEvent.ACTION_DRAG_ENDED:
@@ -147,7 +154,11 @@ public class AlgoView extends ScrollView {
         //ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
         Production pbc = new Production(getContext(),new BraceCloserString());
         ll.addView(pbc,1);
-        refreshText();
+
+        ll.addView(lastLine);
+
+        //refreshText();
+        autoIndent();
     }
 
     private void showInsertResult(DragEvent event, View v){
@@ -286,7 +297,7 @@ public class AlgoView extends ScrollView {
 
 
         }
-        refreshText();
+        //refreshText();
         autoIndent();
     }
 
@@ -347,7 +358,7 @@ public class AlgoView extends ScrollView {
         return i;
     }
 
-    public void refreshText(){
+    /*public void refreshText(){
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
             if(v instanceof Production){
@@ -355,7 +366,7 @@ public class AlgoView extends ScrollView {
                 p.refreshText();
             }
         }
-    }
+    }*/
 
     private void resetSeparator(){
         if(myCustomSeparator.getParent() != null) {
@@ -387,6 +398,14 @@ public class AlgoView extends ScrollView {
                 p.setText(tabs+p.getBasicText());
             }
         }
+        replaceLastLine();
+    }
+
+    protected void replaceLastLine(){
+        if(lastLine.getParent() != null){
+            ll.removeView(lastLine);
+        }
+        ll.addView(lastLine);
     }
 
     public String getAlgorithme(){
