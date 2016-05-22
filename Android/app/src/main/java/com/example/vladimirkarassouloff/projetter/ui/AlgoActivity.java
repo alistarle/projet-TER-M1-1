@@ -115,6 +115,7 @@ public class AlgoActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        actionSave(0);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);
     }
 
@@ -122,13 +123,14 @@ public class AlgoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerLocalBroadcastManager();
+        actionLoad(0);
     }
 
     @Override
     public void onDestroy() {
         //unregisterReceiver(onNotice);
         //onNotice = null;
-        actionSave(0);
+
         super.onDestroy();
     }
 
@@ -205,7 +207,7 @@ public class AlgoActivity extends AppCompatActivity {
 
 
 
-        actionLoad(0);
+
 
     }
 
@@ -264,16 +266,15 @@ public class AlgoActivity extends AppCompatActivity {
                     }
                 }
             };
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
         }
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
-
     }
     /*private void unregisterLocalBroadcastManager(){
         LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);

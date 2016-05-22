@@ -85,11 +85,15 @@ public class NameView extends ScrollDraggableElementView {
     }
 
     public void addVariable(String name) {
-        if (!this.variables.contains(name)) {
-            ElementVariable v = new ElementVariable(getContext(), name);
-            addDraggableElement(v,ll.indexOfChild(headerVar)+1);
-            this.variables.add(name);
+        for(String s : this.variables){
+            if(s.equals(name)){
+                return;
+            }
         }
+        ElementVariable v = new ElementVariable(getContext(), name);
+        addDraggableElement(v,ll.indexOfChild(headerVar)+1);
+        this.variables.add(name);
+
     }
 
 
@@ -98,11 +102,15 @@ public class NameView extends ScrollDraggableElementView {
 
 
     public void addFunction(String name){
-        if (!this.fonctions.contains(name)) {
-            ElementFonction f = new ElementFonction(getContext(), name);
-            addDraggableElement(f,ll.indexOfChild(headerFunc)+1);
-            this.fonctions.add(name);
+        for(String s : this.fonctions){
+            if(s.equals(name)){
+                return;
+            }
         }
+        ElementFonction f = new ElementFonction(getContext(), name);
+        addDraggableElement(f,ll.indexOfChild(headerFunc)+1);
+        this.fonctions.add(name);
+
     }
 
 
