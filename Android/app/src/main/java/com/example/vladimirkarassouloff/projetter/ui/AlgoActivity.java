@@ -111,8 +111,23 @@ public class AlgoActivity extends AppCompatActivity {
     private ListView menuElementsList; //Menu
     private ActionBarDrawerToggle menuToggle; //Gère l'ouverture et la fermeture du menu
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerLocalBroadcastManager();
+    }
+
     @Override
     public void onDestroy() {
+        //unregisterReceiver(onNotice);
+        //onNotice = null;
         actionSave(0);
         super.onDestroy();
     }
@@ -188,61 +203,68 @@ public class AlgoActivity extends AppCompatActivity {
         }
 
 
-        onNotice = new BroadcastReceiver() {
 
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals("connected")) {
-                    setState(ConnectionState.connected);
-                } else if (intent.getAction().equals("disconnected")) {
-                    setState(ConnectionState.disconnected);
-                }
-                else if(intent.getAction().equals("doAction")){
-                    consumeActions();
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("removeLastAction")){
-                    removeLastAction();
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("autoIndent")){
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("addProductions")){
-                    //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                    int line = intent.getIntExtra("line",0);
-                    int i = 0;
-                    List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
-                    for(ElementString es : list){
-                        Production p = new Production(algoScroll.getLl().getContext(),es);
-                        addProduction(p,line+i);
-                        i++;
+
+        actionLoad(0);
+
+    }
+
+    private void registerLocalBroadcastManager(){
+        if(onNotice == null){
+            onNotice = new BroadcastReceiver() {
+
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (intent.getAction().equals("connected")) {
+                        setState(ConnectionState.connected);
+                    } else if (intent.getAction().equals("disconnected")) {
+                        setState(ConnectionState.disconnected);
                     }
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("removeProductions")){
-                    int line = intent.getIntExtra("line",0);
-                    List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
-                    for(ElementString es : list){
-                        Production p = new Production(algoScroll.getLl().getContext(),es);
-                        removeProduction(p,line);
-                    }
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("moveProduction")){
-                    int lineFrom = intent.getIntExtra("from",0);
-                    int lineTo = intent.getIntExtra("to",0);
-                    if(algoScroll.getLl().getChildAt(lineFrom) != null){
-                        View v = algoScroll.getLl().getChildAt(lineFrom);
-                        algoScroll.getLl().removeView(v);
-                        algoScroll.getLl().addView(v,lineTo);
+                    else if(intent.getAction().equals("doAction")){
+                        consumeActions();
                         algoScroll.autoIndent();
                     }
+                    else if(intent.getAction().equals("removeLastAction")){
+                        removeLastAction();
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("autoIndent")){
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("addProductions")){
+                        //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                        int line = intent.getIntExtra("line",0);
+                        int i = 0;
+                        List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                        for(ElementString es : list){
+                            Production p = new Production(algoScroll.getLl().getContext(),es);
+                            addProduction(p,line+i);
+                            i++;
+                        }
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("removeProductions")){
+                        int line = intent.getIntExtra("line",0);
+                        List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                        for(ElementString es : list){
+                            Production p = new Production(algoScroll.getLl().getContext(),es);
+                            removeProduction(p,line);
+                        }
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("moveProduction")){
+                        int lineFrom = intent.getIntExtra("from",0);
+                        int lineTo = intent.getIntExtra("to",0);
+                        if(algoScroll.getLl().getChildAt(lineFrom) != null){
+                            View v = algoScroll.getLl().getChildAt(lineFrom);
+                            algoScroll.getLl().removeView(v);
+                            algoScroll.getLl().addView(v,lineTo);
+                            algoScroll.autoIndent();
+                        }
+                    }
                 }
-            }
-        };
-
-
+            };
+        }
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
@@ -252,9 +274,22 @@ public class AlgoActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
 
-        actionLoad(0);
-
     }
+    /*private void unregisterLocalBroadcastManager(){
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("connected"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("disconnected"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("doAction"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("removeLastAction"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("autoIndent"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("addProductions"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("removeProductions"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("moveProduction"));
+
+    }*/
+
+
 
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
