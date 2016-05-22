@@ -284,6 +284,213 @@ Une fois cette grammaire définie, l’outil permet de créer un AST, qui permet
 Victor : mini-langage et compilateur\\
 Julien et Vladimir: travail sur l’application\\
 
+\section{exemples de fonctionnement}
+
+\subsection{Matériel}
+
+\paragraph{}
+Ce projet implique l’utilisation d’un grand nombre de technologies, en effet, il s‘agit :
+\begin{itemize}
+\item De designer une interface pour tablette android, compatible avec le maximum de périphériques et de versions d’android, la compatibilité avec une grande palette de taille d’écran est un plus.
+\item De charger un programme dans un robot autonome via le réseau, wifi ou bluetooth. il est nécessaire de pouvoir recharger à la volée ces programmes avec un minimum de latences, de ce fait, on laisse place à l’expérimentation.
+\item De disposer d’un robot programmable facilement, avec un maximum de moteurs et de capteurs. De ce fait, il sera possible de programmer le robot de manière dynamique avec son environnement, tel une intelligence artificielle, et non une simple suite d’instruction séquentielle.
+\item De disposer d’un micro-ordinateur servant à coordonner les différents échanges entre le périphérique de contrôle, la tablette en l'occurrence, et le robot. Ce micro-ordinateur sera de préférence placé directement sur le robot, car relié aux moteurs et capteurs de ce dernier.
+\end{itemize}
+
+\paragraph{}
+Afin de répondre à toutes ces contraintes, voici le matériel utilisé principalement :
+\begin{itemize}
+\item La tablette Android de référence pour le développement de l’interface fût une Nexus 7 de 2012 sous Android 5.1.1 Lollipop. Cette tablette possède un écran de 7 pouces, qui est une taille confortable pour la représentation visuelle, tout en étant adaptée à des enfants, un milieu ou une tablette de 10 pouces est plus difficile à manipuler.
+\item Notre choix s’est porté sur l’utilisation du réseau wifi, plus stable et plus simple à manipuler que le bluetooth. 
+\item La partie programmable du robot est représentée par une carte de type Arduino Leonardo, permettant de contrôler différents périphériques sur des ports de type GPIO tel que des moteurs ou des capteurs infrarouges, la liste des périphériques utilisés est la suivante :
+\begin{itemize}
+\item 4 moteurs pour chacune des roues, reliées deux par deux, côté gauche et côté droit, ils sont réglables en vitesse via une valeur entre -255 et 255.
+\item 1 servomoteur, basé à la tête du robot, permet d’orienter un capteur à ultrasons sur un axe de 0 à 180 de gauche à droite.
+\item 1 LED, positionnée directement sur la carte arduino, elle peut être utilisée à vocation de témoin d’une action en cours.
+\item 3 capteurs infrarouges, ils sont positionnés à l’avant du robot, un au centre, un à gauche et un à droite. Ils détectent une proximité avec un obstacle (booléen).
+\item 1 capteur à ultrasons, basé sur le servomoteur, il permet de mesurer précisément la distance du robot avec un obstacle.
+\item 2 odomètres, situés sur chacune des roues arrières, ils mesurent la distance parcourue par chaque roue.
+\end{itemize}
+\item Le micro-ordinateur est une carte de type pcduino, disposant d’une carte wifi embarquée compatible avec un mode point d'accès qui sera utile lors de l’appareillement avec la tablette. L’OS utilisé est ubuntu, qui permet une large étendue de fonctionnalité.
+\end{itemize}
+
+\subsection{Préparatifs}
+
+\paragraph{}
+Afin de pouvoir utiliser le programme dans des conditions réelles, il est nécessaire de connecter en wifi la tablette au point d’accès hébergé par la carte pcduino. Le nom de ce point d’accès est “Robotaf”, et pour un souci de simplicité, il ne possède aucun mot de passe afin de pouvoir s’y connecter en 1 geste. 
+Une fois connecté à Robotaf, le pcduino est l'hébergeur, son IP est donc déjà connue et il n’est pas nécessaire de la saisir. Pour ce qui est du port choisi il est défini à l’avance afin de permette le téléversement des programmes créés sans aucune configuration.
+
+\subsection{Application android}
+
+\subsubsection{Editeur de code}
+
+\begin{center}
+\includegraphics[scale=0.2]{img/main_app.png}
+\end{center}
+
+\paragraph{}
+Le fonctionnement de l’éditeur de code repose sur le drag'n'drop. On prend des blocks du panel de droite que l’on fait glisser vers la vue centrale, où on pourra crée de nouvelles lignes, ou imbriquer un nouvel élément dans un autre.
+
+\paragraph{}
+Lors de l’insertion d’une nouvelle ligne, on colore un en violet un block situé entre deux lignes, par exemple lors de l’insertion d’une nouvelle instruction if, on aura :
+\begin{center}
+\includegraphics[scale=0.5]{img/edit_1.png}
+\end{center}
+Génération de 2 nouvelles lignes de code =>
+\begin{center}
+\includegraphics[scale=0.5]{img/edit_2.png}
+\end{center}
+Lors d’un drag'n'drop sur un block existant, on colore le block pour signaler qu’il est réactif à l’élément qu’on lui présente
+\begin{center}
+\includegraphics[scale=0.5]{img/edit_3.png}
+\end{center}
+
+\subsubsection{Les gestes}
+\begin{center}
+\includegraphics[scale=0.5]{img/gesture.png}
+\end{center}
+
+\paragraph{}
+Afin d’initialiser le drag'n'drop d’un élément dans le code source, il faut toucher un “MyElement” représenté par les textview en gris clair, puis glisser vers la gauche dans la vue centrale.
+
+\paragraph{}
+On laissera déplacer les éléments algorithmiques (Production) de la vue centrale avec le même procédé.\\
+De plus, les Productions sont modifiables et supprimable via un LongClick. 
+
+\subsubsection{Sauvegarde Et restauration de contenu}
+\begin{center}
+\includegraphics[scale=0.2]{img/save.png}
+\end{center}
+
+\paragraph{}
+Afin de conserver les algorithmes pour les reprendre plus tard sans devoir les réécrire au lancement de l’application, nous avons mis au point un système de sauvegarde.\\
+Ainsi en haut de l’écran dans la barre des actions, nous avons placé deux boutons,
+une disquette pour la sauvegarde et un dossier pour le chargement.\\
+Aux clics des ces boutons, une popup demande à l’utilisateur de choisir entre les trois slots disponibles pour sauvegarder ou charger son algorithme.
+
+\begin{center}
+\includegraphics[scale=0.4]{img/edit_4.png}
+\end{center}
+
+\paragraph{}
+Ici nous avons fait appel à une méthode de sérialisations des données. Le système de sauvegarde enregistre la liste de tous les ElementString de la vue de l'algorithme (objet composé de plusieurs String découlant des objets Production). Ces strings sont sérialisées dans un fichier sur la carte SD de l’appareil, dont le nom dépend du slot.\\
+Afin de reconstruire les liens vueAlgorithme-modèle après un chargement, les objets Production sont réinstanciés depuis les ElementString récupérée dans le fichier, via un constructeur.
+
+\section{Architecture}
+
+\subsection{Application  Android}
+
+\subsubsection{Modèle et Vues}
+
+\paragraph{}
+Le modèle se base sur l’objet : “ElementString”, qui contient une liste de composant de même type. Les ElementString seront contenu dans des vues, aussi appelées “Production” (de code) qui sont crées à partir d’éléments (“MyElements”) que l’ont met à disposition à l’utilisateur sur le coté droit de l’application.
+
+\paragraph{}
+Les éléments (“MyElements”) servant à générer le code, implémentent l’interface “DraggableElement”, où ils donnent des directives afin de pouvoir générer le code final : 
+soit en drag'n'droppant sur des lignes vides afin d’en créer de nouvelles, soit en drag'n'droppant sur une ligne déjà existante afin d’ajouter des “ElementString” en argument.
+
+\paragraph{}
+Chaque élément de code conventionnel (“if => IfString”,”instanciation de variable=>InstanciationVariableString”, “appel de fonction=>FonctionString”, … ) héritent de ElementString, sachant que chacun définira si il est réactif ou non aux autres éléments. 
+
+\paragraph{}
+Par exemple le IfString sera réactif au nombre, variables, etc. En revanche il ne sera pas réactif aux instanciations de variables. Sur l’interface on montre ça en faisant passer la view contenant le IfString (que l’on appellera “Production”) en violet à l’approche d’un élément dont il est réactif.
+
+\subsubsection{Undo - Redo}
+
+\begin{center}
+\includegraphics[scale=0.5]{img/undo.png}
+\end{center}
+
+\paragraph{}
+Concernant toutes les opérations servant à modifier le code source généré, on créé un objet héritant de la classe abstraite “Action” contenant une méthode doAction(), undoAction() où, pour chaque action, on donne des directives sur comment effectuer, et annuler l’action
+
+\paragraph{}
+Par exemple concernant l’ajout d’une ligne, on implémente doAction où l’on ajoutera une Production à la vue dédiée au code source, et dans undoAction, on précisera qu’il faut retirer cette même Production de sa vue parente.
+
+\paragraph{}
+Les actions sont stockées dans 2 Stack<Action>, appelées undoStack et redoStack.
+Ainsi, lors de l’appuie sur l’un des boutons, on pop() l’action d’une Stack, puis on applique sa méthode doAction / undoAction selon le bouton pressé, et on place l’action dans l’autre Stack.
+
+\subsection{Interface et connexion réseau}
+
+\paragraph{}
+Nous avons mis en place un serveur Java muni d’un protocole très simpliste, attendant simplement la connexion, puis attendant de recevoir un code source et répondant à l’application le résultat de la compilation de ce code source, qu’elle soit réussie, ou ratée, auquel cas, on enverra les numéros de lignes problématique au compilateur à l’utilisateur. 
+
+\subsection{Compilateur}
+\paragraph{}
+Une fois le code téléversé sur la carte pcduino, il est sous une forme proche d’un langage impératif classique, or ce type de langage, avec les variables et les structures de contrôles associées tel que les conditions ou les boucles, n’est pas exécutable tel quel sur un processeur. Il est donc nécessaire de traiter le langage reçu pour le convertir en suite linéaire d’instruction, avec des déplacements sous forme de sauts, classiques ou conditionnels. C’est donc la première étape de notre traitement de l’algorithme, la compilation.
+
+\subsubsection{Construction de l’AST}
+\paragraph{}
+La première étape de la compilation consiste à la création d’un AST, un arbre de syntaxe abstraite qui va permet de représenter le programme sous forme d’arbre. On effectue ainsi une première vérification sur l’intégrité du programme. Cet AST servira de base pour la suite de tout les traitements.
+
+\subsubsection{Construction de la table des symboles}
+\paragraph{}
+La table des symboles permet de relier toutes les variables et fonctions à un type à un moment donné du programme, cette table sert également à étiqueter chaque variables et fonctions afin de pouvoir y faire référence via son index, notamment lors de l’accès aux registres ou aux frames dans les futurs étapes de la compilation. 
+
+\subsubsection{Conversion vers un langage intermédiaire}
+\paragraph{}
+La prochaine étape est de linéariser chaque bloc de contrôle afin de n’utiliser qu’un jeu restreint d’instructions classiques, proche de l’assembleur. Dans notre cas, nous n'avons pas à aller jusqu'à l’assembleur car le langage intermédiaire - cette liste d’instructions - sera directement analysé par notre interpréteur qui exécutera notre programme. La liste des instructions utilisées est la suivante :
+\begin{itemize}
+\item Goto : Permet de sauter à un label défini
+\item Label : Étiquette dans le programme, lors de l'exécution chaque label correspond à son index dans la liste d’instruction du programme, de cette façon il est possible de modifier le flux d'exécution du programme en sautant vers un label
+\item Jump : Similaire au Goto, mais teste une expression booléenne, l’adresse de saut dépendra du résultat de ce test.
+\item Assign : Associe le résultat d’une expression arithmétique à un registre, ici symbolisé par une liste de variable, avec un index qui simule les numéros de registre d’un processeur réel.
+\item Call : Appel d’une fonction ou procédure, ces instructions seront notamment utilisées lors de l’appel à des fonctions de contrôle du robot, tel que les capteurs ou les moteurs. Les retours des fonctions peuvent être utilisés lors de tests booléens ou affectés à des variables.
+\end{itemize}
+
+\subsection{Interpréteur}
+\paragraph{}
+L'interpréteur est la partie du processus qui va gérer l'exécution du programme, à la manière d’un processeur avec du code assembleur, il va en effet interpréter chaque instruction de la liste générée précédemment et va agir en conséquence, soit en modifiant le flux d'exécution, en modifiant les variables locales, ou encore en lançant des commandes dans l’interface Erlang afin de directement contrôler le robot.
+
+\subsection{Erlang}
+\paragraph{}
+L’utilisation d’Erlang est une commodité appréciable fournie par les utilisateurs précèdent du robot. En effet, une interface à déjà été développée afin de contrôler l’intégralité des moteurs et capteurs du robot via la carte arduino. Cette interface, utilisable en java via la librairie prévue par Erlang, permet de contrôler directement l’arduino depuis l'interpréteur, et donc d’utiliser le robot pour l'exécution du programme.
+
+\subsection{Arduino}
+\paragraph{}
+La carte arduino héberge un code en lien avec l’interface Erlang associée, en effet, la carte attend continuellement des ordres sur le port série, que ce soit l’actionnement d’un moteur ou encore la récupération de la valeur d’un capteur.
+
+\section{Justification structures de données utilisés}
+\subsection{Choix esthétiques}
+\paragraph{}
+La priorité était de faire une interface intuitive, ainsi nous avons imaginé cette interface, compatible portait comme paysage, donnant le plus d’espace possible à l’éditeur d’algorithme.\\
+Concernant le style visuel, pour un premier prototype le style devait rester simple et plutôt sobre, néanmoins pour garantir un rendu similaire entre toutes les versions d’Android les méthodes et styles des pages héritent de classes AppCompat/AppCompatActivity, elles garantissent un rendu de type Material Design dès Android 2.3.
+
+\subsection{Choix technologiques}
+\paragraph{}
+L’idée initiale était de programmer manuellement l’arduino afin de se prémunir du processus erlang en tâche de fond sur le pcduino. Mais il s’est avéré que le gain de temps apporté par l’utilisation de l’interface Erlang n’étais pas négligeable, et cela à permis de se concentrer sur d’autres points du projet, afin de fournir un prototype fonctionnel dans le temps imparti.
+
+\paragraph{}
+Pour ce qui est de l’utilisation du compilateur, nous avons profité de celui crée lors du projet de cours de compilation afin de mieux répondre aux attentes du projet, ce compilateur permettait notamment de gérer toutes les fonctionnalités attendu du langage utilisé dans Robotaf. De plus, le fait de s'arrêter au langage intermédiaire permet de simplifier grandement l'implémentation de ce dernier, car la structure de donnée générée est directement utilisable dans l'interpréteur pour l'exécution du programme.
+
+\section{Extensions possibles du logiciel}
+\subsection{Nouvelle interface graphique}
+
+\begin{center}
+\includegraphics[scale=0.3]{img/new_ui.png}
+\end{center}
+
+\paragraph{}
+Si dessus une idée d’évolution de l’interface. Au milieu, dans le Playground un Layout sous forme de tableau en 2 dimensions, pouvant recevoir des blocs correspondants à des éléments algorithmiques ou des actions que le robot peut exécuter, ces blocs se trouvent en bas sur le screenshot et seraient classés en catégorie (en haut), on pourrait également penser à un jeu de couleurs facilitant la compréhension des enfants.
+
+\paragraph{}
+Ce système serait moins permissif, et permettrait d’éviter l’utilisateur de créer des algorithmes insensés, ou de générer de multiples erreurs.
+
+\subsection{Compilation directe vers l’assembleur}
+\paragraph{}
+Une possibilité pour une future évolution du projet est la compilation du code vers de l’assembleur natif utilisé par le processeur de l’arduino. En effet, le compilateur utilisé permet de produire du code assembleur, alors pourquoi ne pas directement utiliser ce code produit sur un processeur plutôt que de l'interpréter et de l'interface avec Erlang pour contrôler le robot ? 
+
+\paragraph{}
+Nous pensons cette évolution possible, bien que pouvant limiter les approches, car cela rendrais obsolète la carte pcduino, et le code serais directement téléversé sur l’arduino via un shield wifi. D’un autre point de vue, cela ferrait drastiquement chuter le coût de production du robot, car l’on se sépare de sa pièce la plus onéreuse.
+Toutefois, cette solution nécessite une maîtrise complète de l’assembleur utilisé sur ce type de carte, avec les fonctionnalités d’accès aux pins GPIO pour contrôler les différents périphériques reliés.
+
+\subsection{Nouveaux capteurs, nouveaux robot}
+\paragraph{}
+L’architecture évoquée précédemment permet d’investir l’argent économisé avec la carte pcduino dans de nouveaux capteurs ou actuateurs du robot, afin d’augmenter ses possibilités ludiques. On peut ainsi imaginer des lumières, buzzers ou autre caméra toujours contrôlable depuis l’interface de l’application sur la tablette. \\
+Par exemple ajouter une boussole au robot permettraient de mieux gérer l’espace, sachant que actuellement, il est impossible de tourner le robot de manière précise du fait de l’adhérence variante du sol.\\
+La suppression de la carte pcduino, outre le gain dans le prix du robot, offre un gain de place non négligeable, ce qui permet par la suite d’opter pour un châssis plus compact afin de produire des robots plus adaptés à des espaces confinés.
+
 \vfill\eject
 \bibliographystyle{plain}
 \bibliography{rapport}
