@@ -84,7 +84,7 @@ public class NameView extends ScrollDraggableElementView {
 
     }
 
-    protected void addVariable(String name) {
+    public void addVariable(String name) {
         if (!this.variables.contains(name)) {
             ElementVariable v = new ElementVariable(getContext(), name);
             addDraggableElement(v,ll.indexOfChild(headerVar)+1);
@@ -97,7 +97,7 @@ public class NameView extends ScrollDraggableElementView {
 
 
 
-    protected void addFunction(String name){
+    public void addFunction(String name){
         if (!this.fonctions.contains(name)) {
             ElementFonction f = new ElementFonction(getContext(), name);
             addDraggableElement(f,ll.indexOfChild(headerFunc)+1);
