@@ -565,6 +565,7 @@ public class AlgoActivity extends AppCompatActivity {
 
 
     public void actionExport(View view) {
+        Log.wtf("message",algoScroll.getAlgorithme());
         int slot = 1;
         try {
             exportAlgo("test");

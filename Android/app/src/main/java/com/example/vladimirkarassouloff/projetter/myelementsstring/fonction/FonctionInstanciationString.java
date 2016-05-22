@@ -61,4 +61,9 @@ public class FonctionInstanciationString extends ElementString {
     public boolean shouldBeInsideParenthesis(){
         return false;
     }
+
+    @Override
+    public boolean shouldHaveSemicolumn(){
+        return false;
+    }
 }

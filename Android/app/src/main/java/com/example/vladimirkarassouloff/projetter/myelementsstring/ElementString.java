@@ -252,5 +252,19 @@ public class ElementString implements Serializable {
     }
 
 
+    public List<ElementString> getComponents() {
+        return components;
+    }
 
+
+    public boolean shouldHaveSemicolumn(){
+        return true;
+    }
+    public String getAlgoString(){
+        String semicolumn = "";
+        if(shouldHaveSemicolumn()){
+            semicolumn =";";
+        }
+        return getBasicText()+semicolumn;
+    }
 }

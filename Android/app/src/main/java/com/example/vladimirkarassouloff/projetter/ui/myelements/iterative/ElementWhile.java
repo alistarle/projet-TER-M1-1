@@ -21,7 +21,7 @@ public class ElementWhile  extends TextView implements DraggableElement {
 
     public ElementWhile(Context context){
         super(context);
-        this.setText("While");
+        this.setText("while() {}");
     }
     public ElementWhile(Context context, AttributeSet attrs){
         super(context, attrs);

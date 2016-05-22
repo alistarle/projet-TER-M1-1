@@ -125,6 +125,10 @@ public class Production extends LinearLayout {
         init();
     }
 
+    public TextView getTv() {
+        return tv;
+    }
+
     protected void init(){
         this.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -386,8 +390,10 @@ public class Production extends LinearLayout {
 
         //on place les elements et on bind l'event
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(10, 0, 10, 0);
+                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        layoutParams.setMargins(10, 10, 10, 10);
+
+        myCustomSeparator.setLayoutParams(layoutParams);
 
         List<ElementString> arrayElements = new ArrayList<>();
         for(ElementString es : elementToChange.components) {
@@ -421,6 +427,9 @@ public class Production extends LinearLayout {
             prod.setOnLongClickListener(new OnLongClickListener(){public boolean onLongClick(View arg0) {return false;}});
 
             llElem.addView(prod,layoutParams);
+            prod.setMinimumWidth(60);
+            prod.getTv().setGravity(Gravity.CENTER_HORIZONTAL);
+            //prod.setPadding(100,30,100,30);
         }
 
 
@@ -534,6 +543,10 @@ public class Production extends LinearLayout {
 
 
 
+
+    public String getAlgoText(){
+        return basicElement.getAlgoString();
+    }
 
     public String getBasicText(){
         return basicElement.getBasicText();

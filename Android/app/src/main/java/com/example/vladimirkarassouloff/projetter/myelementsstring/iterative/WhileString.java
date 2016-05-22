@@ -46,4 +46,10 @@ public class WhileString extends ElementString {
     public boolean supportDropFonction() {
         return true;
     }
+
+    @Override
+    public boolean shouldHaveSemicolumn(){
+        return false;
+    }
+
 }

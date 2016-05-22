@@ -16,4 +16,9 @@ public class ElseString extends ElementString {
     public String toString() {
         return "else {";
     }
+
+    @Override
+    public boolean shouldHaveSemicolumn(){
+        return false;
+    }
 }
