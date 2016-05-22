@@ -418,6 +418,7 @@ public class AlgoView extends ScrollView {
 
     public void autoIndent(){
         int tab = 0;
+        Production oldProd = null;
         for(int i = 0 ; i < ll.getChildCount() ; i++){
             View v = ll.getChildAt(i);
             if(v instanceof Production){
@@ -466,8 +467,18 @@ public class AlgoView extends ScrollView {
                 tab += p.tabChanger();
 
                 p.setText(tabs+p.getBasicText());
+                oldProd = p;
+            }
+
+            if(i == ll.getChildCount()-1){
+                Log.wtf("message","lol");
+            }
+            if(i >= ll.getChildCount()-1 && tab > 0){
+                oldProd.setErrorMessage(Production.ERRORTAG_INDENTATION,"Il y a une { de trop");
             }
         }
+
+
         replaceLastLine();
     }
 
