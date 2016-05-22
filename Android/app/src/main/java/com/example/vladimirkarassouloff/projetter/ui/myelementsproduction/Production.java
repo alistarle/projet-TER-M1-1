@@ -126,8 +126,8 @@ public class Production extends LinearLayout {
         tv.setLayoutParams(textParam);
 
         errorMessage = "";
-        errorDisplay.setBackgroundColor(Color.BLACK);
-        errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.loop_back));
+        //errorDisplay.setBackgroundColor(Color.BLACK);
+        errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.warning));
 
         LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         imageParam.gravity = Gravity.END;
