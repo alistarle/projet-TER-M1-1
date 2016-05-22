@@ -386,8 +386,10 @@ public class Production extends LinearLayout {
 
         //on place les elements et on bind l'event
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(10, 0, 10, 0);
+
+        myCustomSeparator.setLayoutParams(layoutParams);
 
         List<ElementString> arrayElements = new ArrayList<>();
         for(ElementString es : elementToChange.components) {
