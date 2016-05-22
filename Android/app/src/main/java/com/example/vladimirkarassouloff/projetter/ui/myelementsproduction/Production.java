@@ -290,7 +290,7 @@ public class Production extends LinearLayout {
     public void supprimer(){
         if(getParent()!=null && getParent().getParent()!=null && getParent().getParent() instanceof AlgoView) {
             int line = ((ViewGroup)getParent()).indexOfChild(this);
-            List<Production> oldView = new ArrayList<>();
+            ArrayList<Production> oldView = new ArrayList<>();
             oldView.add(this);
             DeleteLineAction ala = new DeleteLineAction(line, oldView);
             AlgoActivity.ACTION_TO_CONSUME.add(ala);
@@ -439,7 +439,7 @@ public class Production extends LinearLayout {
         alertDialogBuilder.setCancelable(true).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        List<ElementString> newArray = new ArrayList<ElementString>();
+                        ArrayList<ElementString> newArray = new ArrayList<ElementString>();
                         for(int i = 0 ; i < llElem.getChildCount() ; i++){
                             if(llElem.getChildAt(i) instanceof Production){
                                 Production pr = (Production) llElem.getChildAt(i);

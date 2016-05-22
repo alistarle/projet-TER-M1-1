@@ -13,6 +13,7 @@ import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class AddLineAction extends Action {
 
     public int line;
-    public List<ElementString> elementString;
+    public ArrayList<ElementString> elementString;
     //public ViewGroup view;
     //public AlgoView algoView;
 

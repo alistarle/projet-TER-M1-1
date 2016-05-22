@@ -576,9 +576,19 @@ public class AlgoActivity extends AppCompatActivity {
         FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 
-        HashMap<String,Object> list = new HashMap<>();
-        ArrayList<ElementString> algolist = new ArrayList<>();
 
+        HashMap<String,Object> list = new HashMap<>();
+        ArrayList<Action> dolist = new ArrayList<>();
+        for(int i = 0; i< redoStack.size() ; i ++){
+            dolist.add(redoStack.get(i));
+        }
+        list.put("REDO",dolist);
+        ArrayList<Action> undolist = new ArrayList<>();
+        for(int i = 0 ; i< undoStack.size(); i ++){
+            undolist.add(undoStack.get(i));
+        }
+        list.put("UNDO",undolist);
+        ArrayList<ElementString> algolist = new ArrayList<>();
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
             Object element = algoScroll.getLl().getChildAt(i);
                 if(element instanceof Production){
@@ -629,14 +639,23 @@ public class AlgoActivity extends AppCompatActivity {
             algoScroll.getLl().removeAllViews();
             nameView.getFonctions().clear();
             nameView.getVariables().clear();
+            undoStack.clear();
+            redoStack.clear();
+
             if(list!=null){
-
-
                 ArrayList<String> varlist = (ArrayList<String>) list.get("VAR");
-            ArrayList<String> fctlist = (ArrayList<String>) list.get("FCT");
-            ArrayList<ElementString> algolist = (ArrayList<ElementString>) list.get("ALGO");
+                ArrayList<String> fctlist = (ArrayList<String>) list.get("FCT");
+                ArrayList<ElementString> algolist = (ArrayList<ElementString>) list.get("ALGO");
+                ArrayList<Action> dolist = ((ArrayList<Action>) list.get("REDO"));
+                ArrayList<Action> undolist = ((ArrayList<Action>) list.get("UNDO"));
 
 
+                for(int i = 0 ; i < undolist.size() ; i++){
+                    undoStack.add(undolist.get(i));
+                }
+                for(int i = 0 ; i < dolist.size() ; i++){
+                    redoStack.add(dolist.get(i));
+                }
                 for(int i = 0 ; i < algolist.size() ; i ++){
                     algoScroll.getLl().addView(new Production(this,algolist.get(i)));
                 }
