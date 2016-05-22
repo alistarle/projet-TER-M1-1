@@ -52,8 +52,9 @@ public class Production extends LinearLayout {
 
     protected TextView tv;
     protected ElementString basicElement;
-    protected ImageView errorDisplay;
 
+    protected ImageView errorDisplay;
+    protected String errorMessage;
 
     protected float initialXEvent, initialYEvent;
     protected float MARGE_EVENT_DRAG = 100;
@@ -118,21 +119,52 @@ public class Production extends LinearLayout {
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
 
-        errorDisplay.setBackgroundColor(Color.BLACK);
-        errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.loop_back));
 
         LayoutParams textParam = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
         textParam.gravity = Gravity.START;
         textParam.weight = 0.9f;
         tv.setLayoutParams(textParam);
 
+        errorMessage = "";
+        errorDisplay.setBackgroundColor(Color.BLACK);
+        errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.loop_back));
+
         LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         imageParam.gravity = Gravity.END;
         imageParam.weight = 0.1f;
         errorDisplay.setLayoutParams(imageParam);
+        //errorDisplay.setVisibility(View.GONE);
 
         this.refreshText();
         this.setPadding(5, 10, 5, 10);
+
+
+
+        errorDisplay.setOnTouchListener(
+                new View.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+                        int action = event.getAction();
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                showError();
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                break;
+                            case MotionEvent.ACTION_CANCEL:
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                }
+
+        );
+
+
 
         this.setOnTouchListener(
                 new View.OnTouchListener() {
@@ -621,5 +653,20 @@ public class Production extends LinearLayout {
 
     public void setText(String s){
         this.tv.setText(s);
+    }
+
+
+    public void addErrorMessage(String s){
+        errorDisplay.setVisibility(VISIBLE);
+        errorMessage += "s";
+    }
+    public void showError(){
+        errorDisplay.setVisibility(INVISIBLE);
+        errorMessage = "";
+        Toast.makeText(getContext(),"MDRRR",Toast.LENGTH_SHORT).show();
+    }
+    public void eraseError(String s){
+        errorDisplay.setVisibility(INVISIBLE);
+        errorMessage = "";
     }
 }
