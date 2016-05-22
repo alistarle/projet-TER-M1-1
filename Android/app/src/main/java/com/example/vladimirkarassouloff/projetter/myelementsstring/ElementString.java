@@ -18,6 +18,9 @@ import java.util.List;
  * Created by Vladimir on 17/02/2016.
  */
 public class ElementString implements Serializable {
+
+    protected int colorBackgroundDefault = getBackgroundColorDefault();
+
     public List<ElementString> components;
 
     public ElementString(List<ElementString> components) {
@@ -231,10 +234,12 @@ public class ElementString implements Serializable {
     }
 
 
-
+    public int getCurrentBackgroundColor(){return colorBackgroundDefault;}
     public int getBackgroundColorDefault(){
-        return Color.rgb(255,255,255);
+        return Color.rgb(200,200,200);
     }
+
+
     public int getBackgroundColorOnTouch(){
         return Color.rgb(128,128,128);
     }

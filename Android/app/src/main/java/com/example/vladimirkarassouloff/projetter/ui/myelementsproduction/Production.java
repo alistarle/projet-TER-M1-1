@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -121,32 +122,25 @@ public class Production extends LinearLayout {
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
 
+        if(basicElement != null) {
+            this.setBackgroundColor(basicElement.getBackgroundColorDefault());
+        }
+        tv.setMinHeight(40);
 
         LayoutParams textParam = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-        textParam.gravity = Gravity.START;
+        textParam.gravity = Gravity.CENTER_VERTICAL;
         textParam.weight = 0.1f;
         tv.setLayoutParams(textParam);
+        tv.setGravity(Gravity.CENTER_VERTICAL);
 
         errorMessage = "";
         errorDisplay.setBackgroundColor(Color.BLACK);
         errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.warning));
-        /*errorDisplay.setMaxWidth(10);
-        errorDisplay.setMinimumWidth(10);
-        errorDisplay.setMaxHeight(10);
-        errorDisplay.setMinimumHeight(10);*/
-        //errorDisplay.adjustViewBounds(true);
-        //errorDisplay.setBounds(0, 0, 50, 50);
-//errorDisplay.setClipBounds(new Rect(0, 0, 50, 50));
-        //errorDisplay.setImageDrawable(new ScaleDrawable(errorDisplay.getDrawable(), 0, 50, 50).getDrawable());
-
         LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         imageParam.gravity = Gravity.END;
-        imageParam.weight = 1f;
+        imageParam.weight = 0.7f;
         errorDisplay.setLayoutParams(imageParam);
-        //errorDisplay.setVisibility(View.GONE);
-
         this.refreshText();
-        this.setPadding(5, 10, 5, 10);
 
 
 
@@ -168,7 +162,7 @@ public class Production extends LinearLayout {
                             default:
                                 break;
                         }
-                        return false;
+                        return true;
                     }
                 }
 
@@ -182,12 +176,12 @@ public class Production extends LinearLayout {
 
                         float x = event.getX();
                         float y = event.getY();
-                        setBackgroundColor(getBackgroundColorOnTouch());
                         int action = event.getAction();
                         switch (event.getAction()) {
                             case MotionEvent.ACTION_DOWN:
                                 initialXEvent = event.getX();
                                 initialYEvent = event.getY();
+                                setBackgroundColor(getBackgroundColorOnTouch());
                                 break;
                             case MotionEvent.ACTION_UP:
                                 //resetDraggableColor();
@@ -205,6 +199,7 @@ public class Production extends LinearLayout {
                                     ClipData data2 = ClipData.newPlainText("", "");
                                     View.DragShadowBuilder shadowBuilder2 = new View.DragShadowBuilder(v);
                                     v.startDrag(data2, shadowBuilder2, v, 0);
+                                    setBackgroundColor(getBackgroundColorDefault());
                                 }
                                 break;
                             default:
@@ -671,11 +666,27 @@ public class Production extends LinearLayout {
         errorMessage += "s";
     }
     public void showError(){
-        errorDisplay.setVisibility(INVISIBLE);
-        errorMessage = "";
-        Toast.makeText(getContext(),"MDRRR",Toast.LENGTH_SHORT).show();
+        if(errorMessage != null && !errorMessage.equals("")) {
+
+                //Toast.makeText(getContext(),"MDRRR",Toast.LENGTH_SHORT).show();
+            LayoutInflater li = LayoutInflater.from(getContext());
+            View showError = li.inflate(R.layout.error, null);
+            TextView textError = (TextView)showError.findViewById(R.id.textError);
+                textError.setText(errorMessage);
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+            alertDialogBuilder.setView(showError);
+            alertDialogBuilder.setCancelable(true).setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+        eraseError();
     }
-    public void eraseError(String s){
+    public void eraseError(){
         errorDisplay.setVisibility(INVISIBLE);
         errorMessage = "";
     }
