@@ -14,7 +14,9 @@ public class Reserver extends Assign {
 
     public enum Function {
         IN(new FunctionIdentificateur(Type.EnumType.INTVAL, "in")),
-        OUT(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "out"));
+        OUT(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "out")),
+        ALLUMERLED(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "AllumerLed")),
+        ETEINDRELED(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "EteindreLed"));
 
         private FunctionIdentificateur fi;
 
