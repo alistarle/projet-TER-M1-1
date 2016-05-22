@@ -268,18 +268,8 @@ public class AlgoView extends ScrollView {
                         Log.wtf("message","pas de support du drop");
                     }
                     else if(supporting.size() == 1){
-                        List<ElementString> oldArray = supporting.get(0).getComponents();
-                        ArrayList<ElementString> newArray = new ArrayList<>();
-                        for(ElementString el : oldArray) {
-                            newArray.add(el);
-                        }
-                        newArray.add(newElement);
-                        ModifyProductionAction mpa = new ModifyProductionAction(supporting.get(0),newArray);
                         supporting.get(0).onDrop(newElement);
                         de.onDropOver(p);
-                        AlgoActivity.ACTION_TO_CONSUME.add(mpa);
-                        Intent intent = new Intent("doAction");
-                        LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                     }
                     else{
                         //choix du drop
@@ -299,18 +289,18 @@ public class AlgoView extends ScrollView {
                                 de.onDropOver(p);
                                 Intent intent = new Intent("autoIndent");
                                 LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
-                                List<ElementString> oldArray = supporting.get(which).getComponents();
+                                /*List<ElementString> oldArray = supporting.get(which).getComponents();
                                 ArrayList<ElementString> newArray = new ArrayList<>();
                                 for(ElementString el : oldArray) {
                                     newArray.add(el);
                                 }
                                 newArray.add(newElement);
-                                ModifyProductionAction mpa = new ModifyProductionAction(supporting.get(which),newArray);
+                                ModifyProductionAction mpa = new ModifyProductionAction(supporting.get(which),newArray);*/
                                 supporting.get(which).onDrop(newElement);
                                 de.onDropOver(p);
-                                AlgoActivity.ACTION_TO_CONSUME.add(mpa);
+                                /*AlgoActivity.ACTION_TO_CONSUME.add(mpa);
                                 Intent intent = new Intent("doAction");
-                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);*/
                             }
                         });
                         dialog = builder.create();
