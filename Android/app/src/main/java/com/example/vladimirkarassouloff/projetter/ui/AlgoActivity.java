@@ -146,7 +146,6 @@ public class AlgoActivity extends AppCompatActivity {
         nameView = (NameView) findViewById(R.id.namesScroll);
         algoScroll = (AlgoView) findViewById(R.id.algoScroll);
 
-
         ///////////Gestion viewanimator/////////////
         viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
         buttonPrev = (Button) findViewById(R.id.prev);

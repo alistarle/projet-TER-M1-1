@@ -11,6 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,9 +48,11 @@ import java.util.List;
 /**
  * Created by Vladimir on 14/02/2016.
  */
-public class Production extends TextView {
+public class Production extends LinearLayout {
 
+    protected TextView tv;
     protected ElementString basicElement;
+    protected ImageView errorDisplay;
 
 
     protected float initialXEvent, initialYEvent;
@@ -66,6 +70,10 @@ public class Production extends TextView {
 
     public Production(Context context){
         super(context);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = new ElementString();
         init();
     }
@@ -75,27 +83,53 @@ public class Production extends TextView {
 
     public Production(Context context, AttributeSet attrs){
         super(context, attrs);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = new ElementString();
         init();
     }
     public Production(Context context,ElementString basicElement){
         super(context);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = basicElement;
         init();
     }
     public Production(Context context, AttributeSet attrs,ElementString basicElement){
         super(context, attrs);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = basicElement;
         init();
     }
 
     protected void init(){
-        this.setTextColor(Color.BLACK);
+        this.setOrientation(LinearLayout.HORIZONTAL);
+        this.tv.setTextColor(Color.BLACK);
         this.separator = getResources().getDrawable(R.drawable.test);
         myCustomSeparator = new TextView(getContext());
         myCustomSeparator.setText(" ");
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
+
+        errorDisplay.setBackgroundColor(Color.BLACK);
+        errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.loop_back));
+
+        LayoutParams textParam = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        textParam.gravity = Gravity.START;
+        textParam.weight = 0.9f;
+        tv.setLayoutParams(textParam);
+
+        LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        imageParam.gravity = Gravity.END;
+        imageParam.weight = 0.1f;
+        errorDisplay.setLayoutParams(imageParam);
 
         this.refreshText();
         this.setPadding(5, 10, 5, 10);
@@ -454,9 +488,9 @@ public class Production extends TextView {
 
     public void refreshText() {
         if (basicElement == null) {
-            this.setText("EmptyProduction");
+            tv.setText("EmptyProduction");
         } else {
-            this.setText(basicElement.getBasicText());
+            tv.setText(basicElement.getBasicText());
         }
     }
 
@@ -585,4 +619,7 @@ public class Production extends TextView {
         return basicElement.getBackgroundColorOnTouch();
     }
 
+    public void setText(String s){
+        this.tv.setText(s);
+    }
 }
