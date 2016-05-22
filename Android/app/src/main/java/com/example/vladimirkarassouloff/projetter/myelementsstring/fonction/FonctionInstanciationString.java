@@ -57,4 +57,8 @@ public class FonctionInstanciationString extends ElementString {
     protected String separator(){
         return ",";
     }
+
+    public boolean shouldBeInsideParenthesis(){
+        return false;
+    }
 }

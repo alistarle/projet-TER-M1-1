@@ -432,6 +432,9 @@ public class AlgoView extends ScrollView {
                         tabs += "\t\t";
                         j++;
                     }
+
+                    //gestion des couleurs en fonction de l'indentation
+                    p.setErrorMessage(Production.ERRORTAG_INDENTATION,"");
                     int newDefaultColor = p.getBackgroundColorDefault();
                     for(int k = 0 ; k < tab ; k++){
                         //on eclaircit la couleur
@@ -444,10 +447,21 @@ public class AlgoView extends ScrollView {
 
                     }
                     p.setColor(newDefaultColor);
+                    //gestion des erreurs d'indentations
+                    if(p.shouldBeInsideParenthesis() && tab <= 0) {
+                        if (p.getBasicElement() != null && p.getBasicElement() instanceof BraceCloserString) {
+                            p.setErrorMessage(Production.ERRORTAG_INDENTATION, "} de trop");
+                        } else {
+                            p.setErrorMessage(Production.ERRORTAG_INDENTATION, "Cet element devrait etre entre des { }");
+                        }
+                    }
+                    else if(! p.shouldBeInsideParenthesis() && tab != 0){
+                        p.setErrorMessage(Production.ERRORTAG_INDENTATION,"Cet element ne devrait pas etre entre des { }");
+                    }
                 }
                 else {
                     tabs = "";
-                    ((Production) v).addErrorMessage("Erreur d'indentation.");
+                    ((Production) v).setErrorMessage("Indentation","Il y a une { de trop");
                 }
                 tab += p.tabChanger();
 

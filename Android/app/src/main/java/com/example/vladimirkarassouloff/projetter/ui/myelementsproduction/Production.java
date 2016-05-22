@@ -46,12 +46,24 @@ import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVa
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
  * Created by Vladimir on 14/02/2016.
  */
 public class Production extends LinearLayout {
+
+
+    public static String ERRORTAG_INDENTATION = "Indent";
+    public static String ERRORTAG_COMPIL = "Compilateur";
+    public static List<String> tagErrorList = new ArrayList<>();
+    static {
+        tagErrorList.add(ERRORTAG_COMPIL);
+        tagErrorList.add(ERRORTAG_INDENTATION);
+    }
+
+    protected Hashtable<String,String> hashError;
 
     protected TextView tv;
     protected ElementString basicElement;
@@ -115,6 +127,9 @@ public class Production extends LinearLayout {
 
     protected void init(){
         this.setOrientation(LinearLayout.HORIZONTAL);
+
+        hashError = new Hashtable<>();
+
         this.tv.setTextColor(Color.BLACK);
         this.separator = getResources().getDrawable(R.drawable.test);
         myCustomSeparator = new TextView(getContext());
@@ -645,8 +660,11 @@ public class Production extends LinearLayout {
 
 
 
-    public void refreshColor(){
-        if(basicElement != null){
+    public void refreshColor() {
+        if (basicElement != null) {
+            if ("".equals(errorMessage)) {
+                this.setBackgroundColor(basicElement.getBackgroundColorError());
+            }
             this.setBackgroundColor(basicElement.getCurrentBackgroundColor());
         }
     }
@@ -684,19 +702,25 @@ public class Production extends LinearLayout {
         setBackgroundColor(getCurrentBackgroundColor());
     }
 
-
-    public void addErrorMessage(String s){
-        errorDisplay.setVisibility(VISIBLE);
-        errorMessage += "s";
+////////////////////////////////////////////Erreurs////////////////////
+    public void setErrorMessage(String tag, String s){
+        hashError.put(tag,s);
+        if(hasError()) {
+            errorDisplay.setVisibility(VISIBLE);
+        }
+        else{
+            errorDisplay.setVisibility(GONE);
+        }
+        refreshColor();
     }
     public void showError(){
-        if(errorMessage != null && !errorMessage.equals("")) {
+        if(hasError()) {
 
                 //Toast.makeText(getContext(),"MDRRR",Toast.LENGTH_SHORT).show();
             LayoutInflater li = LayoutInflater.from(getContext());
             View showError = li.inflate(R.layout.error, null);
             TextView textError = (TextView)showError.findViewById(R.id.textError);
-                textError.setText(errorMessage);
+                textError.setText(getError());
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
             alertDialogBuilder.setView(showError);
@@ -710,9 +734,38 @@ public class Production extends LinearLayout {
         }
         eraseError();
     }
+
+    public boolean hasError(){
+        if("".equals(getError())){
+            return false;
+        }
+        return true;
+    }
+
     public void eraseError(){
         errorDisplay.setVisibility(GONE);
-        errorMessage = "";
+        for(String errorTag : tagErrorList){
+            hashError.put(errorTag,"");
+        }
+        refreshColor();
     }
+    public String getError(){
+        String s = "";
+        for(String errorTag : tagErrorList){
+            if( !  (hashError.get(errorTag) == null || hashError.get(errorTag).equals(""))){
+                s+= hashError.get(errorTag);
+            }
+        }
+        return s;
+    }
+
+
+    public boolean shouldBeInsideParenthesis(){
+        if(basicElement != null){
+            return basicElement.shouldBeInsideParenthesis();
+        }
+        return false;
+    }
+    ////////////////////////////////////////////ErreursFin/////////////////
 
 }
