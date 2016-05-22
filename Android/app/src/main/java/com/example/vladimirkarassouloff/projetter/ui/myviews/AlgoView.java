@@ -519,7 +519,7 @@ public class AlgoView extends ScrollView {
             View v = ll.getChildAt(i);
             if(v instanceof Production){
                 Production p = (Production) v;
-                algo+=p.getBasicText();
+                algo+=p.getAlgoText();
             }
         }
         return algo;

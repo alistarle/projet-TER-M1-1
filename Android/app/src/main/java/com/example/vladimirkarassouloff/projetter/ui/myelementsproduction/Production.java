@@ -544,6 +544,10 @@ public class Production extends LinearLayout {
 
 
 
+    public String getAlgoText(){
+        return basicElement.getAlgoString();
+    }
+
     public String getBasicText(){
         return basicElement.getBasicText();
     }

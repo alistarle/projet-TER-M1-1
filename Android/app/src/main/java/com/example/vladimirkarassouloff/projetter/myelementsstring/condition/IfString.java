@@ -54,5 +54,8 @@ public class IfString extends ElementString {
         }
         return true;
     }
-
+    @Override
+    public boolean shouldHaveSemicolumn(){
+        return false;
+    }
 }
