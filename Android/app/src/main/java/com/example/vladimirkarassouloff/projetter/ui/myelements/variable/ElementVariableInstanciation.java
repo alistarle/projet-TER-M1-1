@@ -124,8 +124,8 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                /*Intent intent = new Intent("removeLastAction");
-                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);*/
+                                Intent intent = new Intent("removeLastAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });

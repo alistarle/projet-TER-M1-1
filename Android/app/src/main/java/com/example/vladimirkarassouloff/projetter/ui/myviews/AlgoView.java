@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.action.ModifyProductionAction;
 import com.example.vladimirkarassouloff.projetter.action.MoveLineAction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
@@ -267,8 +268,18 @@ public class AlgoView extends ScrollView {
                         Log.wtf("message","pas de support du drop");
                     }
                     else if(supporting.size() == 1){
+                        List<ElementString> oldArray = supporting.get(0).getComponents();
+                        List<ElementString> newArray = new ArrayList<>();
+                        for(ElementString el : oldArray) {
+                            newArray.add(el);
+                        }
+                        newArray.add(newElement);
+                        ModifyProductionAction mpa = new ModifyProductionAction(supporting.get(0),newArray);
                         supporting.get(0).onDrop(newElement);
                         de.onDropOver(p);
+                        AlgoActivity.ACTION_TO_CONSUME.add(mpa);
+                        Intent intent = new Intent("doAction");
+                        LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                     }
                     else{
                         //choix du drop
@@ -283,11 +294,23 @@ public class AlgoView extends ScrollView {
                         builder.setAdapter(itemsAdapter, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Log.wtf("mdr","on a click sur "+which);
+                                /*Log.wtf("mdr","on a click sur "+which);
                                 supporting.get(which).onDrop(newElement);
                                 de.onDropOver(p);
                                 Intent intent = new Intent("autoIndent");
-                                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+                                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
+                                List<ElementString> oldArray = supporting.get(which).getComponents();
+                                List<ElementString> newArray = new ArrayList<>();
+                                for(ElementString el : oldArray) {
+                                    newArray.add(el);
+                                }
+                                newArray.add(newElement);
+                                ModifyProductionAction mpa = new ModifyProductionAction(supporting.get(which),newArray);
+                                supporting.get(which).onDrop(newElement);
+                                de.onDropOver(p);
+                                AlgoActivity.ACTION_TO_CONSUME.add(mpa);
+                                Intent intent = new Intent("doAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                             }
                         });
                         dialog = builder.create();
@@ -470,9 +493,7 @@ public class AlgoView extends ScrollView {
                 oldProd = p;
             }
 
-            if(i == ll.getChildCount()-1){
-                Log.wtf("message","lol");
-            }
+
             if(i >= ll.getChildCount()-1 && tab > 0){
                 oldProd.setErrorMessage(Production.ERRORTAG_INDENTATION,"Il y a une { de trop");
             }

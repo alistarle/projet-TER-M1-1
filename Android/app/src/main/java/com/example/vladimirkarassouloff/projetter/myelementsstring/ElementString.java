@@ -252,5 +252,7 @@ public class ElementString implements Serializable {
     }
 
 
-
+    public List<ElementString> getComponents() {
+        return components;
+    }
 }
