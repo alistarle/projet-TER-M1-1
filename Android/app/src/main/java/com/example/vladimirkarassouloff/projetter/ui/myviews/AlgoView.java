@@ -124,6 +124,7 @@ public class AlgoView extends ScrollView {
                         showInsertResult(event, v);
                         break;
                     case DragEvent.ACTION_DROP:
+                        resetSeparator();
                         doInsert(event, v);
                         //refreshText();
                         autoIndent();
@@ -238,11 +239,11 @@ public class AlgoView extends ScrollView {
                         for(ElementString es : supporting){
                             listString.add(es.getBasicText());
                         }
-                        ArrayAdapter<String> itensAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
+                        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
                         AlertDialog dialog;
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setTitle("Choisir sur quoi dropper l'element");
-                        builder.setAdapter(itensAdapter, new DialogInterface.OnClickListener() {
+                        builder.setAdapter(itemsAdapter, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.wtf("mdr","on a click sur "+which);
@@ -275,7 +276,12 @@ public class AlgoView extends ScrollView {
 
             }
             else if(currentState == ActionUser.linemove && view instanceof Production){
-                MoveLineAction ala = new MoveLineAction(ll.indexOfChild(view),lineInsert);
+                MoveLineAction ala;
+                if(ll.indexOfChild(view) - lineInsert < 0)
+                    ala= new MoveLineAction(ll.indexOfChild(view),lineInsert-1);
+                else {
+                    ala = new MoveLineAction(ll.indexOfChild(view), lineInsert);
+                }
                 AlgoActivity.ACTION_TO_CONSUME.add(ala);
                 Intent intent = new Intent("doAction");
                 LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);

@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -122,16 +124,24 @@ public class Production extends LinearLayout {
 
         LayoutParams textParam = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
         textParam.gravity = Gravity.START;
-        textParam.weight = 0.9f;
+        textParam.weight = 0.1f;
         tv.setLayoutParams(textParam);
 
         errorMessage = "";
-        //errorDisplay.setBackgroundColor(Color.BLACK);
+        errorDisplay.setBackgroundColor(Color.BLACK);
         errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.warning));
+        /*errorDisplay.setMaxWidth(10);
+        errorDisplay.setMinimumWidth(10);
+        errorDisplay.setMaxHeight(10);
+        errorDisplay.setMinimumHeight(10);*/
+        //errorDisplay.adjustViewBounds(true);
+        //errorDisplay.setBounds(0, 0, 50, 50);
+//errorDisplay.setClipBounds(new Rect(0, 0, 50, 50));
+        //errorDisplay.setImageDrawable(new ScaleDrawable(errorDisplay.getDrawable(), 0, 50, 50).getDrawable());
 
         LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         imageParam.gravity = Gravity.END;
-        imageParam.weight = 0.1f;
+        imageParam.weight = 1f;
         errorDisplay.setLayoutParams(imageParam);
         //errorDisplay.setVisibility(View.GONE);
 
