@@ -37,7 +37,9 @@ import android.widget.ViewAnimator;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogConnection;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.network.NetworkInfo;
 import com.example.vladimirkarassouloff.projetter.network.NetworkTask;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -90,6 +92,7 @@ public class AlgoActivity extends AppCompatActivity {
     private MenuItem menuDisconnect;
     private MenuItem menuSave;
     private MenuItem menuLoad;
+    private MenuItem menuReset;
 
     private TextView test;
     private TextView drag;
@@ -203,12 +206,18 @@ public class AlgoActivity extends AppCompatActivity {
                 this.doConnect(new NetworkInfo(ip, port));
             }
         }
+    }
 
-
-
-
-
-
+    protected void newProject(){
+        algoScroll.getLl().removeAllViews();
+        nameView.getFonctions().clear();
+        nameView.getVariables().clear();
+        undoStack.clear();
+        redoStack.clear();
+        Production main = new Production(algoScroll.getContext(),new FonctionInstanciationString("main","void"));
+        algoScroll.getLl().addView(main,0);
+        Production pbc = new Production(algoScroll.getContext(),new BraceCloserString());
+        algoScroll.getLl().addView(pbc,1);
     }
 
     private void registerLocalBroadcastManager(){
@@ -335,6 +344,7 @@ public class AlgoActivity extends AppCompatActivity {
         this.menuExecuteCode = (MenuItem) menu.findItem(R.id.action_execute);
         this.menuSave = (MenuItem) menu.findItem(R.id.action_save);
         this.menuLoad = (MenuItem) menu.findItem(R.id.action_load);
+        this.menuReset = (MenuItem) menu.findItem(R.id.action_reset);
 
 
         return true;
@@ -405,6 +415,8 @@ public class AlgoActivity extends AppCompatActivity {
             showSavePrompt();
         }else if(id == R.id.action_load){
             showLoadPrompt();
+        }else if(id == R.id.action_reset){
+            newProject();
         }
 
 

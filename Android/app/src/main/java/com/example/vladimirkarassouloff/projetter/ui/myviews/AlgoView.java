@@ -78,7 +78,7 @@ public class AlgoView extends ScrollView {
 
 
 
-    protected void init() {
+    public void init() {
         //this.setBackgroundColor(Color.CYAN);
 
 
