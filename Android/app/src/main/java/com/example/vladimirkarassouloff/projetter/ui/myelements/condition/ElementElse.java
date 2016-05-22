@@ -58,5 +58,10 @@ public class ElementElse extends TextView implements DraggableElement {
 
     }
 
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
+    }
+
 
 }

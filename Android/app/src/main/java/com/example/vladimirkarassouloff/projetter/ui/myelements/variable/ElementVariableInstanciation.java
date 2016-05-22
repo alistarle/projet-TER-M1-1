@@ -134,4 +134,9 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
         Button theButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         theButton.setOnClickListener(new ValidationDialogVariable(alertDialog,promptsView,block,vis));
     }
+
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
+    }
 }

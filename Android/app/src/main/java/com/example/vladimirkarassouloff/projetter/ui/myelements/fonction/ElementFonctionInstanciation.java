@@ -142,5 +142,9 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
     public void onDropOver(final Production block) {
 
     }
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
+    }
 
 }

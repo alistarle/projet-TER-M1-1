@@ -62,4 +62,8 @@ public class ElementVariable extends TextView implements DraggableElement {
     public void onDropOver(final Production block) {
 
     }
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
+    }
 }

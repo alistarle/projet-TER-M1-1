@@ -6,7 +6,8 @@
 
     <array name="contextMenuProduction">
        <item>Supprimer</item>
-       <item>Modifier</item>
+        <item>Modifier</item>
+        <item>Annuler</item>
     </array>
 </resources>
 

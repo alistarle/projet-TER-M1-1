@@ -49,5 +49,9 @@ public class ElementOperator extends TextView implements DraggableElement {
     public void onDropOver(final Production block) {
 
     }
+    @Override
+    public boolean isDraggableOnLine() {
+        return false;
+    }
 
 }

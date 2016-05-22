@@ -92,4 +92,9 @@ public class ElementNumber extends TextView implements DraggableElement {
 
 
     }
+
+    @Override
+    public boolean isDraggableOnLine() {
+        return false;
+    }
 }

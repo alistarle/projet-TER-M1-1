@@ -27,6 +27,7 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.*;
@@ -49,7 +50,8 @@ public class AlgoView extends ScrollView {
     private static float MARGE = 15f;
 
 
-
+    protected int colorDropSupported = Color.rgb(85,255,142);
+    protected int colorErrorDetected = Color.rgb(255,85,85);
 
 
     private int lineInsert;
@@ -101,14 +103,31 @@ public class AlgoView extends ScrollView {
 
             @Override
             public boolean onDrag(View v, DragEvent event) {
-                if((View)event.getLocalState() instanceof Production){
+                if(event.getLocalState() instanceof Production){
                     currentState = ActionUser.linemove;
                 }
+
+
 
                 int action = event.getAction();
                 switch (event.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         resetSeparator();
+                        if(event.getLocalState() instanceof DraggableElement){
+                            DraggableElement de = (DraggableElement) event.getLocalState();
+                            for(int i = 0 ; i < ll.getChildCount() ; i++) {
+                                View b = ll.getChildAt(i);
+                                if (b instanceof Production) {
+                                    Production p = (Production) b;
+                                    ElementString newElement = de.onDraggedOnBlock(p);
+                                    List<ElementString> supporting = p.getListElementSupporting(newElement);
+                                    Log.wtf("message", "On a trouve " + supporting.size() + " elements supportant le drop");
+                                    if (supporting.size() > 0) {
+                                        p.setColor(colorDropSupported);
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case DragEvent.ACTION_DRAG_ENTERED:
                         // v.setBackgroundDrawable(enterShape);
@@ -130,6 +149,8 @@ public class AlgoView extends ScrollView {
                         autoIndent();
                         break;
                     case DragEvent.ACTION_DRAG_ENDED:
+                        resetDefaultColor();
+                        autoIndent();
                         resetSeparator();
                     default:
                         break;
@@ -149,6 +170,16 @@ public class AlgoView extends ScrollView {
         }
 
 
+    }
+
+
+    protected void resetDefaultColor(){
+        for(int i = 0 ; i < ll.getChildCount() ; i++){
+            if(ll.getChildAt(i) instanceof Production){
+                Production p = (Production) ll.getChildAt(i);
+                p.setColor(p.getBackgroundColorDefault());
+            }
+        }
     }
 
     @Override
@@ -198,6 +229,12 @@ public class AlgoView extends ScrollView {
             }
             //ou si on insere une nouvelle instruction
         else {
+            if(view instanceof DraggableElement) {
+                DraggableElement de = (DraggableElement) view;
+                if(!de.isDraggableOnLine()){
+                    return;
+                }
+            }
             int i = getBlockSuivant(event.getX(),event.getY());
             if(i == ll.getChildCount()){//on replace 1 cran en dessous, car on ne drag pas en dessous de la "lastLine"
                 i--;

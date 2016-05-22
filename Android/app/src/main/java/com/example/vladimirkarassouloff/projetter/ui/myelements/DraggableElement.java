@@ -16,4 +16,5 @@ public interface DraggableElement {
     public ElementString onDraggedOnBlock(Production block);
     public boolean isDropSupported(Production p);
     public void onDropOver(final Production block);
+    public boolean isDraggableOnLine();
 }

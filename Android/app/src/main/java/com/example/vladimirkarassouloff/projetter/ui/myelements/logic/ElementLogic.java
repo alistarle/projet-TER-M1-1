@@ -55,5 +55,10 @@ public abstract class ElementLogic extends TextView implements DraggableElement 
 
     }
 
+    @Override
+    public boolean isDraggableOnLine() {
+        return false;
+    }
+
 
 }
