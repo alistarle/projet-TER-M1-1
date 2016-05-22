@@ -234,6 +234,8 @@ public class ElementString implements Serializable {
     }
 
 
+
+    public void setColor(int newColor){this.colorBackgroundDefault = newColor;}
     public int getCurrentBackgroundColor(){return colorBackgroundDefault;}
     public int getBackgroundColorDefault(){
         return Color.rgb(200,200,200);

@@ -371,6 +371,10 @@ public class AlgoView extends ScrollView {
         }
         for(int i = 0 ; i < ll.getChildCount() ; i++) {
             ll.getChildAt(i).setBackground(null);
+            if(ll.getChildAt(i) instanceof Production){
+                Production p = (Production)ll.getChildAt(i);
+                p.refreshColor();
+            }
         }
     }
 
@@ -386,9 +390,27 @@ public class AlgoView extends ScrollView {
                 if(p.tabChanger() < 0){
                     j += -p.tabChanger();
                 }
-                while(j < tab){
-                    tabs+="\t\t";
-                    j++;
+                if(j >= 0) {
+                    while (j < tab) {
+                        tabs += "\t\t";
+                        j++;
+                    }
+                    int newDefaultColor = p.getBackgroundColorDefault();
+                    for(int k = 0 ; k < tab ; k++){
+                        //on eclaircit la couleur
+                        if( (!(p.getBasicElement() instanceof BraceCloserString)) || (p.getBasicElement() instanceof BraceCloserString && k < tab-1)) {
+                            float[] hsv = new float[3];
+                            Color.colorToHSV(newDefaultColor, hsv);
+                            hsv[2] *= 1.05f;
+                            newDefaultColor = Color.HSVToColor(hsv);
+                        }
+
+                    }
+                    p.setColor(newDefaultColor);
+                }
+                else {
+                    tabs = "";
+                    ((Production) v).addErrorMessage("Erreur d'indentation.");
                 }
                 tab += p.tabChanger();
 

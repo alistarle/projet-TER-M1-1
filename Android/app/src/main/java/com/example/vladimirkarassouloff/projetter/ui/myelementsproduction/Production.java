@@ -123,7 +123,7 @@ public class Production extends LinearLayout {
         myCustomSeparator.setHeight(20);
 
         if(basicElement != null) {
-            this.setBackgroundColor(basicElement.getBackgroundColorDefault());
+            this.setBackgroundColor(basicElement.getCurrentBackgroundColor());
         }
         tv.setMinHeight(40);
 
@@ -133,13 +133,15 @@ public class Production extends LinearLayout {
         tv.setLayoutParams(textParam);
         tv.setGravity(Gravity.CENTER_VERTICAL);
 
-        errorMessage = "";
         errorDisplay.setBackgroundColor(Color.BLACK);
         errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.warning));
         LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         imageParam.gravity = Gravity.END;
         imageParam.weight = 0.7f;
         errorDisplay.setLayoutParams(imageParam);
+        eraseError();
+
+
         this.refreshText();
 
 
@@ -186,12 +188,12 @@ public class Production extends LinearLayout {
                             case MotionEvent.ACTION_UP:
                                 //resetDraggableColor();
                                 isLongClickedTriggered = false;
-                                setBackgroundColor(getBackgroundColorDefault());
+                                setBackgroundColor(getCurrentBackgroundColor());
                                 break;
                             case MotionEvent.ACTION_CANCEL:
                                 //resetDraggableColor();
                                 isLongClickedTriggered = false;
-                                setBackgroundColor(getBackgroundColorDefault());
+                                setBackgroundColor(getCurrentBackgroundColor());
                                 break;
                             case MotionEvent.ACTION_MOVE:
                                 Log.i("Debug ",initialXEvent+" "+x);
@@ -199,7 +201,7 @@ public class Production extends LinearLayout {
                                     ClipData data2 = ClipData.newPlainText("", "");
                                     View.DragShadowBuilder shadowBuilder2 = new View.DragShadowBuilder(v);
                                     v.startDrag(data2, shadowBuilder2, v, 0);
-                                    setBackgroundColor(getBackgroundColorDefault());
+                                    setBackgroundColor(getCurrentBackgroundColor());
                                 }
                                 break;
                             default:
@@ -642,6 +644,21 @@ public class Production extends LinearLayout {
     }
 
 
+
+    public void refreshColor(){
+        if(basicElement != null){
+            this.setBackgroundColor(basicElement.getCurrentBackgroundColor());
+        }
+    }
+
+
+    public int getCurrentBackgroundColor(){
+        if(basicElement == null){
+            return 0;
+        }
+        return basicElement.getCurrentBackgroundColor();
+    }
+
     public int getBackgroundColorDefault(){
         if(basicElement == null){
             return 0;
@@ -658,6 +675,13 @@ public class Production extends LinearLayout {
 
     public void setText(String s){
         this.tv.setText(s);
+    }
+
+    public void setColor(int color){
+        if(basicElement != null){
+            basicElement.setColor(color);
+        }
+        setBackgroundColor(getCurrentBackgroundColor());
     }
 
 
@@ -687,7 +711,8 @@ public class Production extends LinearLayout {
         eraseError();
     }
     public void eraseError(){
-        errorDisplay.setVisibility(INVISIBLE);
+        errorDisplay.setVisibility(GONE);
         errorMessage = "";
     }
+
 }
