@@ -21,9 +21,9 @@ public class ElementString implements Serializable {
 
     protected int colorBackgroundDefault = getBackgroundColorDefault();
 
-    public List<ElementString> components;
+    public ArrayList<ElementString> components;
 
-    public ElementString(List<ElementString> components) {
+    public ElementString(ArrayList<ElementString> components) {
         this.components = components;
     }
     public ElementString(){

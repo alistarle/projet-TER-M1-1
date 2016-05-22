@@ -16,11 +16,11 @@ public class ModifyProductionAction extends Action{
 
 
     ElementString element;
-    List<ElementString> newComponents;
-    List<ElementString> oldComponents;
+    ArrayList<ElementString> newComponents;
+    ArrayList<ElementString> oldComponents;
 
 
-    public ModifyProductionAction(ElementString element,List<ElementString> newComponents) {
+    public ModifyProductionAction(ElementString element,ArrayList<ElementString> newComponents) {
         this.newComponents = newComponents;
         this.element = element;
         this.oldComponents = element.components;
