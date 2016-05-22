@@ -269,7 +269,7 @@ public class AlgoView extends ScrollView {
                     }
                     else if(supporting.size() == 1){
                         List<ElementString> oldArray = supporting.get(0).getComponents();
-                        List<ElementString> newArray = new ArrayList<>();
+                        ArrayList<ElementString> newArray = new ArrayList<>();
                         for(ElementString el : oldArray) {
                             newArray.add(el);
                         }
@@ -300,7 +300,7 @@ public class AlgoView extends ScrollView {
                                 Intent intent = new Intent("autoIndent");
                                 LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
                                 List<ElementString> oldArray = supporting.get(which).getComponents();
-                                List<ElementString> newArray = new ArrayList<>();
+                                ArrayList<ElementString> newArray = new ArrayList<>();
                                 for(ElementString el : oldArray) {
                                     newArray.add(el);
                                 }
