@@ -266,6 +266,7 @@ public class AlgoActivity extends AppCompatActivity {
                     }
                 }
             };
+        }
             LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
             LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
             LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
@@ -274,7 +275,7 @@ public class AlgoActivity extends AppCompatActivity {
             LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
             LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
             LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
-        }
+
     }
     /*private void unregisterLocalBroadcastManager(){
         LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);
