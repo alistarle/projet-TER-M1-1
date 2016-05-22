@@ -14,13 +14,40 @@ import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVa
 /**
  * Created by Vladimir on 17/02/2016.
  */
-public class ValidationDialogFunction extends ValidationDialogVariable {
+public class ValidationDialogFunction  extends ValidationDialogProduction {
+
+    protected EditText et;
+    protected PromptTypeVariableView ptv;
+
     public ValidationDialogFunction(Dialog dialog, View promptsView,Production p) {
         super(dialog, promptsView,p);
         this.et = (EditText) promptsView.findViewById(R.id.editTextFunctionInput);
         this.ptv = (PromptTypeVariableView) promptsView.findViewById(R.id.promptviewtypefunction);
 
     }
+
+    @Override
+    public void checkValid() throws Exception{
+        if(et.getText().length() == 0){
+            throw new Exception("Donnez un nom a la fonction !");
+        }
+        else if(Character.isDigit(et.getText().charAt(0))){
+            throw new Exception("La premiere lettre ne peut pas etre un nombre");
+        }
+        else if(!isNameCorrect(et.getText().toString())){
+            throw new Exception("Symbole interdits");
+        }
+    }
+
+    protected boolean isNameCorrect(String s){
+        for(int i = 0 ; i < s.length() ; i++){
+            if(!Character.isDigit(s.charAt(i)) && !Character.isLetter(s.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void onValid() {
         /*ProductionFonctionInstanciation pv = (ProductionFonctionInstanciation) this.production;

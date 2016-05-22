@@ -1,6 +1,8 @@
 package com.example.vladimirkarassouloff.projetter.customlistener;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.EditText;
 
@@ -27,6 +29,7 @@ public class ValidationDialogNumber extends ValidationDialogProduction {
     @Override
     public void onValid(){
         es.setNombre(et.getText().toString());
-        this.production.refreshText();
+        Intent intent = new Intent("autoIndent");
+        LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
     }
 }

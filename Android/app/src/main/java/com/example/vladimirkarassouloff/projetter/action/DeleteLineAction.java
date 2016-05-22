@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.List;
  */
 public class DeleteLineAction extends AddLineAction {
 
-    public DeleteLineAction(int line, List<View> prod, ViewGroup view, AlgoView algoView) {
-        super(line, prod, view,algoView);
+    public DeleteLineAction(int line, List<Production> prod) {
+        super(line, prod);
     }
 
     @Override

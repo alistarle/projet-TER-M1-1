@@ -18,9 +18,12 @@ public class ValidationDialogVariable extends ValidationDialogProduction{
 
     protected EditText et;
     protected PromptTypeVariableView ptv;
+    protected VariableInstanciationString vis;
 
-    public ValidationDialogVariable(Dialog dialog, View promptsView,Production p) {
+
+    public ValidationDialogVariable(Dialog dialog, View promptsView,Production p,VariableInstanciationString vis) {
         super(dialog, promptsView,p);
+        this.vis = vis;
         et = (EditText) promptsView.findViewById(R.id.editTextVariableInput);
         ptv = (PromptTypeVariableView) promptsView.findViewById(R.id.promptviewtypevariable);
     }
@@ -53,7 +56,7 @@ public class ValidationDialogVariable extends ValidationDialogProduction{
         pv.setType(ptv.getType());
         pv.setName(et.getText().toString());
         pv.refreshText();*/
-        VariableInstanciationString vis = (VariableInstanciationString) production.getBasicElement();
+        //VariableInstanciationString vis = (VariableInstanciationString) production.getBasicElement();
         vis.setType(ptv.getType());
         vis.setName(et.getText().toString());
         //production.refreshText();

@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.condition.ElementElse;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.condition.ElementElseIf;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.condition.ElementIf;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.iterative.ElementWhile;
 
 /**
  * Created by Vladimir on 12/02/2016.
@@ -39,7 +40,7 @@ public class ElementsView extends ScrollDraggableElementView {
         this.addBlankLine();
 
         this.addHeader("Iterative : ");
-
+        this.addDraggableElement(new ElementWhile(getContext()));
         this.addBlankLine();
 
     }

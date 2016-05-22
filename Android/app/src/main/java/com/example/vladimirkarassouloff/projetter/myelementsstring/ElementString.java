@@ -1,5 +1,6 @@
 package com.example.vladimirkarassouloff.projetter.myelementsstring;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
@@ -17,6 +18,9 @@ import java.util.List;
  * Created by Vladimir on 17/02/2016.
  */
 public class ElementString implements Serializable {
+
+    protected int colorBackgroundDefault = getBackgroundColorDefault();
+
     public List<ElementString> components;
 
     public ElementString(List<ElementString> components) {
@@ -39,18 +43,32 @@ public class ElementString implements Serializable {
         }
     }
 
+
+    //precise si les composant devraient etre entouré de parentheses
+    protected boolean shouldWrapComponents(ElementString element){
+        return false;
+    }
+
     public String getComponentString(){
         String s = "";
+
         for(int i = 0 ; i < components.size() ; i++){
+            if(shouldWrapComponents(components.get(i)) && components.size() > 1){
+                s+="(";
+            }
             s += components.get(i).getBasicText();
+            if(shouldWrapComponents(components.get(i)) && components.size() > 1){
+                s+=")";
+            }
             if(i < components.size()-1){
                 s+=separator();
             }
         }
+
         return s;
     }
     protected String separator(){
-        return ",";
+        return " ";
     }
 
     //sert a l'indentation
@@ -190,12 +208,19 @@ public class ElementString implements Serializable {
     }
 
 
+
+    protected boolean allowDropOnComponent(){
+        return true;
+    }
+
     public void addAllElementSupportingDrop(List<ElementString> array, ElementString testDrop){
         if(this.supportDrop(testDrop)){
             array.add(this);
         }
-        for(ElementString comp : components){
-            comp.addAllElementSupportingDrop(array,testDrop);
+        if(this.allowDropOnComponent()) {
+            for (ElementString comp : components) {
+                comp.addAllElementSupportingDrop(array, testDrop);
+            }
         }
     }
 
@@ -209,8 +234,22 @@ public class ElementString implements Serializable {
     }
 
 
+    public boolean shouldBeInsideParenthesis(){
+        return true;
+    }
+
+    public void setColor(int newColor){this.colorBackgroundDefault = newColor;}
+    public int getCurrentBackgroundColor(){return colorBackgroundDefault;}
+    public int getBackgroundColorError(){return Color.rgb(255,130,130);}
+
+    public int getBackgroundColorDefault(){
+        return Color.rgb(200,200,200);
+    }
 
 
+    public int getBackgroundColorOnTouch(){
+        return Color.rgb(128,128,128);
+    }
 
 
 

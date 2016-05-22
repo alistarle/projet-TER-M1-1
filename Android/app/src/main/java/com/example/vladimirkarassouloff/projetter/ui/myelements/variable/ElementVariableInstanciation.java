@@ -34,7 +34,7 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
     private String name;
     private String type;
 
-    private Production tv;
+    private VariableInstanciationString vis;
 
     public ElementVariableInstanciation(Context context){
         super(context);
@@ -51,16 +51,16 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> array = new ArrayList<View>();
-        tv = new Production(v.getContext(),new VariableInstanciationString(type,name));
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> array = new ArrayList<Production>();
+        vis = new VariableInstanciationString();
+        Production tv = new Production(v.getContext(),vis);
         array.add(tv);
 
 
         LayoutInflater li = LayoutInflater.from(v.getContext());
         View promptsView = li.inflate(R.layout.promptvariable, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
-        // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
         final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextVariableInput);
         final PromptTypeVariableView ptv = (PromptTypeVariableView) promptsView.findViewById(R.id.promptviewtypevariable);
@@ -72,26 +72,11 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
         // set dialog message
         alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                               /* name = userInput.getText().toString();
-                                type = ptv.getType();
-
-                                tv.setName(name);
-                                tv.setType(type);
-                                refreshTextView();
-
-                                Intent intent = new Intent("newVariable");
-                                // You can also include some extra data.
-                                intent.putExtra("variable", userInput.getText().toString());
-                                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
-
-                    }
+                    public void onClick(DialogInterface dialog, int id) {}
                 })
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                /*ViewGroup owner = (ViewGroup) tv.getParent();
-                                owner.removeView(tv);*/
                                 Intent intent = new Intent("removeLastAction");
                                 LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
                                 dialog.cancel();
@@ -99,12 +84,11 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
                         });
 
 
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
         // show it
         alertDialog.show();
         Button theButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        theButton.setOnClickListener(new ValidationDialogVariable(alertDialog,promptsView,tv));
+        theButton.setOnClickListener(new ValidationDialogVariable(alertDialog,promptsView,tv,vis));
 
 
 
@@ -113,7 +97,8 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
 
     @Override
     public ElementString onDraggedOnBlock(Production block) {
-        return new VariableInstanciationString(type,name);
+        vis = new VariableInstanciationString();
+        return vis;
     }
 
     @Override
@@ -121,13 +106,37 @@ public class ElementVariableInstanciation extends TextView implements DraggableE
         return p.supportDropVariableInstanciation();
     }
 
-    public void refreshTextView(){
-        tv.refreshText();
-    }
 
 
     @Override
     public void onDropOver(final Production block) {
+        LayoutInflater li = LayoutInflater.from(block.getContext());
+        View promptsView = li.inflate(R.layout.promptvariable, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(block.getContext());
+        alertDialogBuilder.setView(promptsView);
+        final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextVariableInput);
+        final PromptTypeVariableView ptv = (PromptTypeVariableView) promptsView.findViewById(R.id.promptviewtypevariable);
 
+        alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                /*Intent intent = new Intent("removeLastAction");
+                                LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);*/
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        Button theButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        theButton.setOnClickListener(new ValidationDialogVariable(alertDialog,promptsView,block,vis));
+    }
+
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
     }
 }

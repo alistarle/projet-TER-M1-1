@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.special.Infrarouge;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonction;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -27,8 +26,8 @@ public class ElementInfrarougeCentre extends ElementFonction {
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> ar = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> ar = new ArrayList<Production>();
         Production p = new Production(getContext(), new Infrarouge("InfrarougeCentre"));
         ar.add(p);
         return ar;
@@ -39,10 +38,6 @@ public class ElementInfrarougeCentre extends ElementFonction {
 
     }
 
-    @Override
-    public ElementString onDraggedOnBlock(Production block) {
-        return null;
-    }
 
     @Override
     public boolean isDropSupported(Production p) {

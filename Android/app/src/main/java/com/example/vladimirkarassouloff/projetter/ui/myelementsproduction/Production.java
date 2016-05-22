@@ -5,11 +5,15 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,13 +21,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
 import com.example.vladimirkarassouloff.projetter.action.DeleteLineAction;
+import com.example.vladimirkarassouloff.projetter.action.ModifyProductionAction;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogFunction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
@@ -39,15 +46,34 @@ import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVa
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
  * Created by Vladimir on 14/02/2016.
  */
-public class Production extends TextView {
+public class Production extends LinearLayout {
 
+
+    public static String ERRORTAG_INDENTATION = "Indent";
+    public static String ERRORTAG_COMPIL = "Compilateur";
+    public static List<String> tagErrorList = new ArrayList<>();
+    static {
+        tagErrorList.add(ERRORTAG_COMPIL);
+        tagErrorList.add(ERRORTAG_INDENTATION);
+    }
+
+    protected Hashtable<String,String> hashError;
+
+    protected TextView tv;
     protected ElementString basicElement;
 
+    protected ImageView errorDisplay;
+    protected String errorMessage;
+
+    protected float initialXEvent, initialYEvent;
+    protected float MARGE_EVENT_DRAG = 100;
+    protected boolean isLongClickedTriggered;
 
     //Modification
     protected ViewGroup layoutParent;
@@ -60,6 +86,10 @@ public class Production extends TextView {
 
     public Production(Context context){
         super(context);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = new ElementString();
         init();
     }
@@ -69,32 +99,140 @@ public class Production extends TextView {
 
     public Production(Context context, AttributeSet attrs){
         super(context, attrs);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = new ElementString();
         init();
     }
     public Production(Context context,ElementString basicElement){
         super(context);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = basicElement;
         init();
     }
     public Production(Context context, AttributeSet attrs,ElementString basicElement){
         super(context, attrs);
+        this.tv = new TextView(context);
+        this.errorDisplay = new ImageView(context);
+        addView(tv);
+        addView(errorDisplay);
         this.basicElement = basicElement;
         init();
     }
 
     protected void init(){
+        this.setOrientation(LinearLayout.HORIZONTAL);
+
+        hashError = new Hashtable<>();
+
+        this.tv.setTextColor(Color.BLACK);
         this.separator = getResources().getDrawable(R.drawable.test);
         myCustomSeparator = new TextView(getContext());
         myCustomSeparator.setText(" ");
         myCustomSeparator.setBackground(separator);
         myCustomSeparator.setHeight(20);
 
-        this.setText("Default");
-        this.setPadding(5, 10, 5, 10);
+        if(basicElement != null) {
+            this.setBackgroundColor(basicElement.getCurrentBackgroundColor());
+        }
+        tv.setMinHeight(40);
+
+        LayoutParams textParam = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        textParam.gravity = Gravity.CENTER_VERTICAL;
+        textParam.weight = 0.1f;
+        tv.setLayoutParams(textParam);
+        tv.setGravity(Gravity.CENTER_VERTICAL);
+
+        errorDisplay.setBackgroundColor(Color.BLACK);
+        errorDisplay.setImageDrawable(getResources().getDrawable(R.drawable.warning));
+        LayoutParams imageParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        imageParam.gravity = Gravity.END;
+        imageParam.weight = 0.7f;
+        errorDisplay.setLayoutParams(imageParam);
+        eraseError();
+
+
+        this.refreshText();
+
+
+
+        errorDisplay.setOnTouchListener(
+                new View.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+                        int action = event.getAction();
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                showError();
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                break;
+                            case MotionEvent.ACTION_CANCEL:
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+
+                                break;
+                            default:
+                                break;
+                        }
+                        return true;
+                    }
+                }
+
+        );
+
+
+
+        this.setOnTouchListener(
+                new View.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        float x = event.getX();
+                        float y = event.getY();
+                        int action = event.getAction();
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                initialXEvent = event.getX();
+                                initialYEvent = event.getY();
+                                setBackgroundColor(getBackgroundColorOnTouch());
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                //resetDraggableColor();
+                                isLongClickedTriggered = false;
+                                setBackgroundColor(getCurrentBackgroundColor());
+                                break;
+                            case MotionEvent.ACTION_CANCEL:
+                                //resetDraggableColor();
+                                isLongClickedTriggered = false;
+                                setBackgroundColor(getCurrentBackgroundColor());
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+                                Log.i("Debug ",initialXEvent+" "+x);
+                                if((x < initialXEvent-MARGE_EVENT_DRAG || x > initialXEvent+MARGE_EVENT_DRAG) && !isLongClickedTriggered) {
+                                    ClipData data2 = ClipData.newPlainText("", "");
+                                    View.DragShadowBuilder shadowBuilder2 = new View.DragShadowBuilder(v);
+                                    v.startDrag(data2, shadowBuilder2, v, 0);
+                                    setBackgroundColor(getCurrentBackgroundColor());
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                }
+
+        );
+
+
         this.setOnLongClickListener(
                 new OnLongClickListener() {
                     public boolean onLongClick(View arg0) {
+                        isLongClickedTriggered = true;
                         LayoutInflater li = LayoutInflater.from(getContext());
                         View promptsView = li.inflate(R.layout.longclickproductioncontext, null);
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
@@ -107,7 +245,7 @@ public class Production extends TextView {
                                         else if(which == 1){
                                            final List<ElementString> listEditableElements = getListElementEditable(basicElement);
                                            if(listEditableElements.size()==0){
-                                               Toast.makeText(getContext(),"Rien a modifier",Toast.LENGTH_SHORT);
+                                               Toast.makeText(getContext(),"Rien a modifier",Toast.LENGTH_SHORT).show();
                                            }
                                            else if(listEditableElements.size()==1){
                                                 modifier(listEditableElements.get(0));
@@ -118,17 +256,14 @@ public class Production extends TextView {
                                                for(ElementString es : listEditableElements){
                                                    listString.add(es.getBasicText());
                                                }
-                                               ArrayAdapter<String> itensAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
+                                               ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getContext(),R.layout.choice_element,listString);
                                                android.support.v7.app.AlertDialog dialog2;
                                                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
                                                builder.setTitle("Choisir quel element modifier");
-                                               builder.setAdapter(itensAdapter, new DialogInterface.OnClickListener() {
+                                               builder.setAdapter(itemsAdapter, new DialogInterface.OnClickListener() {
                                                    @Override
                                                    public void onClick(DialogInterface dialog2, int which) {
-                                                       Log.wtf("mdr","on a click sur "+which);
                                                        modifier(listEditableElements.get(which));
-                                                       /*Intent intent = new Intent("autoIndent");
-                                                       LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
                                                    }
                                                });
                                                dialog2 = builder.create();
@@ -136,11 +271,13 @@ public class Production extends TextView {
                                            }
                                            //modifier();
                                        }
+                                        isLongClickedTriggered = false;
                                     }
                                 });
+
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
-                        return false;
+                        return true;
                     }
                 }
         );
@@ -149,9 +286,9 @@ public class Production extends TextView {
     public void supprimer(){
         if(getParent()!=null && getParent().getParent()!=null && getParent().getParent() instanceof AlgoView) {
             int line = ((ViewGroup)getParent()).indexOfChild(this);
-            List<View> oldView = new ArrayList<>();
+            List<Production> oldView = new ArrayList<>();
             oldView.add(this);
-            DeleteLineAction ala = new DeleteLineAction(line, oldView, (ViewGroup)getParent(), (AlgoView)(getParent().getParent()));
+            DeleteLineAction ala = new DeleteLineAction(line, oldView);
             AlgoActivity.ACTION_TO_CONSUME.add(ala);
             Intent intent = new Intent("doAction");
             LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
@@ -255,12 +392,7 @@ public class Production extends TextView {
         List<ElementString> arrayElements = new ArrayList<>();
         for(ElementString es : elementToChange.components) {
             arrayElements.add(es);
-            Production prod = new Production(llElem.getContext(),es) {
-                @Override
-                public String getBasicText() {
-                    return elementToChange.toString();
-                }
-            };
+            Production prod = new Production(llElem.getContext(),es);
             prod.setOnTouchListener(
                     new View.OnTouchListener() {
                         public boolean onTouch(View v, MotionEvent event) {
@@ -287,7 +419,7 @@ public class Production extends TextView {
                     }
             );
             prod.setOnLongClickListener(new OnLongClickListener(){public boolean onLongClick(View arg0) {return false;}});
-            prod.refreshText();
+
             llElem.addView(prod,layoutParams);
         }
 
@@ -305,13 +437,20 @@ public class Production extends TextView {
                                 newArray.add(pr.basicElement);
                             }
                         }
-                        basicElement.components = newArray;
-                        refreshText();
+                        //elementToChange.components = newArray;
+                        ModifyProductionAction mpa = new ModifyProductionAction(elementToChange,newArray);
+                        AlgoActivity.ACTION_TO_CONSUME.add(mpa);
+                        Intent intent = new Intent("doAction");
+                        LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+                        /*Intent intent = new Intent("autoIndent");
+                        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);*/
                     }
                 })
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent("autoIndent");
+                                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                                 dialog.cancel();
                             }
                         });
@@ -401,8 +540,12 @@ public class Production extends TextView {
     }
 
 
-    public void refreshText(){
-        this.setText(basicElement.getBasicText());
+    public void refreshText() {
+        if (basicElement == null) {
+            tv.setText("EmptyProduction");
+        } else {
+            tv.setText(basicElement.getBasicText());
+        }
     }
 
 
@@ -514,4 +657,115 @@ public class Production extends TextView {
         elementString.addAllElementEditable(editable);
         return editable;
     }
+
+
+
+    public void refreshColor() {
+        if (basicElement != null) {
+            if ("".equals(errorMessage)) {
+                this.setBackgroundColor(basicElement.getBackgroundColorError());
+            }
+            this.setBackgroundColor(basicElement.getCurrentBackgroundColor());
+        }
+    }
+
+
+    public int getCurrentBackgroundColor(){
+        if(basicElement == null){
+            return 0;
+        }
+        return basicElement.getCurrentBackgroundColor();
+    }
+
+    public int getBackgroundColorDefault(){
+        if(basicElement == null){
+            return 0;
+        }
+        return basicElement.getBackgroundColorDefault();
+    }
+
+    public int getBackgroundColorOnTouch(){
+        if(basicElement == null){
+            return 0;
+        }
+        return basicElement.getBackgroundColorOnTouch();
+    }
+
+    public void setText(String s){
+        this.tv.setText(s);
+    }
+
+    public void setColor(int color){
+        if(basicElement != null){
+            basicElement.setColor(color);
+        }
+        setBackgroundColor(getCurrentBackgroundColor());
+    }
+
+////////////////////////////////////////////Erreurs////////////////////
+    public void setErrorMessage(String tag, String s){
+        hashError.put(tag,s);
+        if(hasError()) {
+            errorDisplay.setVisibility(VISIBLE);
+        }
+        else{
+            errorDisplay.setVisibility(GONE);
+        }
+        refreshColor();
+    }
+    public void showError(){
+        if(hasError()) {
+
+                //Toast.makeText(getContext(),"MDRRR",Toast.LENGTH_SHORT).show();
+            LayoutInflater li = LayoutInflater.from(getContext());
+            View showError = li.inflate(R.layout.error, null);
+            TextView textError = (TextView)showError.findViewById(R.id.textError);
+                textError.setText(getError());
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+            alertDialogBuilder.setView(showError);
+            alertDialogBuilder.setCancelable(true).setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+        eraseError();
+    }
+
+    public boolean hasError(){
+        if("".equals(getError())){
+            return false;
+        }
+        return true;
+    }
+
+    public void eraseError(){
+        errorDisplay.setVisibility(GONE);
+        for(String errorTag : tagErrorList){
+            hashError.put(errorTag,"");
+        }
+        refreshColor();
+    }
+    public String getError(){
+        String s = "";
+        for(String errorTag : tagErrorList){
+            if( !  (hashError.get(errorTag) == null || hashError.get(errorTag).equals(""))){
+                s+= hashError.get(errorTag);
+            }
+        }
+        return s;
+    }
+
+
+    public boolean shouldBeInsideParenthesis(){
+        if(basicElement != null){
+            return basicElement.shouldBeInsideParenthesis();
+        }
+        return false;
+    }
+    ////////////////////////////////////////////ErreursFin/////////////////
+
 }

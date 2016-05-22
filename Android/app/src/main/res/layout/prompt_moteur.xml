@@ -7,13 +7,24 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrez la direction et la vitesse: "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Entrez la direction et la vitesse : "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:padding="5dp"/>
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Direction : "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:padding="10dp"/>
 
     <RadioGroup
         android:id="@+id/radioDirection"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp">
 
         <RadioButton
             android:id="@+id/radioForward"
@@ -40,10 +51,18 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vitesse : "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:padding="10dp"/>
     <RadioGroup
         android:id="@+id/radioVitesse"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp">
 
         <RadioButton
             android:id="@+id/radioLent"

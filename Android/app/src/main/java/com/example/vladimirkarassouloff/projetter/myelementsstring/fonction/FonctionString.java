@@ -12,6 +12,10 @@ public class FonctionString extends ElementString  {
         this.name = name;
     }
 
+    protected String separator(){
+        return ",";
+    }
+
 
     public String getName() {
         return name;

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonction;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementFonctionInstanciation;
+import com.example.vladimirkarassouloff.projetter.ui.myelements.fonction.ElementReturn;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.variable.ElementVariable;
 import com.example.vladimirkarassouloff.projetter.ui.myelements.variable.ElementVariableInstanciation;
 
@@ -71,6 +72,7 @@ public class NameView extends ScrollDraggableElementView {
         this.addHeader("Declarations : ");
         this.addDraggableElement(new ElementVariableInstanciation(getContext()));
         this.addDraggableElement(new ElementFonctionInstanciation(getContext()));
+        this.addDraggableElement(new ElementReturn(getContext()));
         this.addBlankLine();
 
 
@@ -82,12 +84,16 @@ public class NameView extends ScrollDraggableElementView {
 
     }
 
-    protected void addVariable(String name) {
-        if (!this.variables.contains(name)) {
-            ElementVariable v = new ElementVariable(getContext(), name);
-            addDraggableElement(v,ll.indexOfChild(headerVar)+1);
-            this.variables.add(name);
+    public void addVariable(String name) {
+        for(String s : this.variables){
+            if(s.equals(name)){
+                return;
+            }
         }
+        ElementVariable v = new ElementVariable(getContext(), name);
+        addDraggableElement(v,ll.indexOfChild(headerVar)+1);
+        this.variables.add(name);
+
     }
 
 
@@ -95,15 +101,32 @@ public class NameView extends ScrollDraggableElementView {
 
 
 
-    protected void addFunction(String name){
-        if (!this.fonctions.contains(name)) {
-            ElementFonction f = new ElementFonction(getContext(), name);
-            addDraggableElement(f,ll.indexOfChild(headerFunc)+1);
-            this.fonctions.add(name);
+    public void addFunction(String name){
+        for(String s : this.fonctions){
+            if(s.equals(name)){
+                return;
+            }
         }
+        ElementFonction f = new ElementFonction(getContext(), name);
+        addDraggableElement(f,ll.indexOfChild(headerFunc)+1);
+        this.fonctions.add(name);
+
     }
 
 
+    public List<String> getFonctions() {
+        return fonctions;
+    }
 
+    public List<String> getVariables() {
+        return variables;
+    }
 
+    public void setVariables(List<String> variables) {
+        this.variables = variables;
+    }
+
+    public void setFonctions(List<String> fonctions) {
+        this.fonctions = fonctions;
+    }
 }

@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +31,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import com.example.vladimirkarassouloff.projetter.R;
@@ -41,6 +45,7 @@ import com.example.vladimirkarassouloff.projetter.ui.myviews.mypopups.PopupLoad;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.AlgoView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptConnectionView;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
+import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.NameView;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.utils.DefaultValues;
 
@@ -50,6 +55,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -57,6 +63,8 @@ import java.util.Stack;
 
 public class AlgoActivity extends AppCompatActivity {
 
+
+    public static DisplayMetrics metrics;
 
     private Button redoActionButton;
     private Button undoActionButton;
@@ -89,6 +97,8 @@ public class AlgoActivity extends AppCompatActivity {
 
     //scroll droite
     private ElementsView elementsScroll;
+    private NameView nameView;
+
 
     //scroll gauche
     private AlgoView algoScroll;
@@ -103,9 +113,34 @@ public class AlgoActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        actionSave(0);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerLocalBroadcastManager();
+        actionLoad(0);
+    }
+
+    @Override
+    public void onDestroy() {
+        //unregisterReceiver(onNotice);
+        //onNotice = null;
+
+        super.onDestroy();
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algo);
+
+
 
         //DO UNDO REDO
         redoStack = new Stack<Action>();
@@ -126,8 +161,8 @@ public class AlgoActivity extends AppCompatActivity {
         //Gestion des main scoll
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         elementsScroll = (ElementsView) findViewById(R.id.elementsScroll);
+        nameView = (NameView) findViewById(R.id.namesScroll);
         algoScroll = (AlgoView) findViewById(R.id.algoScroll);
-
 
         ///////////Gestion viewanimator/////////////
         viewAnimator = (ViewAnimator) findViewById(R.id.viewanimator);
@@ -170,35 +205,107 @@ public class AlgoActivity extends AppCompatActivity {
         }
 
 
-        onNotice = new BroadcastReceiver() {
 
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals("connected")) {
-                    setState(ConnectionState.connected);
-                } else if (intent.getAction().equals("disconnected")) {
-                    setState(ConnectionState.disconnected);
-                }
-                else if(intent.getAction().equals("doAction")){
-                    consumeActions();
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("removeLastAction")){
-                    removeLastAction();
-                    algoScroll.autoIndent();
-                }
-                else if(intent.getAction().equals("autoIndent")){
-                    algoScroll.autoIndent();
-                }
-            }
-        };
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
+
+
 
     }
+
+    private void registerLocalBroadcastManager(){
+        if(onNotice == null){
+            onNotice = new BroadcastReceiver() {
+
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (intent.getAction().equals("connected")) {
+                        setState(ConnectionState.connected);
+                    } else if (intent.getAction().equals("disconnected")) {
+                        setState(ConnectionState.disconnected);
+                    }
+                    else if(intent.getAction().equals("doAction")){
+                        consumeActions();
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("removeLastAction")){
+                        removeLastAction();
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("autoIndent")){
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("addProductions")){
+                        //LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                        int line = intent.getIntExtra("line",0);
+                        int i = 0;
+                        List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                        for(ElementString es : list){
+                            Production p = new Production(algoScroll.getLl().getContext(),es);
+                            addProduction(p,line+i);
+                            i++;
+                        }
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("removeProductions")){
+                        int line = intent.getIntExtra("line",0);
+                        List<ElementString> list = (ArrayList<ElementString>) intent.getSerializableExtra("elements");
+                        for(ElementString es : list){
+                            Production p = new Production(algoScroll.getLl().getContext(),es);
+                            removeProduction(p,line);
+                        }
+                        algoScroll.autoIndent();
+                    }
+                    else if(intent.getAction().equals("moveProduction")){
+                        int lineFrom = intent.getIntExtra("from",0);
+                        int lineTo = intent.getIntExtra("to",0);
+                        if(algoScroll.getLl().getChildAt(lineFrom) != null){
+                            View v = algoScroll.getLl().getChildAt(lineFrom);
+                            algoScroll.getLl().removeView(v);
+                            algoScroll.getLl().addView(v,lineTo);
+                            algoScroll.autoIndent();
+                        }
+                    }
+                }
+            };
+        }
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("connected"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("disconnected"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("doAction"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeLastAction"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("autoIndent"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("addProductions"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("removeProductions"));
+            LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("moveProduction"));
+
+    }
+    /*private void unregisterLocalBroadcastManager(){
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice);
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("connected"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("disconnected"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("doAction"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("removeLastAction"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("autoIndent"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("addProductions"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("removeProductions"));
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onNotice, new IntentFilter("moveProduction"));
+
+    }*/
+
+
+
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+
+    public void addProduction(Production prod,int line){
+        algoScroll.getLl().addView(prod,line);
+    }
+
+    public void removeProduction(Production prod,int line){
+        algoScroll.getLl().removeView(algoScroll.getLl().getChildAt(line));
+    }
+
 
 
     public void removeLastAction(){
@@ -465,47 +572,105 @@ public class AlgoActivity extends AppCompatActivity {
         }
     }
     private void saveAlgo(int slot) throws IOException {
-        // Write to disk with FileOutputStream
         FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
-        // Write object with ObjectOutputStream
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 
-        ArrayList<ElementString> list = new ArrayList<>();
+        HashMap<String,Object> list = new HashMap<>();
+        ArrayList<ElementString> algolist = new ArrayList<>();
+
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
             Object element = algoScroll.getLl().getChildAt(i);
                 if(element instanceof Production){
-                    list.add(((Production) element).getBasicElement());
-                    //list.add(algoScroll.getLl().getChildAt(i));
+                    algolist.add(((Production) element).getBasicElement());
                 }
         }
-        // Write object out to disk
+        list.put("PANEL",viewAnimator.indexOfChild(viewAnimator.getCurrentView()));
+        list.put("ALGO",algolist);
+
+        ArrayList<String> varlist = new ArrayList<>();
+        for(int i = 0 ; i < this.nameView.getVariables().size(); i ++){
+            Object element = this.nameView.getVariables().get(i);
+            if(element instanceof String){
+                varlist.add((element.toString()));
+            }
+        }
+        list.put("VAR",varlist);
+
+        ArrayList<String> fctlist = new ArrayList<>();
+        for(int i = 0 ; i < this.nameView.getFonctions().size(); i ++){
+            Object element = this.nameView.getFonctions().get(i);
+            if(element instanceof String){
+                fctlist.add((element.toString()));
+            }
+        }
+        list.put("FCT",fctlist);
+
         obj_out.writeObject(list);
+        if(slot!=0){
+            Context context = getApplicationContext();
+            CharSequence text = "Sauvegarde sur le slot "+slot+" réussie !";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
     }
 
 
     private void loadAlgo(int slot) throws IOException, ClassNotFoundException {
-        // Read from disk using FileInputStream
         FileInputStream f_in = new
                 FileInputStream("/sdcard/slot" + slot + ".data");
-
-        // Read object using ObjectInputStream
         ObjectInputStream obj_in = new ObjectInputStream(f_in);
-
-        // Read an object
         Object obj = obj_in.readObject();
-        if(obj instanceof ArrayList){
-            ArrayList<ElementString> list = ((ArrayList<ElementString>)obj);
+        if(obj instanceof HashMap){
+            HashMap<String,Object> list = ((HashMap<String,Object>)obj);
             algoScroll.getLl().removeAllViews();
-            for(int i = 0 ; i < list.size() ; i ++){
-                algoScroll.getLl().addView(new Production(this,list.get(i)));
+            nameView.getFonctions().clear();
+            nameView.getVariables().clear();
+            if(list!=null){
+
+
+                ArrayList<String> varlist = (ArrayList<String>) list.get("VAR");
+            ArrayList<String> fctlist = (ArrayList<String>) list.get("FCT");
+            ArrayList<ElementString> algolist = (ArrayList<ElementString>) list.get("ALGO");
+
+
+                for(int i = 0 ; i < algolist.size() ; i ++){
+                    algoScroll.getLl().addView(new Production(this,algolist.get(i)));
+                }
+
+                for(int i = 0 ; i < varlist.size() ; i ++) {
+                    nameView.addVariable(varlist.get(i));
+                }
+                for(int i = 0 ; i < fctlist.size() ; i ++) {
+                    nameView.addFunction(fctlist.get(i));
+                }
+                algoScroll.autoIndent();
+                if(list.get("PANEL")!=null)
+                    viewAnimator.setDisplayedChild((int)list.get("PANEL"));
+                //viewAnimator.indexOfChild(viewAnimator.getCurrentView())
+
+                Context context = getApplicationContext();
+                CharSequence text;
+
+                if(slot==0){
+                    text = "sauvegarde auto restaurée";
+                }else{
+                    text = "sauvegarde "+slot+" restaurée";
+
+                }
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+
             }
-            algoScroll.autoIndent();
 
         }
 
     }
-
-
     public void actionSave(View view) {
         int slot = 1;
         try {
@@ -521,6 +686,7 @@ public class AlgoActivity extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("failed to load file from slot " + slot);
         }
     }
@@ -532,6 +698,7 @@ public class AlgoActivity extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("failed to load file from slot " + slot);
         }
     }

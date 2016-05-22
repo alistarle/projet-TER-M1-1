@@ -46,13 +46,18 @@ public abstract class ElementLogic extends TextView implements DraggableElement 
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
+    public List<Production> onDraggedOnLine(View v) {
         return null;
     }
 
     @Override
     public void onDropOver(final Production block) {
 
+    }
+
+    @Override
+    public boolean isDraggableOnLine() {
+        return false;
     }
 
 

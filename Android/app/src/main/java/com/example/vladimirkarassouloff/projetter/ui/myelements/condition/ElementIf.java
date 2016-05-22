@@ -29,8 +29,8 @@ public class ElementIf extends TextView implements DraggableElement {
     }
 
     @Override
-    public List<View> onDraggedOnLine(View v){
-        List<View> array = new ArrayList<View>();
+    public List<Production> onDraggedOnLine(View v){
+        List<Production> array = new ArrayList<Production>();
         /*ProductionIf tv = new ProductionIf(v.getContext());
         ProductionBraceCloser pb = new ProductionBraceCloser(v.getContext());
         array.add(tv);
@@ -56,6 +56,10 @@ public class ElementIf extends TextView implements DraggableElement {
     @Override
     public void onDropOver(final Production block) {
 
+    }
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
     }
 
 }

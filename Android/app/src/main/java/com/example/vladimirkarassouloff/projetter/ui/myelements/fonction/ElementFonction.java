@@ -35,10 +35,8 @@ public class ElementFonction extends TextView implements DraggableElement {
 
 
     @Override
-    public List<View> onDraggedOnLine(View v) {
-        List<View> ar = new ArrayList<View>();
-        /*ProductionFonction pv = new ProductionFonction(getContext(),element.toString());
-        ar.add(pv);*/
+    public List<Production> onDraggedOnLine(View v) {
+        List<Production> ar = new ArrayList<Production>();
         Production p = new Production(getContext(), new FonctionString(element.getName()));
         ar.add(p);
         return ar;
@@ -59,5 +57,10 @@ public class ElementFonction extends TextView implements DraggableElement {
     @Override
     public void onDropOver(final Production block) {
 
+    }
+
+    @Override
+    public boolean isDraggableOnLine() {
+        return true;
     }
 }
