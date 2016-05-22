@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5sp"
-        android:text="Choisissez un slot de sauvegarde à charger" />
+        android:text="Choisissez le slot à charger"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <RadioGroup
         android:layout_width="wrap_content"

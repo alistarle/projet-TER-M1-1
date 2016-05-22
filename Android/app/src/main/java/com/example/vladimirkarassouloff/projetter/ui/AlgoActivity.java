@@ -55,6 +55,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -536,14 +537,47 @@ public class AlgoActivity extends AppCompatActivity {
     private void saveAlgo(int slot) throws IOException {
         FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-        ArrayList<ElementString> list = new ArrayList<>();
+
+        HashMap<String,Object> list = new HashMap<>();
+        ArrayList<ElementString> algolist = new ArrayList<>();
+
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
             Object element = algoScroll.getLl().getChildAt(i);
                 if(element instanceof Production){
-                    list.add(((Production) element).getBasicElement());
+                    algolist.add(((Production) element).getBasicElement());
                 }
         }
+        list.put("PANEL",viewAnimator.indexOfChild(viewAnimator.getCurrentView()));
+        list.put("ALGO",algolist);
+
+        ArrayList<String> varlist = new ArrayList<>();
+        for(int i = 0 ; i < this.nameView.getVariables().size(); i ++){
+            Object element = this.nameView.getVariables().get(i);
+            if(element instanceof String){
+                varlist.add((element.toString()));
+            }
+        }
+        list.put("VAR",varlist);
+
+        ArrayList<String> fctlist = new ArrayList<>();
+        for(int i = 0 ; i < this.nameView.getFonctions().size(); i ++){
+            Object element = this.nameView.getFonctions().get(i);
+            if(element instanceof String){
+                fctlist.add((element.toString()));
+            }
+        }
+        list.put("FCT",fctlist);
+
         obj_out.writeObject(list);
+        if(slot!=0){
+            Context context = getApplicationContext();
+            CharSequence text = "Sauvegarde sur le slot "+slot+" réussie !";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
     }
 
 
@@ -552,19 +586,54 @@ public class AlgoActivity extends AppCompatActivity {
                 FileInputStream("/sdcard/slot" + slot + ".data");
         ObjectInputStream obj_in = new ObjectInputStream(f_in);
         Object obj = obj_in.readObject();
-        if(obj instanceof ArrayList){
-            ArrayList<ElementString> list = ((ArrayList<ElementString>)obj);
+        if(obj instanceof HashMap){
+            HashMap<String,Object> list = ((HashMap<String,Object>)obj);
             algoScroll.getLl().removeAllViews();
-            for(int i = 0 ; i < list.size() ; i ++){
-                algoScroll.getLl().addView(new Production(this,list.get(i)));
+            nameView.getFonctions().clear();
+            nameView.getVariables().clear();
+            if(list!=null){
+
+
+                ArrayList<String> varlist = (ArrayList<String>) list.get("VAR");
+            ArrayList<String> fctlist = (ArrayList<String>) list.get("FCT");
+            ArrayList<ElementString> algolist = (ArrayList<ElementString>) list.get("ALGO");
+
+
+                for(int i = 0 ; i < algolist.size() ; i ++){
+                    algoScroll.getLl().addView(new Production(this,algolist.get(i)));
+                }
+
+                for(int i = 0 ; i < varlist.size() ; i ++) {
+                    nameView.addVariable(varlist.get(i));
+                }
+                for(int i = 0 ; i < fctlist.size() ; i ++) {
+                    nameView.addFunction(fctlist.get(i));
+                }
+                algoScroll.autoIndent();
+                if(list.get("PANEL")!=null)
+                    viewAnimator.setDisplayedChild((int)list.get("PANEL"));
+                //viewAnimator.indexOfChild(viewAnimator.getCurrentView())
+
+                Context context = getApplicationContext();
+                CharSequence text;
+
+                if(slot==0){
+                    text = "sauvegarde auto restaurée";
+                }else{
+                    text = "sauvegarde "+slot+" restaurée";
+
+                }
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+
             }
-            algoScroll.autoIndent();
 
         }
 
     }
-
-
     public void actionSave(View view) {
         int slot = 1;
         try {
@@ -580,6 +649,7 @@ public class AlgoActivity extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("failed to load file from slot " + slot);
         }
     }
@@ -591,6 +661,7 @@ public class AlgoActivity extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("failed to load file from slot " + slot);
         }
     }
