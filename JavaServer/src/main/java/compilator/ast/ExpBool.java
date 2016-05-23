@@ -1,5 +1,7 @@
 package compilator.ast;
 
+import java.util.List;
+
 /**
  * Created by thomas on 22/02/16.
  */
@@ -16,6 +18,11 @@ public class ExpBool extends Expression {
     @Override
     public Type.EnumType getType() {
         return Type.EnumType.BOOLVAL;
+    }
+
+    @Override
+    public int evaluate(List<Integer> stack) {
+        return (value.equals(Bool.TRUE)) ? 1 : 0;
     }
 
     @Override

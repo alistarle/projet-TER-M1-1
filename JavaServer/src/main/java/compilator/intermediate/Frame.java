@@ -36,6 +36,22 @@ public class Frame {
         return instructions;
     }
 
+    public Label getEntry() {
+        return entry_label;
+    }
+
+    public Label getReturn() {
+        return return_label;
+    }
+
+    public ArrayList<Integer> getArgs() {
+        return args;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
     @Override
     public String toString() {
         //TODO Rework the toString of arrayList to prevent [ ] to be appended

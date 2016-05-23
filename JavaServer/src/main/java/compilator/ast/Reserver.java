@@ -13,10 +13,15 @@ import java.util.ArrayList;
 public class Reserver extends Assign {
 
     public enum Function {
-        IN(new FunctionIdentificateur(Type.EnumType.INTVAL, "in")),
-        OUT(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "out")),
+        ETEINDRELED(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "EteindreLed")),
         ALLUMERLED(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "AllumerLed")),
-        ETEINDRELED(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "EteindreLed"));
+        MOTEUR(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "Moteur")),
+        TOURNERTETE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "TournerTete")),
+        INFRAROUGEDROIT(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "InfrarougeDroit")),
+        INFRAROUGECENTRE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "InfrarougeCentre")),
+        INFRAROUGEGAUCHE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "InfrarougeGauche")),
+        ODOMETRE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "Odometre")),
+        ULTRASON(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "Ultrason"));
 
         private FunctionIdentificateur fi;
 

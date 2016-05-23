@@ -4,6 +4,8 @@ import compilator.exceptions.ReferenceIndefinie;
 import compilator.exceptions.TypeIncoherent;
 import compilator.table.Table;
 
+import java.util.List;
+
 public class ExpIdArray extends Expression {
 
     public String id;
@@ -31,6 +33,11 @@ public class ExpIdArray extends Expression {
                 throw new ReferenceIndefinie(id,pos);
             }
         }
+    }
+
+    @Override
+    public int evaluate(List<Integer> stack) {
+        return 0;
     }
 
     @Override

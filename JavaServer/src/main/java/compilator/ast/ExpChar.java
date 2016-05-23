@@ -1,5 +1,7 @@
 package compilator.ast;
 
+import java.util.List;
+
 /**
  * Created by thomas on 22/02/16.
  */
@@ -16,6 +18,11 @@ public class ExpChar extends Expression {
     @Override
     public Type.EnumType getType() {
         return Type.EnumType.CHARVAL;
+    }
+
+    @Override
+    public int evaluate(List<Integer> stack) {
+        return (value.equals("0")) ? 0 : 1;
     }
 
     @Override

@@ -3,6 +3,8 @@ package compilator.ast;
 import compilator.exceptions.ReferenceIndefinie;
 import compilator.table.Table;
 
+import java.util.List;
+
 public class ExpVar extends Expression {
 
 	//Flag use to tweak the toString function from name to regIndex
@@ -32,6 +34,11 @@ public class ExpVar extends Expression {
 		}else{
 			throw new ReferenceIndefinie(name,pos);
 		}
+	}
+
+	@Override
+	public int evaluate(List<Integer> stack) {
+		return stack.get(reg_index);
 	}
 
 	public int getIndex() {

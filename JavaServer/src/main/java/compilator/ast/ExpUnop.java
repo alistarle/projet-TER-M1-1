@@ -1,6 +1,11 @@
 package compilator.ast;
 
+import com.ericsson.otp.erlang.OtpAuthException;
+import com.ericsson.otp.erlang.OtpErlangExit;
 import compilator.exceptions.TypeIncoherent;
+
+import java.io.IOException;
+import java.util.List;
 
 public class ExpUnop extends Expression {
     public Expression right;
@@ -22,6 +27,11 @@ public class ExpUnop extends Expression {
         }else {
             return right.getType();
         }
+    }
+
+    @Override
+    public int evaluate(List<Integer> stack) throws InterruptedException, OtpErlangExit, OtpAuthException, IOException {
+        return (right.evaluate(stack) == 1) ? 0 : 1;
     }
 
     @Override

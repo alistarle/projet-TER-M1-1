@@ -10,11 +10,8 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 /**
  * Created by thomas on 29/02/16.
@@ -31,10 +28,8 @@ public class Main {
         File file = new File("/Users/alistarle/Documents/Master/Compilation/exemples/abs_main.miniLI");
         FileInputStream fis = new FileInputStream(file);
 
-        String testCode = "void main() { AllumerLed(); }";
-        InputStream is = new ByteArrayInputStream(testCode.getBytes(Charset.defaultCharset()));
-
-        ANTLRInputStream input = new ANTLRInputStream(is);
+        String testCode = "int main () {AllumerLed(); return 0;}";
+        ANTLRInputStream input = new ANTLRInputStream(testCode);
         // Creation of the lexer for pico programs
         MiniliLexer lexer = new MiniliLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);

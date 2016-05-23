@@ -1,5 +1,7 @@
 package compilator.ast;
 
+import java.util.List;
+
 public class ExpInt extends Expression {
 	public int value;
 	public ExpInt(Position pos, int value){
@@ -13,6 +15,11 @@ public class ExpInt extends Expression {
 	@Override
 	public Type.EnumType getType() throws Exception {
 		return Type.EnumType.INTVAL;
+	}
+
+	@Override
+	public int evaluate(List<Integer> stack) {
+		return (value > 0) ? 1 : 0;
 	}
 
 	@Override

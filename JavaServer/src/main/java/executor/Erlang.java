@@ -1,9 +1,11 @@
 package executor;
 
 import com.ericsson.otp.erlang.*;
+import compilator.ast.Reserver;
 import enums.Direction;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Erlang {
@@ -45,6 +47,35 @@ public class Erlang {
 
     public Erlang() {
         connect();
+    }
+
+    public int execute(Reserver.Function func, ArrayList<Integer> args) throws OtpErlangExit, IOException, OtpAuthException, InterruptedException {
+        switch(func)
+        {
+            case ALLUMERLED:
+                this.led(true);
+                return 0;
+            case ETEINDRELED:
+                this.led(false);
+                return 0;
+            case INFRAROUGECENTRE:
+                return Integer.valueOf(this.infrarouges().elementAt(1).toString());
+            case INFRAROUGEDROIT:
+                return Integer.valueOf(this.infrarouges().elementAt(2).toString());
+            case INFRAROUGEGAUCHE:
+                return Integer.valueOf(this.infrarouges().elementAt(0).toString());
+            case MOTEUR:
+                this.moteurs(Direction.values()[args.get(0)]);
+                return 0;
+            case ODOMETRE:
+                return (Integer.valueOf(this.odometres().elementAt(0).toString()) + Integer.valueOf(this.odometres().elementAt(1).toString()))/2;
+            case TOURNERTETE:
+                this.servo(args.get(0));
+                return 0;
+            case ULTRASON:
+                return Integer.valueOf(this.ultrason().toString());
+        }
+        return 0;
     }
 
     public void moteurs(Direction dir) throws IOException, OtpErlangExit, OtpAuthException, InterruptedException {

@@ -67,6 +67,10 @@ public class Intermediate {
         return sb.toString();
     }
 
+    public static ArrayList<Frame> getFrameList() {
+        return frameList;
+    }
+
     public static int fresh_reg()
     {
         return reg_index++;

@@ -8,6 +8,8 @@ import compilator.miniLI.ErrorHandling;
 import compilator.parser.MiniliLexer;
 import compilator.parser.MiniliParser;
 import compilator.parser.MiniliVisitor;
+import compilator.table.Table;
+import executor.Executor;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -45,6 +47,10 @@ public class Compiler {
         System.out.println("=========== Language Intermediaire ===========");
         Intermediate.genIntermediate(program);
         System.out.println(Intermediate.printIntermediate());
+
+        System.out.println("=========== Debut de l'éxécution ===========");
+        Executor exec = new Executor(Intermediate.getFrameList(), Table.getInstance().getFunc("main").getIndex());
+        exec.execute();
 
         return "OK";
     }
