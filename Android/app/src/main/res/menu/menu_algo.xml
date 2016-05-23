@@ -29,6 +29,8 @@
                 android:orderInCategory="100" app:showAsAction="never" />
             <item android:id="@+id/action_show_operator" android:title="Afficher les opérateurs"
                 android:orderInCategory="100" app:showAsAction="never" />
+            <item android:id="@+id/action_show_special" android:title="Afficher les fonctions spéciales"
+                android:orderInCategory="100" app:showAsAction="never" />
             <item android:id="@+id/action_reset" android:title="Nouvel algo"
                 android:orderInCategory="100" app:showAsAction="never"/>
 

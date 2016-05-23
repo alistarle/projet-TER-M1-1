@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.action.AddLineAction;
+import com.example.vladimirkarassouloff.projetter.action.DeleteLineAction;
 import com.example.vladimirkarassouloff.projetter.action.ModifyProductionAction;
 import com.example.vladimirkarassouloff.projetter.action.MoveLineAction;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
@@ -48,19 +50,21 @@ public class AlgoView extends ScrollView {
     private Drawable separator;
     private TextView myCustomSeparator;
 
-    private static float MARGE = 15f;
+    private static float MARGE = 25f;
 
 
     protected int colorDropSupported = Color.rgb(85,255,142);
     protected int colorErrorDetected = Color.rgb(255,85,85);
 
 
-    private int lineInsert;
+    private boolean productionDropOutside;//sert a la suppression d'element algorithmique
+    private int lineInsert;//insert block violet
     private View dropBlock;
 
     private TextView lastLine; //sert a empecher l'impossibilite d'inserer une ligne en bas de la scrollview
 
     private enum ActionUser {
+        nothing,
         drop,
         line,
         linemove
@@ -104,9 +108,7 @@ public class AlgoView extends ScrollView {
 
             @Override
             public boolean onDrag(View v, DragEvent event) {
-                if(event.getLocalState() instanceof Production){
-                    currentState = ActionUser.linemove;
-                }
+
 
 
 
@@ -114,7 +116,11 @@ public class AlgoView extends ScrollView {
                 switch (event.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
                         resetSeparator();
-                        if(event.getLocalState() instanceof DraggableElement){
+                        if(event.getLocalState() instanceof Production){
+                            currentState = ActionUser.linemove;
+                            productionDropOutside = false;
+                        }
+                        else if(event.getLocalState() instanceof DraggableElement){
                             DraggableElement de = (DraggableElement) event.getLocalState();
                             for(int i = 0 ; i < ll.getChildCount() ; i++) {
                                 View b = ll.getChildAt(i);
@@ -133,10 +139,12 @@ public class AlgoView extends ScrollView {
                     case DragEvent.ACTION_DRAG_ENTERED:
                         // v.setBackgroundDrawable(enterShape);
                         //Log.i("ENTERED algo", "ENTERED algo");
+                        productionDropOutside = false;
                         break;
                     case DragEvent.ACTION_DRAG_EXITED:
                         // v.setBackgroundDrawable(normalShape);
                         //Log.i("EXITED algo", "EXITED algo");
+                        productionDropOutside = true;
                         break;
                     case DragEvent.ACTION_DRAG_LOCATION:
                         //Log.i("dragloc algo " + event.getX() + " " + event.getY(), "dragloc algo");
@@ -150,9 +158,20 @@ public class AlgoView extends ScrollView {
                         autoIndent();
                         break;
                     case DragEvent.ACTION_DRAG_ENDED:
+                        if(currentState == ActionUser.linemove && productionDropOutside && event.getLocalState() instanceof Production){
+                            resetSeparator();
+                            int line = ll.indexOfChild((Production)event.getLocalState());
+                            ArrayList<Production> oldView = new ArrayList<>();
+                            oldView.add((Production)event.getLocalState());
+                            DeleteLineAction dla = new DeleteLineAction(line, oldView);
+                            AlgoActivity.ACTION_TO_CONSUME.add(dla);
+                            Intent intent = new Intent("doAction");
+                            LocalBroadcastManager.getInstance(MyApp.context).sendBroadcast(intent);
+                        }
                         resetDefaultColor();
                         autoIndent();
                         resetSeparator();
+                        currentState = ActionUser.nothing;
                     default:
                         break;
                 }
@@ -190,11 +209,11 @@ public class AlgoView extends ScrollView {
         Production main = new Production(getContext(),new FonctionInstanciationString("main","void"));
 
         //ProductionFonctionInstanciation main = new ProductionFonctionInstanciation(getContext(),"main","void");
-        main.addComponent(new NumberString("43"));
+        /*main.addComponent(new NumberString("43"));
         main.addComponent(new NumberString("12"));
         main.addComponent(new NumberString("65"));
         main.addComponent(new NumberString("124"));
-        main.addComponent(new NumberString("55512"));
+        main.addComponent(new NumberString("55512"));*/
         ll.addView(main,0);
         //ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
         Production pbc = new Production(getContext(),new BraceCloserString());
@@ -209,7 +228,7 @@ public class AlgoView extends ScrollView {
     private void showInsertResult(DragEvent event, View v){
         //on regarde si on dragg sur un block
         View view = (View) event.getLocalState();
-        if (testIfInsideBlock(event.getX(), event.getY())) {
+        if (currentState != ActionUser.linemove && testIfInsideBlock(event.getX(), event.getY())) {
                // Log.i("d","d");
                 if(view instanceof DraggableElement) {
                     DraggableElement de = (DraggableElement) view;
@@ -240,7 +259,9 @@ public class AlgoView extends ScrollView {
             if(i == ll.getChildCount()){//on replace 1 cran en dessous, car on ne drag pas en dessous de la "lastLine"
                 i--;
             }
-            currentState = ActionUser.line;
+            if(currentState != ActionUser.linemove) {
+                currentState = ActionUser.line;
+            }
             lineInsert = i;
             ll.addView(myCustomSeparator, i);
         }

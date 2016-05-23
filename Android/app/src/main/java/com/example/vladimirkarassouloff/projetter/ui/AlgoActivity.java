@@ -402,14 +402,18 @@ public class AlgoActivity extends AppCompatActivity {
             intent.putExtra("message", algoScroll.getAlgorithme());
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
-        } else if (id == R.id.action_show_name && viewAnimator.getDisplayedChild() != 0) {
-            viewAnimator.setDisplayedChild(0);
-            return true;
-        } else if (id == R.id.action_show_stuct && viewAnimator.getDisplayedChild() != 1) {
+        } else if (id == R.id.action_show_name && viewAnimator.getDisplayedChild() != 1) {
             viewAnimator.setDisplayedChild(1);
             return true;
-        } else if (id == R.id.action_show_operator && viewAnimator.getDisplayedChild() != 2) {
+        } else if (id == R.id.action_show_stuct && viewAnimator.getDisplayedChild() != 2) {
             viewAnimator.setDisplayedChild(2);
+            return true;
+        } else if (id == R.id.action_show_operator && viewAnimator.getDisplayedChild() != 3) {
+            viewAnimator.setDisplayedChild(3);
+            return true;
+        }
+        else if (id == R.id.action_show_special && viewAnimator.getDisplayedChild() != 0) {
+            viewAnimator.setDisplayedChild(0);
             return true;
         }else if(id == R.id.action_save){
             showSavePrompt();
