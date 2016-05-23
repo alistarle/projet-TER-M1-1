@@ -29,6 +29,9 @@ public class ReturnString extends ElementString {
 
     @Override
     public String toString() {
+        if(components.size()==0){
+            return "return";
+        }
         return "return ("+getComponentString()+")";
     }
 

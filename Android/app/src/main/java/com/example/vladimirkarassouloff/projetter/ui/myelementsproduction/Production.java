@@ -125,6 +125,10 @@ public class Production extends LinearLayout {
         init();
     }
 
+    public TextView getTv() {
+        return tv;
+    }
+
     protected void init(){
         this.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -286,7 +290,7 @@ public class Production extends LinearLayout {
     public void supprimer(){
         if(getParent()!=null && getParent().getParent()!=null && getParent().getParent() instanceof AlgoView) {
             int line = ((ViewGroup)getParent()).indexOfChild(this);
-            List<Production> oldView = new ArrayList<>();
+            ArrayList<Production> oldView = new ArrayList<>();
             oldView.add(this);
             DeleteLineAction ala = new DeleteLineAction(line, oldView);
             AlgoActivity.ACTION_TO_CONSUME.add(ala);
@@ -386,8 +390,10 @@ public class Production extends LinearLayout {
 
         //on place les elements et on bind l'event
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(10, 0, 10, 0);
+                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        layoutParams.setMargins(10, 10, 10, 10);
+
+        myCustomSeparator.setLayoutParams(layoutParams);
 
         List<ElementString> arrayElements = new ArrayList<>();
         for(ElementString es : elementToChange.components) {
@@ -421,6 +427,9 @@ public class Production extends LinearLayout {
             prod.setOnLongClickListener(new OnLongClickListener(){public boolean onLongClick(View arg0) {return false;}});
 
             llElem.addView(prod,layoutParams);
+            prod.setMinimumWidth(60);
+            prod.getTv().setGravity(Gravity.CENTER_HORIZONTAL);
+            //prod.setPadding(100,30,100,30);
         }
 
 
@@ -430,7 +439,7 @@ public class Production extends LinearLayout {
         alertDialogBuilder.setCancelable(true).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        List<ElementString> newArray = new ArrayList<ElementString>();
+                        ArrayList<ElementString> newArray = new ArrayList<ElementString>();
                         for(int i = 0 ; i < llElem.getChildCount() ; i++){
                             if(llElem.getChildAt(i) instanceof Production){
                                 Production pr = (Production) llElem.getChildAt(i);
@@ -534,6 +543,10 @@ public class Production extends LinearLayout {
 
 
 
+
+    public String getAlgoText(){
+        return basicElement.getAlgoString();
+    }
 
     public String getBasicText(){
         return basicElement.getBasicText();

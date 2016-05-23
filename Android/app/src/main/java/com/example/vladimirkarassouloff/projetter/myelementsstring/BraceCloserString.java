@@ -14,4 +14,10 @@ public class BraceCloserString extends ElementString {
     public int tabChanger() {
         return -1;
     }
+
+    @Override
+    public boolean shouldHaveSemicolumn(){
+        return false;
+    }
+
 }

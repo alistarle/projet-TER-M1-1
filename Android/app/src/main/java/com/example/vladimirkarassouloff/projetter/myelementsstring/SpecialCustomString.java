@@ -1,5 +1,6 @@
 package com.example.vladimirkarassouloff.projetter.myelementsstring;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
 public class SpecialCustomString extends ElementString {
     public String specialValue;
 
-    public SpecialCustomString(List<ElementString> components, String specialValue) {
+    public SpecialCustomString(ArrayList<ElementString> components, String specialValue) {
         super(components);
         this.specialValue = specialValue;
     }

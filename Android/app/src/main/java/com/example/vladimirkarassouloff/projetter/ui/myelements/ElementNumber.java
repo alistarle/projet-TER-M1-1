@@ -75,8 +75,10 @@ public class ElementNumber extends TextView implements DraggableElement {
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                block.getBasicElement().components.remove(tv);
+                                /*block.getBasicElement().components.remove(tv);
                                 Intent intent = new Intent("autoIndent");
+                                LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);*/
+                                Intent intent = new Intent("removeLastAction");
                                 LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
                                 dialog.cancel();
                             }

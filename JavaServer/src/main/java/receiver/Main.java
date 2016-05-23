@@ -37,7 +37,7 @@ public class Main {
                 String envoie, reponse;
 
                 // Initiate conversation with client
-                CustomProtocol cp = new CustomProtocol();
+                receiver.CustomProtocol cp = new receiver.CustomProtocol();
                 reponse = cp.processInput(null);
                 out.println(reponse);
 

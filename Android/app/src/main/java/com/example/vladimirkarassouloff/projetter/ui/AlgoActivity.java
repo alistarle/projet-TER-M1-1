@@ -37,7 +37,9 @@ import android.widget.ViewAnimator;
 import com.example.vladimirkarassouloff.projetter.R;
 import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogConnection;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.network.NetworkInfo;
 import com.example.vladimirkarassouloff.projetter.network.NetworkTask;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -90,6 +92,7 @@ public class AlgoActivity extends AppCompatActivity {
     private MenuItem menuDisconnect;
     private MenuItem menuSave;
     private MenuItem menuLoad;
+    private MenuItem menuReset;
 
     private TextView test;
     private TextView drag;
@@ -203,12 +206,18 @@ public class AlgoActivity extends AppCompatActivity {
                 this.doConnect(new NetworkInfo(ip, port));
             }
         }
+    }
 
-
-
-
-
-
+    protected void newProject(){
+        algoScroll.getLl().removeAllViews();
+        nameView.getFonctions().clear();
+        nameView.getVariables().clear();
+        undoStack.clear();
+        redoStack.clear();
+        Production main = new Production(algoScroll.getContext(),new FonctionInstanciationString("main","void"));
+        algoScroll.getLl().addView(main,0);
+        Production pbc = new Production(algoScroll.getContext(),new BraceCloserString());
+        algoScroll.getLl().addView(pbc,1);
     }
 
     private void registerLocalBroadcastManager(){
@@ -335,6 +344,7 @@ public class AlgoActivity extends AppCompatActivity {
         this.menuExecuteCode = (MenuItem) menu.findItem(R.id.action_execute);
         this.menuSave = (MenuItem) menu.findItem(R.id.action_save);
         this.menuLoad = (MenuItem) menu.findItem(R.id.action_load);
+        this.menuReset = (MenuItem) menu.findItem(R.id.action_reset);
 
 
         return true;
@@ -392,19 +402,25 @@ public class AlgoActivity extends AppCompatActivity {
             intent.putExtra("message", algoScroll.getAlgorithme());
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
-        } else if (id == R.id.action_show_name && viewAnimator.getDisplayedChild() != 0) {
-            viewAnimator.setDisplayedChild(0);
-            return true;
-        } else if (id == R.id.action_show_stuct && viewAnimator.getDisplayedChild() != 1) {
+        } else if (id == R.id.action_show_name && viewAnimator.getDisplayedChild() != 1) {
             viewAnimator.setDisplayedChild(1);
             return true;
-        } else if (id == R.id.action_show_operator && viewAnimator.getDisplayedChild() != 2) {
+        } else if (id == R.id.action_show_stuct && viewAnimator.getDisplayedChild() != 2) {
             viewAnimator.setDisplayedChild(2);
+            return true;
+        } else if (id == R.id.action_show_operator && viewAnimator.getDisplayedChild() != 3) {
+            viewAnimator.setDisplayedChild(3);
+            return true;
+        }
+        else if (id == R.id.action_show_special && viewAnimator.getDisplayedChild() != 0) {
+            viewAnimator.setDisplayedChild(0);
             return true;
         }else if(id == R.id.action_save){
             showSavePrompt();
         }else if(id == R.id.action_load){
             showLoadPrompt();
+        }else if(id == R.id.action_reset){
+            newProject();
         }
 
 
@@ -553,6 +569,7 @@ public class AlgoActivity extends AppCompatActivity {
 
 
     public void actionExport(View view) {
+        Log.wtf("message",algoScroll.getAlgorithme());
         int slot = 1;
         try {
             exportAlgo("test");
@@ -575,9 +592,19 @@ public class AlgoActivity extends AppCompatActivity {
         FileOutputStream f_out = new FileOutputStream("/sdcard/slot" + slot + ".data");
         ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 
-        HashMap<String,Object> list = new HashMap<>();
-        ArrayList<ElementString> algolist = new ArrayList<>();
 
+        HashMap<String,Object> list = new HashMap<>();
+        ArrayList<Action> dolist = new ArrayList<>();
+        for(int i = 0; i< redoStack.size() ; i ++){
+            dolist.add(redoStack.get(i));
+        }
+        list.put("REDO",dolist);
+        ArrayList<Action> undolist = new ArrayList<>();
+        for(int i = 0 ; i< undoStack.size(); i ++){
+            undolist.add(undoStack.get(i));
+        }
+        list.put("UNDO",undolist);
+        ArrayList<ElementString> algolist = new ArrayList<>();
         for (int i = 0 ; i< algoScroll.getLl().getChildCount();i++) {
             Object element = algoScroll.getLl().getChildAt(i);
                 if(element instanceof Production){
@@ -628,14 +655,23 @@ public class AlgoActivity extends AppCompatActivity {
             algoScroll.getLl().removeAllViews();
             nameView.getFonctions().clear();
             nameView.getVariables().clear();
+            undoStack.clear();
+            redoStack.clear();
+
             if(list!=null){
-
-
                 ArrayList<String> varlist = (ArrayList<String>) list.get("VAR");
-            ArrayList<String> fctlist = (ArrayList<String>) list.get("FCT");
-            ArrayList<ElementString> algolist = (ArrayList<ElementString>) list.get("ALGO");
+                ArrayList<String> fctlist = (ArrayList<String>) list.get("FCT");
+                ArrayList<ElementString> algolist = (ArrayList<ElementString>) list.get("ALGO");
+                ArrayList<Action> dolist = ((ArrayList<Action>) list.get("REDO"));
+                ArrayList<Action> undolist = ((ArrayList<Action>) list.get("UNDO"));
 
 
+                for(int i = 0 ; i < undolist.size() ; i++){
+                    undoStack.add(undolist.get(i));
+                }
+                for(int i = 0 ; i < dolist.size() ; i++){
+                    redoStack.add(dolist.get(i));
+                }
                 for(int i = 0 ; i < algolist.size() ; i ++){
                     algoScroll.getLl().addView(new Production(this,algolist.get(i)));
                 }
