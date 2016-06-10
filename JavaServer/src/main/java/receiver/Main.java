@@ -1,5 +1,7 @@
 package receiver;
 
+import executor.Executor;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -37,11 +39,12 @@ public class Main {
                 String envoie, reponse;
 
                 // Initiate conversation with client
-                receiver.CustomProtocol cp = new receiver.CustomProtocol();
+                CustomProtocol cp = new CustomProtocol();
                 reponse = cp.processInput(null);
                 out.println(reponse);
 
                 while ((envoie = in.readLine()) != null) {
+                    envoie = in.readLine();
                     reponse = cp.processInput(envoie);
 
                     if (reponse.equals("disconnect")) {
@@ -53,9 +56,13 @@ public class Main {
                             out.println(Compiler.compileCode(envoie));
                             System.out.println("Compilation réussie !");
                             out.println("compilation_success");
+                            envoie = "";
                         }catch (Exception e){
                             System.out.println("Erreur de compilation !!!");
                             out.println("compilation_failed : "+e.getMessage());
+                            e.printStackTrace();
+                            Executor.erlang.disconnect();
+                            envoie = "";
                         }
                     }
 

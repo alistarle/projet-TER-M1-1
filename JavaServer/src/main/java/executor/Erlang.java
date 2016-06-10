@@ -50,6 +50,7 @@ public class Erlang {
     }
 
     public int execute(Reserver.Function func, ArrayList<Integer> args) throws OtpErlangExit, IOException, OtpAuthException, InterruptedException {
+        System.out.println("On exec une function erlang : "+ func.name());
         switch(func)
         {
             case ALLUMERLED:

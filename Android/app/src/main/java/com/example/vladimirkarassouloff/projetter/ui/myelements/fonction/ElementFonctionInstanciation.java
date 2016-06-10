@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.ReturnString;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.utils.Debug;
 import com.example.vladimirkarassouloff.projetter.R;
@@ -36,6 +38,7 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
 
     private Production tv;
     private Production bc;
+    private Production ret;
 
     public ElementFonctionInstanciation(Context context){
         super(context);
@@ -64,10 +67,13 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
         List<Production> array = new ArrayList<Production>();
         tv = new Production(v.getContext(), new FonctionInstanciationString());
         bc = new Production(v.getContext(),new BraceCloserString());
+        ret = new Production(v.getContext(),new ReturnString());
+
+
 
         array.add(tv);
+        array.add(ret);
         array.add(bc);
-
 
 
         LayoutInflater li = LayoutInflater.from(v.getContext());
@@ -118,7 +124,7 @@ public class ElementFonctionInstanciation extends TextView implements DraggableE
         alertDialog.show();
 
         Button theButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        theButton.setOnClickListener(new ValidationDialogFunction(alertDialog,promptsView,tv));
+        theButton.setOnClickListener(new ValidationDialogFunction(alertDialog,promptsView,tv,ret));
 
         return array;
     }

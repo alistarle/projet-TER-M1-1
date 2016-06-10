@@ -19,7 +19,7 @@ public class ExpInt extends Expression {
 
 	@Override
 	public int evaluate(List<Integer> stack) {
-		return (value > 0) ? 1 : 0;
+		return value;
 	}
 
 	@Override

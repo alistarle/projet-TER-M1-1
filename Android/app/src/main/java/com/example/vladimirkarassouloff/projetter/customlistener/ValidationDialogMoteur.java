@@ -20,11 +20,11 @@ public class ValidationDialogMoteur extends ValidationDialogListener{
     private RadioGroup radioVitesse, radioDirection;
     private Moteur moteur;
 
-    public ValidationDialogMoteur(Dialog dialog, View promptsView, Moteur moteur, RadioGroup rgDir, RadioGroup rgVit) {
+    public ValidationDialogMoteur(Dialog dialog, View promptsView, Moteur moteur, RadioGroup rgDir) {
         super(dialog, promptsView);
         this.moteur = moteur;
         this.radioDirection = rgDir;
-        this.radioVitesse = rgVit;
+        //this.radioVitesse = rgVit;
     }
 
 
@@ -36,7 +36,7 @@ public class ValidationDialogMoteur extends ValidationDialogListener{
     @Override
     public void onValid() {
 
-        String valueSpeed = "";
+       /* String valueSpeed = "";
         int selectedIdVit = radioVitesse.getCheckedRadioButtonId();
         if(selectedIdVit == R.id.radioLent){
             valueSpeed = "SLOW";
@@ -47,25 +47,29 @@ public class ValidationDialogMoteur extends ValidationDialogListener{
         else{
             valueSpeed = "FAST";
         }
-
+*/
         String valueDir = "";
         int selectedIdDir = radioDirection.getCheckedRadioButtonId();
         if(selectedIdDir == R.id.radioForward){
-            valueDir = "FORWARD";
+            //valueDir = "FORWARD";
+            valueDir = "0";
         }
         else if(selectedIdDir == R.id.radioBack){
-            valueDir = "BACK";
+            //valueDir = "BACK";
+            valueDir = "1";
         }
         else if(selectedIdDir == R.id.radioLeft){
-            valueDir = "LEFT";
+            //valueDir = "LEFT";
+            valueDir = "2";
         }
         else{
-            valueDir = "RIGHT";
+            //valueDir = "RIGHT";
+            valueDir = "3";
         }
 
 
         moteur.add(new SpecialCustomString(valueDir));
-        moteur.add(new SpecialCustomString(valueSpeed));
+        //moteur.add(new SpecialCustomString(valueSpeed));
         Intent intent = new Intent("autoIndent");
         LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
     }

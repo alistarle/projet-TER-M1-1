@@ -6,12 +6,11 @@ import compilator.intermediate.Intermediate;
 import compilator.parser.MiniliLexer;
 import compilator.parser.MiniliParser;
 import compilator.parser.MiniliVisitor;
+import compilator.table.Table;
+import executor.Executor;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-
-import java.io.File;
-import java.io.FileInputStream;
 
 /**
  * Created by thomas on 29/02/16.
@@ -19,17 +18,13 @@ import java.io.FileInputStream;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
-        //Enable debug in Error Handling
         ErrorHandling.DEBUG = false;
+
+        String code = args[0];
 
         // FIRST STEP: analysis
         // Creation of the stream of characters
-        File file = new File("/Users/alistarle/Documents/Master/Compilation/exemples/abs_main.miniLI");
-        FileInputStream fis = new FileInputStream(file);
-
-        String testCode = "int main () {AllumerLed(); return 0;}";
-        ANTLRInputStream input = new ANTLRInputStream(testCode);
+        ANTLRInputStream input = new ANTLRInputStream(code);
         // Creation of the lexer for pico programs
         MiniliLexer lexer = new MiniliLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -50,5 +45,10 @@ public class Main {
         System.out.println("=========== Language Intermediaire ===========");
         Intermediate.genIntermediate(program);
         System.out.println(Intermediate.printIntermediate());
+
+        System.out.println("=========== Debut de l'éxécution ===========");
+        Executor exec = new Executor(Intermediate.getFrameList(), Table.getInstance().getFunc("main").getIndex());
+        exec.execute();
+
     }
 }

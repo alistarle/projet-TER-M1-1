@@ -49,7 +49,7 @@ public class ElementMoteur  extends ElementFonction {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
-        final RadioGroup vitesse = (RadioGroup) promptsView.findViewById(R.id.radioVitesse);
+        //final RadioGroup vitesse = (RadioGroup) promptsView.findViewById(R.id.radioVitesse);
         final RadioGroup direction = (RadioGroup) promptsView.findViewById(R.id.radioDirection);
         // set dialog message
         alertDialogBuilder.setCancelable(false).setPositiveButton("OK",
@@ -70,7 +70,8 @@ public class ElementMoteur  extends ElementFonction {
         alertDialog.show();
 
         Button theButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        theButton.setOnClickListener(new ValidationDialogMoteur(alertDialog, promptsView,moteur, direction,vitesse));
+        //theButton.setOnClickListener(new ValidationDialogMoteur(alertDialog, promptsView,moteur, direction,vitesse));
+        theButton.setOnClickListener(new ValidationDialogMoteur(alertDialog, promptsView,moteur, direction));
 
         return ar;
     }

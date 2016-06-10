@@ -2,6 +2,7 @@ package receiver;
 
 import compilator.ast.Ast;
 import compilator.ast.Program;
+import compilator.ast.Reserver;
 import compilator.intermediate.Intermediate;
 import compilator.miniLI.BuildAST;
 import compilator.miniLI.ErrorHandling;
@@ -14,12 +15,20 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.util.ArrayList;
+
 /**
  * Created by Vladimir on 13/03/2016.
  */
 public class Compiler {
 
     public static String compileCode(String code) throws Exception {
+
+        Intermediate.lbl_index = Reserver.Function.values().length;
+        Intermediate.reg_index = 0;
+        Intermediate.frameList = new ArrayList<>();
+        Table.reset();
+
         System.out.println("On a reçu le code : "+code);
         //Enable debug in Error Handling
         ErrorHandling.DEBUG = false;

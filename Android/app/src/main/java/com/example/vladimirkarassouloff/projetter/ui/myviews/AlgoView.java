@@ -28,6 +28,7 @@ import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserSt
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.ReturnString;
 import com.example.vladimirkarassouloff.projetter.ui.AlgoActivity;
 import com.example.vladimirkarassouloff.projetter.ui.MyApp;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.scrolldraggable.ElementsView;
@@ -206,7 +207,6 @@ public class AlgoView extends ScrollView {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        Production main = new Production(getContext(),new FonctionInstanciationString("main","void"));
 
         //ProductionFonctionInstanciation main = new ProductionFonctionInstanciation(getContext(),"main","void");
         /*main.addComponent(new NumberString("43"));
@@ -214,12 +214,16 @@ public class AlgoView extends ScrollView {
         main.addComponent(new NumberString("65"));
         main.addComponent(new NumberString("124"));
         main.addComponent(new NumberString("55512"));*/
+
+
+        Production main = new Production(getContext(),new FonctionInstanciationString("main","int"));
         ll.addView(main,0);
-        //ProductionBraceCloser pbc = new ProductionBraceCloser(getContext());
+        ReturnString returnElem = new ReturnString();
+        returnElem.add(new NumberString("0"));
+        Production returnProd = new Production(getContext(),returnElem);
+        ll.addView(returnProd,1);
         Production pbc = new Production(getContext(),new BraceCloserString());
-        ll.addView(pbc,1);
-
-
+        ll.addView(pbc,2);
 
         autoIndent();
     }

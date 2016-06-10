@@ -285,6 +285,7 @@ public class Production extends LinearLayout {
                     }
                 }
         );
+        this.setMinimumHeight(70);
     }
 
     public void supprimer(){

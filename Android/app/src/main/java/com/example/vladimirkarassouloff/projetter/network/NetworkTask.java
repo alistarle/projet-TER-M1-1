@@ -129,6 +129,8 @@ public class NetworkTask extends AsyncTask<Void,String,String> {
                         matcherFailed = patternFailed.matcher(fromServer);
                         MESSAGE = fromServer;
                         if (fromServer.equals("disconnect")) {
+                            Log.wtf("message","disconnect");
+
                             break;
                         }
                         else if(fromServer.equals("compilation_success")){

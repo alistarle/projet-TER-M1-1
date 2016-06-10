@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Compilator">
+    <output-path>$PROJECT_DIR$/out/artifacts/Compilator</output-path>
+    <root id="archive" name="JavaServer.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/compilator/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="JavaServer" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/OtpErlang.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/antlr4-4.5.2-1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.vladimirkarassouloff.projetter.R;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
 import com.example.vladimirkarassouloff.projetter.ui.myviews.prompt.PromptTypeVariableView;
@@ -18,12 +19,13 @@ public class ValidationDialogFunction  extends ValidationDialogProduction {
 
     protected EditText et;
     protected PromptTypeVariableView ptv;
+    protected Production returnProd;
 
-    public ValidationDialogFunction(Dialog dialog, View promptsView,Production p) {
+    public ValidationDialogFunction(Dialog dialog, View promptsView,Production p,Production returnProd) {
         super(dialog, promptsView,p);
         this.et = (EditText) promptsView.findViewById(R.id.editTextFunctionInput);
         this.ptv = (PromptTypeVariableView) promptsView.findViewById(R.id.promptviewtypefunction);
-
+        this.returnProd = returnProd;
     }
 
     @Override
@@ -61,10 +63,16 @@ public class ValidationDialogFunction  extends ValidationDialogProduction {
         //production.refreshText();
 
 
+        if(fis.getType().equals("int")){
+            returnProd.addComponent(new NumberString("0"));
+        }
+
         Intent intent = new Intent("newFunction");
         intent.putExtra("function", et.getText().toString());
         LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent);
         Intent intent2 = new Intent("autoIndent");
         LocalBroadcastManager.getInstance(promptsView.getContext()).sendBroadcast(intent2);
+
+
     }
 }

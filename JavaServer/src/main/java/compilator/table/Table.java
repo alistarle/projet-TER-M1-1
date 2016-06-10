@@ -30,6 +30,10 @@ public class Table {
         return instance;
     }
 
+    public static void reset(){
+        instance = null;
+    }
+
     public void pushBlock(Block b){
         blocks.push(b);
     }

@@ -61,29 +61,34 @@ public class Executor {
     public Executor(ArrayList<Frame> frames, int mainFrame)
     {
         this.frames = frames;
-        this.mainFrame = mainFrame;
+        this.mainFrame = mainFrame-Reserver.Function.values().length;
         this.instructions = new ArrayList<Instruction>();
         this.stack = new ArrayList<Integer>();
         this.labelLink = new HashMap<>();
         this.erlang = new Erlang();
-        this.curFrame = frames.get(mainFrame);
+        this.curFrame = frames.get(this.mainFrame);
 
         for(Frame f : frames)
         {
             instructions.addAll(f.getInstructions());
         }
         genLabelLink();
-        this.pointer = labelLink.get(frames.get(mainFrame).getEntry());
+        this.pointer = labelLink.get(frames.get(this.mainFrame).getEntry());
+        this.fp = this.mainFrame;
+        this.ra = labelLink.get(curFrame.getReturn());
     }
 
     public void execute() throws IOException, OtpErlangExit, InterruptedException, OtpAuthException {
         curIns = instructions.get(pointer);
-        while(pointer != labelLink.get(frames.get(mainFrame).getReturn()))
+        System.out.println("End at :" + labelLink.get(frames.get(mainFrame).getReturn()));
+        while(pointer != labelLink.get(frames.get(mainFrame).getReturn())+1)
         {
+            System.out.println(curIns+" at "+pointer);
             if(curIns instanceof Goto) {
                 Goto g = (Goto) curIns;
-                if(g.getLabel().equals(curFrame.getReturn())) {
+                if(g.getLabel().getIndex() == curFrame.getReturn().getIndex()) {
                     pointer = ra;
+                    curIns = instructions.get(pointer);
                     curFrame = frames.get(fp);
                 } else
                     jumpAtLabel(g.getLabel());
@@ -114,6 +119,10 @@ public class Executor {
                     }
                     jumpAtLabel(curFrame.getEntry());
                 }
+            } else if (curIns instanceof Label) {
+                if(pointer == labelLink.get(frames.get(mainFrame).getReturn())) break;
+                pointer++;
+                curIns = instructions.get(pointer);
             }
         }
         erlang.disconnect();

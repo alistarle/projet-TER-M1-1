@@ -17,11 +17,11 @@ public class Reserver extends Assign {
         ALLUMERLED(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "AllumerLed")),
         MOTEUR(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "Moteur")),
         TOURNERTETE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "TournerTete")),
-        INFRAROUGEDROIT(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "InfrarougeDroit")),
-        INFRAROUGECENTRE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "InfrarougeCentre")),
-        INFRAROUGEGAUCHE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "InfrarougeGauche")),
-        ODOMETRE(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "Odometre")),
-        ULTRASON(new FunctionIdentificateur(Type.EnumType.VOIDVAL, "Ultrason"));
+        INFRAROUGEDROIT(new FunctionIdentificateur(Type.EnumType.INTVAL, "InfrarougeDroit")),
+        INFRAROUGECENTRE(new FunctionIdentificateur(Type.EnumType.INTVAL, "InfrarougeCentre")),
+        INFRAROUGEGAUCHE(new FunctionIdentificateur(Type.EnumType.INTVAL, "InfrarougeGauche")),
+        ODOMETRE(new FunctionIdentificateur(Type.EnumType.INTVAL, "Odometre")),
+        ULTRASON(new FunctionIdentificateur(Type.EnumType.INTVAL, "Ultrason"));
 
         private FunctionIdentificateur fi;
 

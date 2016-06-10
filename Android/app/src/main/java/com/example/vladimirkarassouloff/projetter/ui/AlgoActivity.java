@@ -39,7 +39,9 @@ import com.example.vladimirkarassouloff.projetter.action.Action;
 import com.example.vladimirkarassouloff.projetter.customlistener.ValidationDialogConnection;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.BraceCloserString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.ElementString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.NumberString;
 import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.FonctionInstanciationString;
+import com.example.vladimirkarassouloff.projetter.myelementsstring.fonction.ReturnString;
 import com.example.vladimirkarassouloff.projetter.network.NetworkInfo;
 import com.example.vladimirkarassouloff.projetter.network.NetworkTask;
 import com.example.vladimirkarassouloff.projetter.ui.myelementsproduction.Production;
@@ -214,10 +216,15 @@ public class AlgoActivity extends AppCompatActivity {
         nameView.getVariables().clear();
         undoStack.clear();
         redoStack.clear();
-        Production main = new Production(algoScroll.getContext(),new FonctionInstanciationString("main","void"));
+        Production main = new Production(algoScroll.getContext(),new FonctionInstanciationString("main","int"));
         algoScroll.getLl().addView(main,0);
+        ReturnString returnElem = new ReturnString();
+        returnElem.add(new NumberString("0"));
+        Production returnProd = new Production(algoScroll.getContext(),returnElem);
+        algoScroll.getLl().addView(returnProd,1);
         Production pbc = new Production(algoScroll.getContext(),new BraceCloserString());
-        algoScroll.getLl().addView(pbc,1);
+        algoScroll.getLl().addView(pbc,2);
+        algoScroll.autoIndent();
     }
 
     private void registerLocalBroadcastManager(){
@@ -401,7 +408,10 @@ public class AlgoActivity extends AppCompatActivity {
             Intent intent = new Intent("send");
             intent.putExtra("message", algoScroll.getAlgorithme());
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-
+        } else if (id == R.id.action_run) {
+            Intent intent = new Intent("send");
+            intent.putExtra("message", algoScroll.getAlgorithme());
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
         } else if (id == R.id.action_show_name && viewAnimator.getDisplayedChild() != 1) {
             viewAnimator.setDisplayedChild(1);
             return true;

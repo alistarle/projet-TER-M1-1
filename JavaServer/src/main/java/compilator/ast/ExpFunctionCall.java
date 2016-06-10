@@ -3,8 +3,6 @@ package compilator.ast;
 import com.ericsson.otp.erlang.OtpAuthException;
 import com.ericsson.otp.erlang.OtpErlangExit;
 import compilator.exceptions.ReferenceIndefinie;
-import compilator.intermediate.Frame;
-import compilator.intermediate.Intermediate;
 import compilator.table.Table;
 import executor.Executor;
 
@@ -40,12 +38,11 @@ public class ExpFunctionCall extends Expression {
 
     @Override
     public int evaluate(List<Integer> stack) throws InterruptedException, OtpErlangExit, OtpAuthException, IOException {
-        Frame f = Intermediate.getFrameList().get(Table.getInstance().getFunc(fc.id).getIndex());
         ArrayList<Integer> params = new ArrayList<Integer>();
         for (Expression e : fc.param) {
             params.add(e.evaluate(stack));
         }
-        return Executor.erlang.execute(Reserver.Function.valueOf(fc.id), params);
+        return Executor.erlang.execute(Reserver.Function.valueOf(fc.id.toUpperCase()), params);
     }
 
     @Override
